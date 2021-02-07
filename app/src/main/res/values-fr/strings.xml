@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DeepFlavours</string>
+    <string name="deep_flavours">Deep Flavours</string>
+    <string name="deliciously_simple">Deliciously Simple</string>
+    <string name="startcooking_btn">Commencer la cuisson</string>
+    <string name="tv_description">Recettes nutritionnellement équilibrées et faciles à cuisiner. Des ingrédients locaux frais de qualité.</string>
+    <string name="createaccount_btn">Créer un Compte</string>
+    <string name="tv_haveaccount">Vous avez déjà un compte?</string>
+    <string name="tv_login">S\'identifier</string>
+    <string name="tv_back">Arrière</string>
+    <string name="tv_welcome">Commençons à faire \nde bons repas!</string>
+    <string name="editTextName"><font size="30">Ton nom complet</font></string>
+    <string name="editTextEmail"><font size="30">Votre email</font></string>
+    <string name="editTextPassword"><font size="30">Mot de passe</font></string>
+    <string name="editTextPasswordVer"><font size="30">Vérifier le mot de passe</font></string>
+    <string name="tv_SignUp">S\'inscrire</string>
+    <string name="tv_welcomeback">Bienvenue à nouveau dans \nDeep Flavors!</string>
+    <string name="Language">Choisir la langue ..</string>
+    <string name="languageTypeRo">Roumain</string>
+    <string name="languageTypeEn">Anglais</string>
+    <string name="languageTypeDe">Allemand</string>
+    <string name="languageTypeFr">Français</string>
+    <string name="empty_errfName">Le nom complet est requis!</string>
+    <string name="empty_errEmail">Une adresse email est requise!</string>
+    <string name="empty_errPass">Mot de passe requis!</string>
+    <string name="length_errPass">Longueur minimum: 6 caractères!</string>
+    <string name="empty_errVerPass">La vérification du mot de passe est requise!</string>
+    <string name="notequal_errVerPass">Les mots de passe ne correspondent pas!</string>
+    <string name="login_failed">L\'adresse e-mail ou le mot de passe est incorrect.Réessayer!</string>
+    <string name="signup_success">Le compte a été créé avec succès!</string>
+    <string name="signup_failed">Échec de la création du compte.Réessayer!</string>
+    <string name="email_exists">Il y a un utilisateur avec ce courriel!</string>
+    <string name="login_success">Connecté avec succès!</string>
+</resources>

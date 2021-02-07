@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DeepFlavours</string>
+    <string name="deep_flavours">Deep Flavours</string>
+    <string name="deliciously_simple">Deliciously Simple</string>
+    <string name="startcooking_btn">Începe să gătești</string>
+    <string name="tv_description">Rețete echilibrate nutrițional, ușor de gătit. Ingrediente locale proaspete de calitate.</string>
+    <string name="createaccount_btn">Creare Cont</string>
+    <string name="tv_haveaccount">Ai deja cont?</string>
+    <string name="tv_login">Autentificare</string>
+    <string name="tv_back">Înapoi</string>
+    <string name="tv_welcome">Hai să pregătim mese \ngustoase!</string>
+    <string name="editTextName"><font size="30">Numele tău complet</font></string>
+    <string name="editTextEmail"><font size="30">E-mail-ul tău</font></string>
+    <string name="editTextPassword"><font size="30">Parolă</font></string>
+    <string name="editTextPasswordVer"><font size="30">Verificare parolă</font></string>
+    <string name="tv_SignUp">Înscrie-te</string>
+    <string name="tv_welcomeback">Bine ai revenit la \nDeep Flavours!</string>
+    <string name="Language">Selectează limba...</string>
+    <string name="languageTypeRo">Română</string>
+    <string name="languageTypeEn">Engleză</string>
+    <string name="languageTypeDe">Germană</string>
+    <string name="languageTypeFr">Franceză</string>
+    <string name="empty_errfName">Introducerea numelui complet este obligatorie!</string>
+    <string name="empty_errEmail">Introducerea adresei de e-mail este obligatorie!</string>
+    <string name="empty_errPass">Introducerea parolei este obligatorie!</string>
+    <string name="length_errPass">Lungime minimă: 6 caractere!</string>
+    <string name="empty_errVerPass">Verificarea parolei este obligatorie!</string>
+    <string name="notequal_errVerPass">Parolele nu se potrivesc! </string>
+    <string name="login_failed">Adresa de e-mail sau parola sunt greșite.Încearcă din nou!</string>
+    <string name="signup_success">Contul a fost creat cu succes!</string>
+    <string name="signup_failed">Eroare la crearea contului.Încearcă din nou!</string>
+    <string name="email_exists">Există un utilizator cu acest e-mail!</string>
+    <string name="login_success">Autentificare realizată cu succes!</string>
+
+
+</resources>

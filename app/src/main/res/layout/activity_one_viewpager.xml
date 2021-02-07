@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tv_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="70dp"
+            android:alpha="0.7"
+            android:text="1 of 3"
+            android:textColor="#aaa480"
+            android:textSize="14sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/tv_food"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="50dp"
+            android:text="Choose your \nfavorite food"
+            android:textColor="#aaa480"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+    <HorizontalScrollView
+        android:id="@+id/HScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginTop="270dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.09">
+
+                <Button
+                    android:id="@+id/Seafod_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:width="160dp"
+                    android:height="20dp"
+                    android:alpha="0.5"
+                    android:background="@drawable/btn_brown"
+                    android:elevation="20dp"
+                    android:text="Seafood"
+                    android:textAllCaps="false"
+                    android:textSize="17sp" />
+
+                <Button
+                    android:id="@+id/Sushi_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:width="200dp"
+                    android:height="20dp"
+                    android:alpha="0.6"
+                    android:background="@drawable/btn_bej"
+                    android:elevation="20dp"
+                    android:text="Sushi"
+                    android:textAllCaps="false"
+                    android:textSize="17sp" />
+
+                <Button
+                    android:id="@+id/Pasta_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:width="180dp"
+                    android:height="20dp"
+                    android:alpha="0.6"
+                    android:background="@drawable/btn_gray"
+                    android:elevation="20dp"
+                    android:text="Pasta"
+                    android:textAllCaps="false"
+                    android:textSize="17sp" />
+
+                <Button
+                    android:id="@+id/Cheese_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:width="120dp"
+                    android:height="20dp"
+                    android:alpha="0.6"
+                    android:background="@drawable/btn_createaccount"
+                    android:elevation="20dp"
+                    android:text="Cheese"
+                    android:textAllCaps="false"
+                    android:textSize="17sp" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.09">
+
+                <Button
+                    android:id="@+id/Steak_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:width="120dp"
+                    android:height="20dp"
+                    android:alpha="0.6"
+                    android:background="@drawable/btn_gray"
+                    android:elevation="20dp"
+                    android:text="Steak"
+                    android:textAllCaps="false"
+                    android:textSize="17sp" />
+
+                <Button
+                    android:id="@+id/Pizza_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:width="180dp"
+                    android:height="20dp"
+                    android:alpha="0.6"
+                    android:background="@drawable/btn_createaccount"
+                    android:elevation="20dp"
+                    android:text="Pizza"
+                    android:textAllCaps="false"
+                    android:textSize="17sp" />
+
+                <Button
+                    android:id="@+id/Spaghetti_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:width="160dp"
+                    android:height="20dp"
+                    android:alpha="0.6"
+                    android:background="@drawable/btn_brown"
+                    android:elevation="20dp"
+                    android:text="Spaghetti"
+                    android:textAllCaps="false"
+                    android:textSize="17sp" />
+
+                <Button
+                    android:id="@+id/Chicken_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:width="200dp"
+                    android:height="20dp"
+                    android:alpha="0.6"
+                    android:background="@drawable/btn_bej"
+                    android:elevation="20dp"
+                    android:text="Chicken"
+                    android:textAllCaps="false"
+                    android:textSize="17sp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.09">
+
+                <Button
+                    android:id="@+id/Salad_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:width="180dp"
+                    android:height="20dp"
+                    android:alpha="0.6"
+                    android:background="@drawable/btn_bej"
+                    android:elevation="20dp"
+                    android:text="Salad"
+                    android:textAllCaps="false"
+                    android:textSize="17sp" />
+
+                <Button
+                    android:id="@+id/Fruits_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:width="120dp"
+                    android:height="20dp"
+                    android:alpha="0.6"
+                    android:background="@drawable/btn_gray"
+                    android:elevation="20dp"
+                    android:text="Fruits"
+                    android:textAllCaps="false"
+                    android:textSize="17sp" />
+
+                <Button
+                    android:id="@+id/Egg_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:width="200dp"
+                    android:height="20dp"
+                    android:alpha="0.6"
+                    android:background="@drawable/btn_createaccount"
+                    android:elevation="20dp"
+                    android:text="Egg"
+                    android:textAllCaps="false"
+                    android:textSize="17sp" />
+
+                <Button
+                    android:id="@+id/Tacos_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:width="160dp"
+                    android:height="20dp"
+                    android:alpha="0.6"
+                    android:background="@drawable/btn_brown"
+                    android:elevation="20dp"
+                    android:text="Tacos"
+                    android:textAllCaps="false"
+                    android:textSize="17sp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7">
+
+                <Button
+                    android:id="@+id/Bacon_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:width="200dp"
+                    android:height="20dp"
+                    android:alpha="0.6"
+                    android:background="@drawable/btn_createaccount"
+                    android:elevation="20dp"
+                    android:text="Bacon"
+                    android:textAllCaps="false"
+                    android:textSize="17sp" />
+
+                <Button
+                    android:id="@+id/Rice_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:width="180dp"
+                    android:height="20dp"
+                    android:alpha="0.6"
+                    android:background="@drawable/btn_brown"
+                    android:elevation="20dp"
+                    android:text="Rice"
+                    android:textAllCaps="false"
+                    android:textSize="17sp" />
+
+                <Button
+                    android:id="@+id/Mushrooms_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:width="160dp"
+                    android:height="20dp"
+                    android:alpha="0.6"
+                    android:background="@drawable/btn_bej"
+                    android:elevation="20dp"
+                    android:text="Mushrooms"
+                    android:textAllCaps="false"
+                    android:textSize="17sp" />
+
+                <Button
+                    android:id="@+id/Potato_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:width="120dp"
+                    android:height="20dp"
+                    android:alpha="0.6"
+                    android:background="@drawable/btn_gray"
+                    android:elevation="20dp"
+                    android:text="Potato"
+                    android:textAllCaps="false"
+                    android:textSize="17sp" />
+            </TableRow>
+
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <Button
+        android:id="@+id/wiewpager_btn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="100dp"
+        android:width="240dp"
+        android:height="20dp"
+        android:background="@drawable/btn_createaccount"
+        android:elevation="20dp"
+        android:text="Continue"
+        android:textAllCaps="false"
+        android:textSize="19sp"
+        />
+
+
+</RelativeLayout>

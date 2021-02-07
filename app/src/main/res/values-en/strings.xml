@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DeepFlavours</string>
+    <string name="deep_flavours">Deep Flavours</string>
+    <string name="deliciously_simple">Deliciously Simple</string>
+    <string name="startcooking_btn">Start Cooking</string>
+    <string name="tv_description">Nutritionally balanced, easy to cook recipes. Quality fresh local ingredients.</string>
+    <string name="createaccount_btn">Create Account</string>
+    <string name="tv_haveaccount">Already have account?</string>
+    <string name="tv_login">Log In</string>
+    <string name="tv_back">Back</string>
+    <string name="tv_welcome">Let\'s start making \ngood meals!</string>
+    <string name="editTextName"><font size="30">Your full name</font></string>
+    <string name="editTextEmail"><font size="30">Your email</font></string>
+    <string name="editTextPassword"><font size="30">Password</font></string>
+    <string name="editTextPasswordVer"><font size="30">Verify Password</font></string>
+    <string name="tv_SignUp">Sign Up</string>
+    <string name="tv_welcomeback">Welcome back to \nDeep Flavours!</string>
+    <string name="Language">Choose language...</string>
+    <string name="languageTypeRo">Romanian</string>
+    <string name="languageTypeEn">English</string>
+    <string name="languageTypeDe">German</string>
+    <string name="languageTypeFr">French</string>
+    <string name="empty_errfName">Full name is required!</string>
+    <string name="empty_errEmail">An email address is required!</string>
+    <string name="empty_errPass">Password is required!</string>
+    <string name="length_errPass">Minimum length: 6 characters!</string>
+    <string name="empty_errVerPass">Password verification is required!</string>
+    <string name="notequal_errVerPass">Passwords doesn\'t match!</string>
+    <string name="login_failed">Email address or password is incorrect.Try again!</string>
+    <string name="signup_success">The account has been successfully created!</string>
+    <string name="signup_failed">Failed to create account.Try again!</string>
+    <string name="email_exists">There is a user with this email!</string>
+    <string name="login_success">Successfully logged in!</string>
+</resources>
