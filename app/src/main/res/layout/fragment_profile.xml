@@ -178,6 +178,8 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+
+
     <LinearLayout
         android:id="@+id/linearlayout_food_post"
         android:layout_width="match_parent"
@@ -215,18 +217,14 @@
    <androidx.recyclerview.widget.RecyclerView
        android:id="@+id/foodpost_profile_RecyclerView"
        android:layout_below="@id/linearlayout_food_post"
-       android:layout_width="match_parent"
+       android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:layout_alignParentStart="true"
        android:layout_alignParentEnd="true"
        tools:listitem="@layout/recipe_item_foodpost_profile"
-       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
        android:orientation="horizontal"
-
+       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
        />
-
-
-
 
 
 </RelativeLayout>
