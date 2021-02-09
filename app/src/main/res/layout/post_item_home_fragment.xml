@@ -75,6 +75,7 @@
         android:orientation="vertical"
         android:layout_marginStart="260dp"
         android:layout_marginTop="220dp">
+
     <ImageView
         android:id="@+id/like_post"
         android:layout_width="30dp"
@@ -82,13 +83,13 @@
         android:src="@drawable/ic_baseline_favorite_border_24" />
 
         <TextView
+            android:id="@+id/nr_like_post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="10"
             android:textSize="10dp"
             android:textColor="#ffffff"
             android:textStyle="bold"
-
             android:layout_gravity="center"
             />
 

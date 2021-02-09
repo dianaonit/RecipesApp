@@ -4,11 +4,11 @@
     android:id="@+id/favoritepost_CardView0"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    android:layout_marginStart="15dp"
+    android:layout_marginStart="10dp"
     android:layout_marginTop="5dp"
-    android:layout_marginEnd="15dp"
+    android:layout_marginEnd="10dp"
     android:layout_marginBottom="2dp"
-    android:alpha="0.8"
+
     android:background="#FFFFFF"
     app:cardBackgroundColor="#ffffff"
     app:cardCornerRadius="17dp"
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="7dp"
         android:layout_marginTop="10dp"
-        app:cardCornerRadius="17dp">
+        app:cardCornerRadius="10dp">
 
         <ImageView
             android:id="@+id/favoritepost_Image"
@@ -36,31 +36,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="120dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/favoritepost_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:alpha="0.9"
+            android:alpha="0.8"
             android:text="Chicken Laska"
             android:textColor="#000000"
-            android:textSize="20dp"
+            android:textSize="17dp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/favoritepost_description"
-            android:layout_width="wrap_content"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:alpha="0.6"
-            android:text="Chicken Laska bla bla "
+            android:text="Chicken Laska  "
             android:textColor="#000000"
-            android:textSize="13dp"
+            android:textSize="10dp"
             android:textStyle="bold" />
 
 
         <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/ratingbar_recipe"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -75,11 +76,12 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="320dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="290dp"
+        android:layout_marginTop="80dp"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/cooktimes_nr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -90,12 +92,13 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/cooktimes_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0.4"
-            android:text="Cooked"
+            android:text="cooked this"
             android:textColor="#000000"
-            android:textSize="10sp"
+            android:textSize="8sp"
             android:textStyle="bold" />
 
 

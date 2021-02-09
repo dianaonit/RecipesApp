@@ -131,6 +131,7 @@ public class PostActivity extends AppCompatActivity{
                        hashMap.put("cooktime", cookTime.getText().toString());
                        hashMap.put("ingredients", ingredients.getText().toString());
                        hashMap.put("directions", directions.getText().toString());
+                       hashMap.put("nrlikes", 0);
                        hashMap.put("userid", FirebaseAuth.getInstance().getCurrentUser().getUid());
 
                        reference.child(recipeid).setValue(hashMap);
