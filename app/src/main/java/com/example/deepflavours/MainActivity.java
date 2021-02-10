@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
-    Fragment selectedFragment = null;
+    Fragment selectedFragment = new HomeFragment();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,9 +30,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        bottomNavigationView= findViewById(R.id.bottom_navigation);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
-
 
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -46,29 +45,39 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-                    switch ( menuItem.getItemId() ){
+                    switch (menuItem.getItemId()) {
                         case R.id.nav_home:
-                             selectedFragment = new HomeFragment();
+                            if (selectedFragment != null && !(selectedFragment instanceof HomeFragment)) {
+                                selectedFragment = new HomeFragment();
+                            }
+
                             break;
                         case R.id.nav_search:
-                             selectedFragment = new SearchFragment();
+                            if (selectedFragment != null && !(selectedFragment instanceof SearchFragment)) {
+                                selectedFragment = new SearchFragment();
+                            }
+
                             break;
                         case R.id.nav_add:
                             selectedFragment = null;
                             startActivity(new Intent(MainActivity.this, PostActivity.class));
                             break;
                         case R.id.nav_saved:
-                             selectedFragment = new SaveFragment();
+                            if (selectedFragment != null && !(selectedFragment instanceof SaveFragment)) {
+                                selectedFragment = new SaveFragment();
+                            }
+
                             break;
                         case R.id.nav_profile:
-                            SharedPreferences.Editor editor = getSharedPreferences("Profiles",MODE_PRIVATE).edit();
-                            editor.putString("profileid", FirebaseAuth.getInstance().getCurrentUser().getUid());
-                            editor.apply();
-                            selectedFragment = new ProfileFragment();
+
+                            if (selectedFragment != null && !(selectedFragment instanceof ProfileFragment)) {
+                                selectedFragment = new ProfileFragment(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            }
+
                             break;
                     }
 
-                    if(selectedFragment != null){
+                    if (selectedFragment != null) {
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 selectedFragment).commit();
                     }

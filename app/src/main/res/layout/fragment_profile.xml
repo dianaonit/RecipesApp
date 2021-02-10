@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -51,7 +52,7 @@
                     android:layout_width="125dp"
                     android:layout_height="125dp"
                     android:layout_marginStart="13dp"
-                    android:src="@drawable/test" />
+                   />
 
                 <TextView
                     android:id="@+id/username"
@@ -61,12 +62,10 @@
                     android:layout_marginTop="3dp"
                     android:alpha="0.7"
                     android:maxLines="1"
-                    android:text="Diana Onit"
+                    android:text=""
                     android:textColor="#000000"
                     android:textSize="12sp"
-                    android:textStyle="bold"
-
-                    />
+                    android:textStyle="bold" />
 
 
                 <LinearLayout
@@ -82,13 +81,13 @@
                         android:src="@drawable/ic_baseline_location_on_24" />
 
                     <TextView
-                        android:id="@+id/tv_description"
+                        android:id="@+id/tv_bio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:alpha="0.7"
                         android:maxLines="1"
-                        android:text="Cluj-Napoca, Romania"
+                        android:text=""
                         android:textColor="#000000"
                         android:textSize="10sp" />
 
@@ -122,7 +121,7 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:maxLines="1"
-                            android:text="20"
+                            android:text=""
                             android:textColor="#000000"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -153,7 +152,7 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:maxLines="1"
-                            android:text="1958"
+                            android:text=""
                             android:textColor="#000000"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -184,7 +183,7 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:maxLines="1"
-                            android:text="134"
+                            android:text=""
                             android:textColor="#000000"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -212,12 +211,13 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/editprofile_button"
                         android:layout_width="175dp"
                         android:layout_height="26dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="4dp"
                         android:background="@drawable/btn_createaccount"
-                        android:text="follow" />
+                        android:text="" />
 
                 </LinearLayout>
 
@@ -251,7 +251,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/seemypost"
+            android:id="@+id/seeAllmypost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="180dp"

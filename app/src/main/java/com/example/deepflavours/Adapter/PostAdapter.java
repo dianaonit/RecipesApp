@@ -59,7 +59,26 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
 
         isLiked(post.getRecipeid(),viewHolder.like);
+
         nrLikes(viewHolder.likes,post.getRecipeid());
+
+        isSaved(post.getRecipeid(),viewHolder.save);
+
+
+
+        viewHolder.save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(viewHolder.save.getTag().equals("save")){
+                    FirebaseDatabase.getInstance().getReference().child("Saves").child(post.getRecipeid())
+                            .child(firebaseUser.getUid()).setValue(true);
+                }else{
+                    FirebaseDatabase.getInstance().getReference().child("Saves").child(post.getRecipeid())
+                            .child(firebaseUser.getUid()).removeValue();
+                }
+            }
+        });
+
 
 
         viewHolder.like.setOnClickListener(new View.OnClickListener() {
@@ -149,6 +168,34 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     }
 
 
+
+    private void isSaved(String postid, ImageView imageView){
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
+                .child("Saves")
+                .child(postid);
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.child(firebaseUser.getUid()).exists()){
+                    imageView.setImageResource(R.drawable.ic_baseline_turned_in_24_white);
+                    imageView.setTag("saved");
+                }else{
+                    imageView.setImageResource(R.drawable.ic_baseline_turned_in_not_24);
+                    imageView.setTag("save");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
 
 
 }
