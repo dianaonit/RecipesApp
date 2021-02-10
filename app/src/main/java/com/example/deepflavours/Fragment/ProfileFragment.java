@@ -17,6 +17,7 @@ import com.example.deepflavours.Adapter.RecipeAdapter;
 import com.example.deepflavours.Model.Recipe;
 import com.example.deepflavours.Model.User;
 import com.example.deepflavours.R;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,7 +37,7 @@ public class ProfileFragment extends Fragment {
 
     private RecyclerView favRecipes_recyclerView;
     private FavoriteRecipesAdapter favoriteRecipesAdapter;
-    private List<String> likeList;
+    private List<Recipe> favouriteRecipes;
 
 
     @Override
@@ -57,16 +58,17 @@ public class ProfileFragment extends Fragment {
 
         recipeList = new ArrayList<>();
 
+        favouriteRecipes = new ArrayList<>();
+
 
         recipeAdapter = new RecipeAdapter(getContext(),recipeList);
-        favoriteRecipesAdapter=new FavoriteRecipesAdapter(getContext(),recipeList);
-
         recyclerView.setAdapter(recipeAdapter);
+
+        favoriteRecipesAdapter=new FavoriteRecipesAdapter(getContext(),favouriteRecipes);
         favRecipes_recyclerView.setAdapter(favoriteRecipesAdapter);
 
-       checkLikes();
-
         readRecipes();
+        readFavRecipes();
 
         return view;
     }
@@ -96,50 +98,33 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-
-
-    private  void checkLikes(){
-        likeList = new ArrayList<>();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Likes")
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-
-
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               likeList.clear();
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                   likeList.add(snapshot.getKey());
-                }
-
-                readFavRecipes();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-
-
     private void readFavRecipes(){
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Likes");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                recipeList.clear();
                 for(DataSnapshot snapshot :dataSnapshot.getChildren()){
-                    Recipe recipe = snapshot.getValue(Recipe.class);
-                  // for ()
-//                    String currentRecipeId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-//                    if(likeList.contains(currentRecipeId)){
-//                        recipeList.add(recipe);
-//                    }
+                   for(DataSnapshot dataSnapshot1: snapshot.getChildren()){
+                       String userId = dataSnapshot1.getKey();
+                       if(userId.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                           String recipeId = snapshot.getKey();
+                           FirebaseDatabase.getInstance().getReference("Recipes").child(recipeId).addValueEventListener(new ValueEventListener() {
+                               @Override
+                               public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                   Recipe recipe = snapshot.getValue(Recipe.class);
+                                   favouriteRecipes.add(recipe);
+                                   favoriteRecipesAdapter.notifyDataSetChanged();
+                               }
+
+                               @Override
+                               public void onCancelled(@NonNull DatabaseError error) {
+
+                               }
+                           });
+                       }
+                   }
                 }
-                favoriteRecipesAdapter.notifyDataSetChanged();
 
             }
 

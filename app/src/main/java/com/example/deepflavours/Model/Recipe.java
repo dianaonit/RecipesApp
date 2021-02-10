@@ -13,10 +13,9 @@ public class Recipe {
     private String description;
     private String cooktime;
     private String preparationtime;
-    private int nrlikes;
 
 
-    public Recipe(String recipeid, String recipeimage, String title, String userid, String ingredients, String directions, String description, String cooktime, String preparationtime,int nrlikes) {
+    public Recipe(String recipeid, String recipeimage, String title, String userid, String ingredients, String directions, String description, String cooktime, String preparationtime) {
         this.recipeid = recipeid;
         this.recipeimage = recipeimage;
         this.title = title;
@@ -26,7 +25,7 @@ public class Recipe {
         this.description = description;
         this.cooktime = cooktime;
         this.preparationtime = preparationtime;
-        this.nrlikes = nrlikes;
+
     }
 
     public Recipe(){
@@ -105,11 +104,5 @@ public class Recipe {
         this.preparationtime = preparationtime;
     }
 
-    public int getNrlikes() {
-        return nrlikes;
-    }
 
-    public void setNrlikes(int nrlikes) {
-        this.nrlikes = nrlikes;
-    }
 }
