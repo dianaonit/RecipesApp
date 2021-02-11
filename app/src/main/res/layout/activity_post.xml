@@ -18,7 +18,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="43dp"
+            android:layout_height="wrap_content"
             android:background="#e1ded0">
 
             <RelativeLayout
@@ -27,22 +27,33 @@
 
                 <ImageView
                     android:id="@+id/close"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_alignParentStart="true"
-                    android:src="@drawable/ic_baseline_close_24" />
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/cancel" />
 
                 <TextView
-                    android:id="@+id/post"
+                    android:id="@+id/textview_title_activity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_toEndOf="@id/close"
+                    android:text="New Post"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+
+                <ImageView
+                    android:id="@+id/post"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="13dp"
-                    android:text="POST"
-                    android:textColor="#aaa480"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/checked" />
 
             </RelativeLayout>
 
@@ -50,151 +61,120 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/image_added"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_baseline_add_a_photo_24" />
-
-        <EditText
-            android:id="@+id/title"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="15dp"
-            android:hint="Title"
-            android:textColor="#000000"
-            android:alpha="0.6"
-            android:inputType="text"
-            android:maxLines="5"
-            android:theme="@style/myEditTextStyle"
-            android:drawableEnd="@drawable/ic_baseline_title_24"
-            />
+            android:orientation="vertical"
+            android:padding="8dp">
 
-        <EditText
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="15dp"
-            android:hint="Description"
-            android:imeOptions="actionDone"
-            android:inputType="textCapSentences|textMultiLine"
-            android:maxLength="2000"
-            android:maxLines="30"
-            android:textColor="#000000"
-            android:theme="@style/myEditTextStyle"
-            android:drawableEnd="@drawable/ic_baseline_description_24"
-            android:alpha="0.6"
-            />
+            <ImageView
+                android:id="@+id/image_added"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_baseline_add_a_photo_24"
+                android:layout_marginTop="10dp" />
 
-        <TextView
-            android:id="@+id/tv_servings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Servings"
-            android:textColor="#aaa480"
-            android:textSize="18sp"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="15dp"
-            />
 
-        <Spinner
-            android:id="@+id/spinner_servings"
-            android:layout_width="300dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="20dp"
-            android:background="@drawable/style_spinner"
-            android:popupBackground="@drawable/style_popupspinner"
-            android:entries="@array/servings" />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:drawableEnd="@drawable/ic_baseline_title_24"
+                android:hint="Title"
+                android:inputType="text"
+                android:textColor="#aaa480"
+                app:met_floatingLabel="normal"
+                app:met_maxCharacters="25" />
 
-        <EditText
-            android:id="@+id/prepTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="15dp"
-            android:hint="Preparation time(in minute)"
-            android:inputType="number"
-            android:textColor="#000000"
-            android:alpha="0.6"
-            android:theme="@style/myEditTextStyle"
-            android:drawableEnd="@drawable/ic_baseline_access_time_filled_24"
-            />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:drawableEnd="@drawable/ic_baseline_description_24"
+                android:hint="Description"
+                android:inputType="text"
+                android:textColor="#aaa480"
+                app:met_floatingLabel="normal"
+                app:met_maxCharacters="40" />
 
-        <EditText
-            android:id="@+id/cookTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="15dp"
-            android:hint="Cook time(in minute)"
-            android:inputType="number"
-            android:textColor="#000000"
-            android:theme="@style/myEditTextStyle"
-            android:drawableEnd="@drawable/ic_baseline_access_time_filled_24"
-            android:alpha="0.6"
-            />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/servings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:hint="Servings"
+                android:inputType="number"
+                android:textColor="#aaa480"
+                app:met_floatingLabel="normal"
+                app:met_maxCharacters="2" />
 
-        <EditText
-            android:id="@+id/ingredients"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="15dp"
-            android:hint="Ingredients"
-            android:imeOptions="actionDone"
-            android:inputType="textCapSentences|textMultiLine"
-            android:maxLength="2000"
-            android:maxLines="30"
-            android:textColor="#000000"
-            android:alpha="0.6"
-            android:theme="@style/myEditTextStyle"
-            android:drawableEnd="@drawable/ic_baseline_add_shopping_cart_24"
-            />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/prepTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:drawableEnd="@drawable/ic_baseline_access_time_filled_24"
+                android:hint="Preparation time(in minute)"
+                android:inputType="text"
+                android:textColor="#aaa480"
+                app:met_floatingLabel="normal"
+                app:met_maxCharacters="10" />
 
-        <EditText
-            android:id="@+id/directions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="15dp"
-            android:hint="Directions"
-            android:imeOptions="actionDone"
-            android:inputType="textCapSentences|textMultiLine"
-            android:maxLength="2000"
-            android:maxLines="100"
-            android:textColor="#000000"
-            android:alpha="0.6"
-            android:theme="@style/myEditTextStyle"
-            android:drawableEnd="@drawable/ic_baseline_live_help_24" />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/cookTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:drawableEnd="@drawable/ic_baseline_access_time_filled_24"
+                android:hint="Cook time(in minute)"
+                android:inputType="number"
+                android:textColor="#aaa480"
+                app:met_floatingLabel="normal"
+                app:met_maxCharacters="10" />
 
-    </LinearLayout>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/ingredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:drawableEnd="@drawable/ic_baseline_add_shopping_cart_24"
+                android:hint="Ingredients"
+                android:inputType="text|textMultiLine"
+                android:textColor="#aaa480"
+                app:met_floatingLabel="normal" />
 
- </ScrollView>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/directions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:drawableEnd="@drawable/ic_baseline_live_help_24"
+                android:hint="Directions"
+                android:inputType="text|textMultiLine"
+
+                android:textColor="#aaa480"
+                app:met_floatingLabel="normal" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
 
 
 </LinearLayout>

@@ -5,10 +5,9 @@
         <layer-list>
             <item>
                 <shape android:shape="rectangle">
-                    <solid android:color="#d6d3c2"/>
+                    <solid android:color="#ffffff"/>
                     <corners android:radius="10dp"/>
                     <padding android:right="10dp"/>
-
                 </shape>
             </item>
         </layer-list>

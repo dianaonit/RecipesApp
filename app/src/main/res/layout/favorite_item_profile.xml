@@ -54,7 +54,7 @@
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:alpha="0.6"
-            android:text="Chicken Laska  "
+            android:text="ChickenLaska"
             android:textColor="#000000"
             android:textSize="10dp"
             android:textStyle="bold" />

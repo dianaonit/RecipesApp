@@ -3,13 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:padding="7dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/image_profile"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginStart="5dp"
+        />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,19 +25,23 @@
             android:layout_height="wrap_content"
             android:id="@+id/fullname"
             android:maxLines="1"
-            android:textStyle="bold"
-            android:textColor="#aaa480"
+            android:textStyle="normal"
+            android:textColor="#000000"
+
             android:text="fullname"
-            android:textSize="20sp"
+            android:textSize="18sp"
+            android:layout_marginStart="4dp"
             />
     </LinearLayout>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:background="@drawable/btn_createaccount"
+        android:background="@drawable/btn_search"
         android:id="@+id/btn_follow"
         android:textColor="#ffffff"
         android:text="follow"
+        android:alpha="0.8"
+        android:layout_marginEnd="10dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:visibility="gone" />

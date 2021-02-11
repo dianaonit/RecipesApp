@@ -29,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
+import com.rengwuxian.materialedittext.MaterialEditText;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.util.HashMap;
@@ -40,9 +41,8 @@ public class PostActivity extends AppCompatActivity{
     StorageTask uploadTask;
     StorageReference storageReference;
 
-    ImageView image_added, close;
-    TextView post;
-    EditText title, description, prepTime, cookTime, ingredients, directions;
+    ImageView image_added, close,post;
+    MaterialEditText title, description,servings, prepTime, cookTime, ingredients, directions;
 
 
     @Override
@@ -60,6 +60,7 @@ public class PostActivity extends AppCompatActivity{
         cookTime = findViewById(R.id.cookTime);
         ingredients = findViewById(R.id.ingredients);
         directions = findViewById(R.id.directions);
+        servings = findViewById(R.id.servings);
 
 
         storageReference = FirebaseStorage.getInstance().getReference("recipes");
@@ -75,7 +76,9 @@ public class PostActivity extends AppCompatActivity{
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadImage();
+
+                messageValidationError();
+
             }
         });
 
@@ -85,7 +88,85 @@ public class PostActivity extends AppCompatActivity{
     }
 
 
-   private String getFileExtension(Uri uri){
+
+    private void messageValidationError(){
+
+        final String rTitle=title.getText().toString().trim();
+        final String rDescription=description.getText().toString().trim();
+        final String rSevings=servings.getText().toString().trim();
+        final String rPrepTime=prepTime.getText().toString().trim();
+        final String rCookTime=cookTime.getText().toString().trim();
+
+        boolean error = false;
+
+
+        if(rTitle.length()>25){
+            title.setError("Max length: 25 char!");
+            title.requestFocus();
+            error = true;
+        }else{
+           title.setError(null);
+           title.requestFocus();
+        }
+
+        if(rDescription.length()>40){
+            description.setError("Max length: 40 char!");
+            description.requestFocus();
+            error = true;
+        }else{
+            description.setError(null);
+            description.requestFocus();
+        }
+
+        if(rSevings.length()>2){
+            servings.setError("Max length: 2 char!");
+            servings.requestFocus();
+            error = true;
+        }else{
+            servings.setError(null);
+            servings.requestFocus();
+        }
+
+        if(rPrepTime.length()>10){
+            prepTime.setError("Max length: 10 char!");
+            prepTime.requestFocus();
+            error = true;
+        }else{
+            prepTime.setError(null);
+            prepTime.requestFocus();
+        }
+
+        if(rCookTime.length()>10){
+            cookTime.setError("Max length: 10 char!");
+            cookTime.requestFocus();
+            error = true;
+        }else{
+            cookTime.setError(null);
+            cookTime.requestFocus();
+        }
+
+        if(rDescription.length()>40){
+            description.setError("Max length: 40 char!");
+            description.requestFocus();
+            error = true;
+        }else{
+            description.setError(null);
+            description.requestFocus();
+        }
+
+
+
+        if(!error){
+            uploadImage();
+        }
+
+
+    }
+
+
+
+
+    private String getFileExtension(Uri uri){
        ContentResolver contentResolver = getContentResolver();
        MimeTypeMap mime = MimeTypeMap.getSingleton();
        return mime.getExtensionFromMimeType(contentResolver.getType(uri));
@@ -127,6 +208,7 @@ public class PostActivity extends AppCompatActivity{
                        hashMap.put("recipeimage", myUrl);
                        hashMap.put("title", title.getText().toString());
                        hashMap.put("description",description.getText().toString());
+                       hashMap.put("servings",servings.getText().toString());
                        hashMap.put("preparationtime", prepTime.getText().toString());
                        hashMap.put("cooktime", cookTime.getText().toString());
                        hashMap.put("ingredients", ingredients.getText().toString());

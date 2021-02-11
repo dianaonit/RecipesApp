@@ -22,21 +22,25 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
-    Fragment selectedFragment = new HomeFragment();
+    Fragment selectedFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+        if(getIntent().getBooleanExtra("isShowAllPosts", false)){
+            selectedFragment = new ProfileFragment(getIntent().getStringExtra("profileid"));
+            bottomNavigationView.setSelectedItemId(R.id.nav_profile);
+        } else {
+            selectedFragment = new HomeFragment();
+        }
+
+       // bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new HomeFragment()).commit();
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =

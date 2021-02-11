@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    tools:context=".Fragment.ProfileFragment">
+    tools:context=".AllPostsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/bar"
@@ -23,6 +23,16 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="17dp"
+                    android:src="@drawable/ic_baseline_arrow_back_ios_new_24" />
 
                 <ImageView
                     android:id="@+id/iv_menu"
@@ -52,7 +62,7 @@
                     android:layout_width="125dp"
                     android:layout_height="125dp"
                     android:layout_marginStart="13dp"
-                   />
+                    />
 
                 <TextView
                     android:id="@+id/username"
@@ -229,7 +239,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
     <LinearLayout
         android:id="@+id/linearlayout_food_post"
         android:layout_width="match_parent"
@@ -246,66 +255,24 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="22dp"
             android:alpha="0.7"
-            android:text="Food Post"
+            android:text="My Food Post"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/seeAllmypost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="180dp"
-            android:layout_marginTop="20dp"
-            android:text="Show all"
-            android:textColor="#aaa480"
-            android:textSize="14sp"
-            android:textStyle="bold" />
     </LinearLayout>
 
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/foodpost_profile_RecyclerView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/all_foodpost_profile_RecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@id/linearlayout_food_post"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/recipe_item_foodpost_profile" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="10dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:listitem="@layout/item_showall" />
 
-    <LinearLayout
-        android:id="@+id/linearlayout_favorite_recipes"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/foodpost_profile_RecyclerView"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/favoriterecipes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="22dp"
-            android:alpha="0.7"
-            android:text="Favorite Recipes"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/favoritepost_profile_RecyclerView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/linearlayout_favorite_recipes"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:orientation="vertical"
-        tools:listitem="@layout/favorite_item_profile" />
 
 </RelativeLayout>
