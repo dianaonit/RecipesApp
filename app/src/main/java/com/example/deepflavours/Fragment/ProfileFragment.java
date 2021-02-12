@@ -22,14 +22,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.deepflavours.Adapter.FavoriteRecipesAdapter;
 import com.example.deepflavours.Adapter.RecipeAdapter;
-import com.example.deepflavours.AllPostsActivity;
 import com.example.deepflavours.EditProfileActivity;
-import com.example.deepflavours.Login;
+import com.example.deepflavours.MainActivity;
 import com.example.deepflavours.Model.Recipe;
 import com.example.deepflavours.Model.User;
-import com.example.deepflavours.OnBoarding;
 import com.example.deepflavours.R;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -95,7 +92,6 @@ public class ProfileFragment extends Fragment {
         edit_profile = view.findViewById(R.id.editprofile_button);
 
 
-
         if(profileid.equals(firebaseUser.getUid())){
             edit_profile.setText("Edit Profile");
         }else {
@@ -103,15 +99,19 @@ public class ProfileFragment extends Fragment {
         }
 
 
-        show_all.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Intent intent = new Intent(getContext(), AllPostsActivity.class);
-                intent.putExtra("profileid", profileid);
-            getContext().startActivity(intent);
-        }
-        });
+     show_all.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             SharedPreferences.Editor editor = getContext().getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
+             editor.putString("profileid",profileid);
+             editor.apply();
+
+             ((FragmentActivity)getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                     new AllMyPostFragment()).commit();
+         }
+     });
+
 
 
         edit_profile.setOnClickListener(new View.OnClickListener() {
@@ -244,9 +244,7 @@ public class ProfileFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                if(getContext() == null){
-//                    return;
-//                }
+
                 User user = dataSnapshot.getValue(User.class);
 
                 Glide.with(getContext()).load(user.getImageurl()).into(image_profile);

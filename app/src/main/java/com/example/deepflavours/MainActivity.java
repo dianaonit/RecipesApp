@@ -23,20 +23,28 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     Fragment selectedFragment;
+    String profileid = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+
         if(getIntent().getBooleanExtra("isShowAllPosts", false)){
-            selectedFragment = new ProfileFragment(getIntent().getStringExtra("profileid"));
-            bottomNavigationView.setSelectedItemId(R.id.nav_profile);
+            profileid = getIntent().getStringExtra("profileid");
+            selectedFragment = new ProfileFragment(profileid);
+            if(profileid.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                bottomNavigationView.setSelectedItemId(R.id.nav_profile);
+            } else {
+                bottomNavigationView.setSelectedItemId(R.id.nav_search);
+            }
         } else {
             selectedFragment = new HomeFragment();
         }
 
-       // bottomNavigationView = findViewById(R.id.bottom_navigation);
+
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
 
@@ -53,37 +61,40 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.nav_home:
                             if (selectedFragment != null && !(selectedFragment instanceof HomeFragment)) {
                                 selectedFragment = new HomeFragment();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
                             }
 
                             break;
+
                         case R.id.nav_search:
                             if (selectedFragment != null && !(selectedFragment instanceof SearchFragment)) {
                                 selectedFragment = new SearchFragment();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
                             }
 
                             break;
+
                         case R.id.nav_add:
                             selectedFragment = null;
                             startActivity(new Intent(MainActivity.this, PostActivity.class));
                             break;
+
                         case R.id.nav_saved:
                             if (selectedFragment != null && !(selectedFragment instanceof SaveFragment)) {
                                 selectedFragment = new SaveFragment();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
                             }
 
                             break;
+
                         case R.id.nav_profile:
-
-                            if (selectedFragment != null && !(selectedFragment instanceof ProfileFragment)) {
+                            if((profileid!=null && !profileid.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) || (selectedFragment != null && !(selectedFragment instanceof ProfileFragment))) {
                                 selectedFragment = new ProfileFragment(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                profileid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
                             }
 
                             break;
-                    }
-
-                    if (selectedFragment != null) {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                selectedFragment).commit();
                     }
 
                     return true;

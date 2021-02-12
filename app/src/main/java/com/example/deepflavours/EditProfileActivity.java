@@ -87,12 +87,14 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
+
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
 
         tv_change.setOnClickListener(new View.OnClickListener() {
             @Override
