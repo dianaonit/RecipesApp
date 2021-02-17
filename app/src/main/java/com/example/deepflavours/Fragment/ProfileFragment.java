@@ -114,6 +114,7 @@ public class ProfileFragment extends Fragment {
 
 
 
+
         edit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -202,7 +203,7 @@ public class ProfileFragment extends Fragment {
 
     private void readFavRecipes(){
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Likes");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Favourites");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

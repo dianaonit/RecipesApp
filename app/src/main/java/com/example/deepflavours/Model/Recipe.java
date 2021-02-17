@@ -11,11 +11,12 @@ public class Recipe {
     private String ingredients;
     private String directions;
     private String description;
+    private String servings;
     private String cooktime;
     private String preparationtime;
 
 
-    public Recipe(String recipeid, String recipeimage, String title, String userid, String ingredients, String directions, String description, String cooktime, String preparationtime) {
+    public Recipe(String recipeid, String recipeimage, String title, String userid, String ingredients, String directions, String description, String servings,String cooktime, String preparationtime) {
         this.recipeid = recipeid;
         this.recipeimage = recipeimage;
         this.title = title;
@@ -25,11 +26,20 @@ public class Recipe {
         this.description = description;
         this.cooktime = cooktime;
         this.preparationtime = preparationtime;
+        this.servings = servings;
 
     }
 
     public Recipe(){
 
+    }
+
+    public String getServings() {
+        return servings;
+    }
+
+    public void setServings(String servings) {
+        this.servings = servings;
     }
 
     public String getRecipeid() {

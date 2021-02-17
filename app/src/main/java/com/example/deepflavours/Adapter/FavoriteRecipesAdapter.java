@@ -1,22 +1,31 @@
 package com.example.deepflavours.Adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.deepflavours.Fragment.RecipeDetailFragment;
 import com.example.deepflavours.Model.Recipe;
 import com.example.deepflavours.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -48,6 +57,19 @@ public class FavoriteRecipesAdapter extends RecyclerView.Adapter<FavoriteRecipes
         viewHolder.favoritepost_title.setText(recipe.getTitle());
         viewHolder.favoritepost_description.setText(recipe.getDescription());
         Glide.with(mContext).load(recipe.getRecipeimage()).into(viewHolder.favoritepost_image);
+
+        viewHolder.favoritepost_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                editor.putString("postid",recipe.getRecipeid());
+                editor.apply();
+
+                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new RecipeDetailFragment()).commit();
+            }
+        });
+
     }
 
 
@@ -81,6 +103,9 @@ public class FavoriteRecipesAdapter extends RecyclerView.Adapter<FavoriteRecipes
 
         }
     }
+
+
+
 
 
 }

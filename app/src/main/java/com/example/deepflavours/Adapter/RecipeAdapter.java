@@ -1,6 +1,7 @@
 package com.example.deepflavours.Adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +10,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.deepflavours.Fragment.RecipeDetailFragment;
 import com.example.deepflavours.Model.Recipe;
 import com.example.deepflavours.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,6 +50,18 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
         viewHolder.recipePost_Title.setText(recipe.getTitle());
         Glide.with(mContext).load(recipe.getRecipeimage()).into(viewHolder.recipePost_Image);
+
+        viewHolder.recipePost_Image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                editor.putString("postid",recipe.getRecipeid());
+                editor.apply();
+
+                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new RecipeDetailFragment()).commit();
+            }
+        });
 
     }
 

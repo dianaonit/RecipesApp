@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -34,6 +35,21 @@ public class SaveFragment extends Fragment {
     private RecyclerView saveRecipesJustAdded_recyclerView;
     private JustAddedCookBookAdapter justAddedCookBookAdapter;
     private List<Recipe> savedRecipes;
+
+
+    private RecyclerView cookedRecipes_recyclerView;
+    private FavoriteRecipesAdapter favoriteRecipesAdapter;
+    private List<Recipe> cookedRecipes;
+
+    String profileid;
+
+    public SaveFragment() {
+
+    }
+
+    public SaveFragment(String profileid){
+        this.profileid = profileid;
+    }
 
 
 
@@ -50,42 +66,68 @@ public class SaveFragment extends Fragment {
         saveRecipesJustAdded_recyclerView.setHasFixedSize(true);
         saveRecipesJustAdded_recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
 
+
+        cookedRecipes_recyclerView = view.findViewById(R.id.savefragment_cookedrecipes);
+        cookedRecipes_recyclerView.setHasFixedSize(true);
+        cookedRecipes_recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+
+
         savedRecipes = new ArrayList<>();
+        cookedRecipes = new ArrayList<>();
 
         justAddedCookBookAdapter=new JustAddedCookBookAdapter(getContext(),savedRecipes);
+        favoriteRecipesAdapter=new FavoriteRecipesAdapter(getContext(),cookedRecipes);
+
         saveRecipesJustAdded_recyclerView.setAdapter(justAddedCookBookAdapter);
+        cookedRecipes_recyclerView.setAdapter(favoriteRecipesAdapter);
 
 
         readSaveRecipes();
+        readCookedRecipes();
 
 
         return view;
     }
 
 
-//    private void readSaveRecipes(){
-//
-//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes");
-//        reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                savedRecipes.clear();
-//                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-//                    Recipe recipe = snapshot.getValue(Recipe.class);
-//                    if(FirebaseAuth.getInstance().getCurrentUser().getUid().equals(recipe.getUserid())) {
-//                        savedRecipes.add(recipe);
-//                    }
-//
-//                }
-//                justAddedCookBookAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
+    private void readCookedRecipes(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("CookedRecipes");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot :dataSnapshot.getChildren()){
+                    for(DataSnapshot dataSnapshot1: snapshot.getChildren()){
+                        String userId = dataSnapshot1.getKey();
+                        if(userId.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                            String recipeId = snapshot.getKey();
+                            FirebaseDatabase.getInstance().getReference("Recipes").child(recipeId).addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    Recipe recipe = snapshot.getValue(Recipe.class);
+                                    cookedRecipes.add(recipe);
+
+                                   favoriteRecipesAdapter.notifyDataSetChanged();
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                        }
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
 
     private void readSaveRecipes(){
 
@@ -103,7 +145,7 @@ public class SaveFragment extends Fragment {
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     Recipe recipe = snapshot.getValue(Recipe.class);
                                     savedRecipes.add(recipe);
-
+                                    Collections.reverse(savedRecipes);
                                     justAddedCookBookAdapter.notifyDataSetChanged();
                                 }
 
@@ -115,6 +157,7 @@ public class SaveFragment extends Fragment {
                         }
                     }
                 }
+
 
             }
 
