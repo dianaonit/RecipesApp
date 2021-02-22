@@ -163,6 +163,8 @@ public class SignUp extends AppCompatActivity {
                                 hashMap.put("userpassword", uPass);
                                 hashMap.put("bio", "");
                                 hashMap.put("imageurl", "https://firebasestorage.googleapis.com/v0/b/deep-flavours.appspot.com/o/userplaceholder.png?alt=media&token=720bddfa-38ae-48b3-94c2-413692c2e499");
+                                hashMap.put("connected",false);
+
 
                                 reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override

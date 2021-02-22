@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,16 +8,26 @@
     android:background="#ffffff"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/iv_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="530dp"
+        android:background="@drawable/desert1"
+        android:alpha="0.9"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/tv_headings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="465dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="590dp"
+        android:fontFamily="@font/amaranth_bold"
         android:text="Deep Flavours"
-        android:textColor="#aaa480"
+        android:textColor="#000000"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -27,7 +38,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         android:layout_marginStart="18dp"
-        android:layout_marginTop="520dp"
+        android:layout_marginTop="550dp"
         android:layout_marginEnd="18dp"
         android:alpha="0.5"
         android:text="The ingredient that binds us together."
@@ -36,13 +47,8 @@
         android:textSize="15sp"
         android:textStyle="italic" />
 
-    <ImageView
-        android:id="@+id/iv_viewpager"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="150dp"
-        android:alpha="0.9" />
+
+
+
 
 </RelativeLayout>

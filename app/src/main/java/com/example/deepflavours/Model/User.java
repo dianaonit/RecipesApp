@@ -7,14 +7,16 @@ public class User {
     private String userpassword;
     private String bio;
     private String imageurl;
+    private Boolean connected;
 
-    public User(String id, String username, String useremail, String userpassword, String bio, String imageurl) {
+    public User(String id, String username, String useremail, String userpassword, String bio, String imageurl,Boolean connected) {
         this.id = id;
         this.username = username;
         this.useremail = useremail;
         this.userpassword = userpassword;
         this.bio = bio;
         this.imageurl = imageurl;
+        this.connected = connected;
     }
 
     public User(){
@@ -39,6 +41,14 @@ public class User {
 
     public String getUseremail() {
         return useremail;
+    }
+
+    public Boolean getConnected() {
+        return connected;
+    }
+
+    public void setConnected(Boolean connected) {
+        this.connected = connected;
     }
 
     public void setUseremail(String useremail) {

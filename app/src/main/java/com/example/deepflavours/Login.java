@@ -15,16 +15,27 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.example.deepflavours.Model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 public class Login extends AppCompatActivity {
     TextInputLayout inputEmail, inputPass;
     Button btnLogIn;
     FirebaseAuth uFirebaseAuth;
+    FirebaseUser firebaseUser;
     ProgressDialog pd;
 
 
@@ -33,6 +44,11 @@ public class Login extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+
 
 
 
@@ -63,6 +79,7 @@ public class Login extends AppCompatActivity {
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 userLogin();
             }
         });
@@ -77,6 +94,7 @@ public class Login extends AppCompatActivity {
 
         final String uEmail=inputEmail.getEditText().getText().toString().trim();
         final String uPass=inputPass.getEditText().getText().toString().trim();
+
 
         boolean error=false;
 
@@ -112,7 +130,26 @@ public class Login extends AppCompatActivity {
                         Toast.makeText(Login.this, getResources().getString(R.string.login_success), Toast.LENGTH_LONG).show();
                         new Thread(new Runnable() {
                             public void run() {
-                                startActivity(new Intent(Login.this,MainActivity.class));
+                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+                                reference.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        User user = dataSnapshot.getValue(User.class);
+                                        if(user.getConnected()){
+                                            Intent intent = new Intent(Login.this,MainActivity.class);
+                                            startActivity(intent);
+                                        }else{
+                                            startActivity(new Intent(Login.this,ViewPagerSlides.class));
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+
+
                             }
                         }).start();
                     } else {

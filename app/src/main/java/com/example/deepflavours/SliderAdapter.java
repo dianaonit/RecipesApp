@@ -23,9 +23,9 @@ public class SliderAdapter extends PagerAdapter {
     }
 
     public int[] slide_images = {
-            R.drawable.cooktogether,
-            R.drawable.customiseyourdish,
-            R.drawable.happycooking1
+            R.drawable.desert1,
+            R.drawable.desert2,
+            R.drawable.desert3
     };
 
 
@@ -58,11 +58,14 @@ public class SliderAdapter extends PagerAdapter {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.activity_slide_viewpager, container, false);
 
-        ImageView slideImageView = (ImageView) view.findViewById(R.id.iv_viewpager);
+
+        TextView slideImageView = (TextView) view.findViewById(R.id.iv_viewpager);
+       // ImageView slideImageView = (ImageView) view.findViewById(R.id.iv_viewpager);
         TextView slideHeading = (TextView) view.findViewById(R.id.tv_headings);
         TextView slideDescription = (TextView) view.findViewById(R.id.tv_desc);
 
-        slideImageView.setImageResource(slide_images[position]);
+       // slideImageView.setImageResource(slide_images[position]);
+        slideImageView.setBackgroundResource(slide_images[position]);
         slideHeading.setText(slide_headings[position]);
         slideDescription.setText(slide_desc[position]);
 

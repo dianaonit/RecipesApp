@@ -1,5 +1,7 @@
 package com.example.deepflavours;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -11,6 +13,13 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 
 public class ViewPagerSlides extends AppCompatActivity {
@@ -25,12 +34,15 @@ public class ViewPagerSlides extends AppCompatActivity {
     Button nextBtn;
     Button skipBtn;
     int mCurrentPage;
+    FirebaseUser firebaseUser;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
         setContentView(R.layout.activity_viewpager);
 
         //hooks-functionality
@@ -41,6 +53,14 @@ public class ViewPagerSlides extends AppCompatActivity {
         nextBtn = findViewById(R.id.next_btn);
         skipBtn = findViewById(R.id.skip_btn);
 
+//        if(getIntent().getBooleanExtra("isFromLogin",false)){
+//            firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//            DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+//
+//            HashMap<String, Object> hashMap = new HashMap<>();
+//            hashMap.put("connected",true);
+//            reference1.updateChildren(hashMap);
+//        }
 
         //call adapter
         sliderAdapter = new SliderAdapter(this);
@@ -51,7 +71,22 @@ public class ViewPagerSlides extends AppCompatActivity {
         viewPager.addOnPageChangeListener(changeListener);
 
 
+        letsGetStarted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put("connected",true);
+                reference.updateChildren(hashMap);
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            }
+        });
+
     }
+
+
+
 
     public void addDotsIndicator(int position) {
         mDots = new TextView[3];

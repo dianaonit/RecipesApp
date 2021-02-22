@@ -18,12 +18,19 @@ import com.example.deepflavours.Fragment.SaveFragment;
 import com.example.deepflavours.Fragment.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     Fragment selectedFragment;
     String profileid = null;
+    FirebaseUser firebaseUser;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,16 +60,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
 
 
-//        Bundle intent = getIntent().getExtras();
-//        if(intent !=null){
-//            String user = intent.getString("userid");
-//            SharedPreferences.Editor editor = getSharedPreferences("PREFS",MODE_PRIVATE).edit();
-//            editor.putString("profileid",user);
-//            editor.apply();
-//            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
-//        }else{
-//            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
-//        }
 
 
 
