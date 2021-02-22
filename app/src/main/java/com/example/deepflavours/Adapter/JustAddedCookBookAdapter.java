@@ -20,6 +20,11 @@ import com.example.deepflavours.Model.Recipe;
 import com.example.deepflavours.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -53,6 +58,9 @@ public class JustAddedCookBookAdapter extends RecyclerView.Adapter<JustAddedCook
         Glide.with(mContext).load(recipe.getRecipeimage()).into(viewHolder.savepostImage_justadded);
 
 
+
+        nrCooked(viewHolder.cooknr,recipe.getRecipeid());
+
         viewHolder.savepostImage_justadded.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,7 +87,7 @@ public class JustAddedCookBookAdapter extends RecyclerView.Adapter<JustAddedCook
         public CardView CardView;
         public CardView CardView1;
         public ImageView savepostImage_justadded;
-        public TextView title_cardview1 ,title_item_cookbook,cooktimes_nr,cooktimes_text,description_item_cookbook;
+        public TextView title_cardview1 ,title_item_cookbook,cooknr,cooktimes_text,description_item_cookbook;
         public RatingBar ratingbar_recipe;
 
 
@@ -93,11 +101,28 @@ public class JustAddedCookBookAdapter extends RecyclerView.Adapter<JustAddedCook
             title_cardview1=itemView.findViewById(R.id.title_cardview_justadded);
             title_item_cookbook=itemView.findViewById(R.id.title_cookbook_justadded);
             description_item_cookbook=itemView.findViewById(R.id.description_cookbook_justadded);
-            cooktimes_nr=itemView.findViewById(R.id.cooktimes_nr);
+            cooknr=itemView.findViewById(R.id.cooktimes_nr);
             cooktimes_text=itemView.findViewById(R.id.cooktimes_text);
             ratingbar_recipe=itemView.findViewById(R.id.ratingbar_recipe);
 
         }
+    }
+
+
+    private void nrCooked(TextView cook, String postid){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("CookedRecipes")
+                .child(postid);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                cook.setText(dataSnapshot.getChildrenCount()+ "");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 }

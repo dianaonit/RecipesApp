@@ -79,6 +79,7 @@ public class StartCooking extends AppCompatActivity {
         Resources resources = getResources();
         final String[] listItems = {resources.getString(R.string.languageTypeRo),resources.getString(R.string.languageTypeEn),resources.getString(R.string.languageTypeDe),resources.getString(R.string.languageTypeFr)};
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(StartCooking.this);
+
         mBuilder.setTitle(R.string.Language);
         int checkedItem;
         if(languageCode.equalsIgnoreCase("ro")){
@@ -110,6 +111,8 @@ public class StartCooking extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
 
 
         AlertDialog mDialog = mBuilder.create();

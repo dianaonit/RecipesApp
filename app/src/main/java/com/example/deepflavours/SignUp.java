@@ -141,7 +141,7 @@ public class SignUp extends AppCompatActivity {
 
         if(!error) {
 
-            pd = new ProgressDialog(SignUp.this);
+            pd = new ProgressDialog(SignUp.this,ProgressDialog.THEME_DEVICE_DEFAULT_LIGHT);
             pd.setMessage("Please wait..");
             pd.show();
 

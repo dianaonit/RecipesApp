@@ -65,6 +65,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         nrLikes(viewHolder.likes,post.getRecipeid());
 
+        nrCooked(viewHolder.cooknr,post.getRecipeid());
+
         isSaved(post.getRecipeid(),viewHolder.save);
 
 
@@ -120,7 +122,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder{
 
        public CardView postItem_CardView;
-       public TextView titlePostItem ,manyTimes, textView_CookThis,likes;
+       public TextView titlePostItem ,cooknr, textView_CookThis,likes;
        public ImageView imagePost,like,save;
 
 
@@ -130,7 +132,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
             postItem_CardView = itemView.findViewById(R.id.post_CardView);
             titlePostItem = itemView.findViewById(R.id.post_titleCardView);
-            manyTimes = itemView.findViewById(R.id.post_manyTimes);
+            cooknr = itemView.findViewById(R.id.cooktimes_nr);
             textView_CookThis = itemView.findViewById(R.id.tv_timesCook);
             imagePost = itemView.findViewById(R.id.image_Post_CardView);
             likes = itemView.findViewById(R.id.nr_like_post);
@@ -173,6 +175,22 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 likes.setText(dataSnapshot.getChildrenCount()+ "");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void nrCooked(TextView cook, String postid){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("CookedRecipes")
+                .child(postid);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                cook.setText(dataSnapshot.getChildrenCount()+ "");
             }
 
             @Override

@@ -37,7 +37,6 @@ public class RecipeDetailFragment extends Fragment {
     private List<Recipe> postList;
 
     String postid;
-    String profileid;
 
     ImageView back;
 
@@ -59,6 +58,7 @@ public class RecipeDetailFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), MainActivity.class);
                 getContext().startActivity(intent);
+
             }
         });
 

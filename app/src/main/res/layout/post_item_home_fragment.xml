@@ -44,7 +44,7 @@
 
 
         <TextView
-            android:id="@+id/post_manyTimes"
+            android:id="@+id/cooktimes_nr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0.8"

@@ -58,6 +58,9 @@ public class FavoriteRecipesAdapter extends RecyclerView.Adapter<FavoriteRecipes
         viewHolder.favoritepost_description.setText(recipe.getDescription());
         Glide.with(mContext).load(recipe.getRecipeimage()).into(viewHolder.favoritepost_image);
 
+
+        nrCooked(viewHolder.cooknr,recipe.getRecipeid());
+
         viewHolder.favoritepost_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,7 +87,7 @@ public class FavoriteRecipesAdapter extends RecyclerView.Adapter<FavoriteRecipes
         public CardView CardView0;
         public CardView CardView1;
         public ImageView favoritepost_image;
-        public TextView favoritepost_title ,favoritepost_description,cooktimes_nr,cooktimes_text;
+        public TextView favoritepost_title ,favoritepost_description,cooknr,cooktimes_text;
         public RatingBar ratingbar_recipe;
 
 
@@ -97,13 +100,29 @@ public class FavoriteRecipesAdapter extends RecyclerView.Adapter<FavoriteRecipes
             favoritepost_image =itemView.findViewById(R.id.favoritepost_Image);
             favoritepost_title=itemView.findViewById(R.id.favoritepost_title);
             favoritepost_description=itemView.findViewById(R.id.favoritepost_description);
-            cooktimes_nr=itemView.findViewById(R.id.cooktimes_nr);
+            cooknr=itemView.findViewById(R.id.cooktimes_nr);
             cooktimes_text=itemView.findViewById(R.id.cooktimes_text);
             ratingbar_recipe=itemView.findViewById(R.id.ratingbar_recipe);
 
         }
     }
 
+
+    private void nrCooked(TextView cook, String postid){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("CookedRecipes")
+                .child(postid);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                cook.setText(dataSnapshot.getChildrenCount()+ "");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
 
 
