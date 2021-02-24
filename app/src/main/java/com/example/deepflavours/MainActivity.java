@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Fragment selectedFragment;
     String profileid = null;
-    FirebaseUser firebaseUser;
 
 
     @Override
@@ -58,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
-
-
 
 
 

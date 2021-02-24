@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
@@ -22,11 +23,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.deepflavours.Adapter.FavoriteRecipesAdapter;
 import com.example.deepflavours.Adapter.RecipeAdapter;
+import com.example.deepflavours.Adapter.UserAdapter;
 import com.example.deepflavours.EditProfileActivity;
+import com.example.deepflavours.Login;
 import com.example.deepflavours.MainActivity;
 import com.example.deepflavours.Model.Recipe;
 import com.example.deepflavours.Model.User;
 import com.example.deepflavours.R;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -53,13 +57,25 @@ public class ProfileFragment extends Fragment {
     private List<Recipe> favouriteRecipes;
 
 
+
+
     CircleImageView image_profile;
     ImageView options;
-    TextView username,bio,posts,following,followers,show_all;
+    TextView username,bio,posts,following,followers,show_all,logout;
     Button edit_profile;
 
     FirebaseUser firebaseUser;
     String profileid;
+
+
+//    RecyclerView recyclerView_Followers;
+//    UserAdapter userAdapter;
+//    List<User> userList;
+//    List<String>idList;
+
+
+
+
 
     public ProfileFragment() {
 
@@ -81,6 +97,18 @@ public class ProfileFragment extends Fragment {
 
 
 
+//       recyclerView_Followers=view.findViewById(R.id.recycler_view_followers);
+//       recyclerView_Followers.setHasFixedSize(true);
+//       recyclerView_Followers.setLayoutManager(new LinearLayoutManager(getContext()));
+//
+//       userList = new ArrayList<>();
+//       userAdapter = new UserAdapter(getContext(),userList);
+//       recyclerView_Followers.setAdapter(userAdapter);
+//       idList = new ArrayList<>();
+
+
+
+
         image_profile = view.findViewById(R.id.image_profile);
         options = view.findViewById(R.id.iv_menu);
         username = view.findViewById(R.id.username);
@@ -90,13 +118,68 @@ public class ProfileFragment extends Fragment {
         followers = view.findViewById(R.id.followers_nr);
         show_all = view.findViewById(R.id.seeAllmypost);
         edit_profile = view.findViewById(R.id.editprofile_button);
+        logout = view.findViewById(R.id.logout_option);
 
 
         if(profileid.equals(firebaseUser.getUid())){
+            options.setVisibility(View.VISIBLE);
             edit_profile.setText("Edit Profile");
         }else {
+            options.setVisibility(View.INVISIBLE);
             checkFollow();
         }
+
+
+
+        options.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+                        getContext(),R.style.BottomSheetDialogTheme
+                );
+                View bottomSheetView = LayoutInflater.from(getContext())
+                        .inflate(
+                                R.layout.bottom_sheet_options,
+                                (LinearLayout)view.findViewById(R.id.bottomSheetContainerOptions)
+                        );
+                bottomSheetView.findViewById(R.id.logout_option).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getContext(),Login.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        getContext().startActivity(intent);
+                        bottomSheetDialog.dismiss();
+                    }
+                });
+
+                bottomSheetDialog.setContentView(bottomSheetView);
+                bottomSheetDialog.show();
+            }
+        });
+
+        followers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+                        getContext(),R.style.BottomSheetDialogTheme
+                );
+                View bottomSheetView = LayoutInflater.from(getContext())
+                        .inflate(
+                                R.layout.bottom_sheet_followers,
+                                (LinearLayout)view.findViewById(R.id.bottomSheetContainerOptions)
+                        );
+                bottomSheetView.findViewById(R.id.ll_followers).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        bottomSheetDialog.dismiss();
+                    }
+                });
+                bottomSheetDialog.setContentView(bottomSheetView);
+                bottomSheetDialog.show();
+            }
+        });
 
 
 
@@ -162,6 +245,8 @@ public class ProfileFragment extends Fragment {
 
         favoriteRecipesAdapter=new FavoriteRecipesAdapter(getContext(),favouriteRecipes);
         favRecipes_recyclerView.setAdapter(favoriteRecipesAdapter);
+
+
 
 
 
@@ -317,6 +402,52 @@ public class ProfileFragment extends Fragment {
         });
 
     }
+
+//    private void getCurrentUserFollowers(){
+//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Follow")
+//                .child(profileid).child("followers");
+//        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                idList.clear();
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+//                    idList.add(snapshot.getKey());
+//                }
+//                showUsers();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
+//
+//    private void showUsers(){
+//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+//        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                userList.clear();
+//                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+//                    User user = snapshot.getValue(User.class);
+//                    for (String profileid : idList){
+//                        if(user.getId().equals(profileid)){
+//                            userList.add(user);
+//                        }
+//
+//                    }
+//                }
+//                userAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//
+//    }
 
 
     private void getNrPosts(){

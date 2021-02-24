@@ -1,7 +1,6 @@
 package com.example.deepflavours;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -14,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.deepflavours.Adapter.SliderAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -53,14 +53,6 @@ public class ViewPagerSlides extends AppCompatActivity {
         nextBtn = findViewById(R.id.next_btn);
         skipBtn = findViewById(R.id.skip_btn);
 
-//        if(getIntent().getBooleanExtra("isFromLogin",false)){
-//            firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-//            DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
-//
-//            HashMap<String, Object> hashMap = new HashMap<>();
-//            hashMap.put("connected",true);
-//            reference1.updateChildren(hashMap);
-//        }
 
         //call adapter
         sliderAdapter = new SliderAdapter(this);
@@ -84,7 +76,6 @@ public class ViewPagerSlides extends AppCompatActivity {
         });
 
     }
-
 
 
 

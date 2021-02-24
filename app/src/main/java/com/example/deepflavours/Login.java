@@ -49,9 +49,6 @@ public class Login extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
 
-
-
-
          //trimitere la ui-ul OnBoarding
         ImageView left_arrow= findViewById(R.id.left_arrow);
         left_arrow.setOnClickListener(view -> {

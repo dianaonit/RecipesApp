@@ -42,6 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/amaranth_bold"
                 android:text="@string/deep_flavours"
                 android:textColor="#aaa480"
                 android:textSize="30sp"

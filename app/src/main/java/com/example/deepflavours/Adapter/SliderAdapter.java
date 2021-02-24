@@ -1,4 +1,4 @@
-package com.example.deepflavours;
+package com.example.deepflavours.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
+
+import com.example.deepflavours.R;
 
 
 public class SliderAdapter extends PagerAdapter {
@@ -60,11 +62,9 @@ public class SliderAdapter extends PagerAdapter {
 
 
         TextView slideImageView = (TextView) view.findViewById(R.id.iv_viewpager);
-       // ImageView slideImageView = (ImageView) view.findViewById(R.id.iv_viewpager);
         TextView slideHeading = (TextView) view.findViewById(R.id.tv_headings);
         TextView slideDescription = (TextView) view.findViewById(R.id.tv_desc);
 
-       // slideImageView.setImageResource(slide_images[position]);
         slideImageView.setBackgroundResource(slide_images[position]);
         slideHeading.setText(slide_headings[position]);
         slideDescription.setText(slide_desc[position]);

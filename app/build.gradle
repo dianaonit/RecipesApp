@@ -56,11 +56,9 @@ dependencies {
     
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'androidx.legacy:legacy-support-v4'
-    
 
-
-
-
+    implementation'com.google.android.material:material:1.2.0-alpha02'
+    implementation'com.makeramen:roundedimageview:2.3.0'
 
 
 
@@ -69,5 +67,6 @@ dependencies {
 
 
 }
+
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.android.application'
