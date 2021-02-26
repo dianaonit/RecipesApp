@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.deepflavours.CommentsActivity;
 import com.example.deepflavours.Fragment.RecipeDetailFragment;
+import com.example.deepflavours.LikesActivity;
 import com.example.deepflavours.MainActivity;
 import com.example.deepflavours.Model.Recipe;
 import com.example.deepflavours.Model.User;
@@ -166,6 +167,15 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
             }
         });
 
+        viewHolder.like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, LikesActivity.class);
+                intent.putExtra("id",post.getRecipeid());
+                mContext.startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -177,7 +187,7 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView post_title, cooktimesNr, servings, prepTime, cookTime, user_name, likes, commnr,comments,post_desc, ingredients, directions;
-        public ImageView image_post, image_profile,back,favourite,cook,more;
+        public ImageView image_post, image_profile,back,favourite,cook,more,like;
         public Button btn_ingredients,btn_directions;
 
 
@@ -192,6 +202,7 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
             cookTime = itemView.findViewById(R.id.tv_timeOfcook);
             user_name = itemView.findViewById(R.id.name_user);
             likes = itemView.findViewById(R.id.tv_likesnr);
+            like = itemView.findViewById(R.id.iv_like);
             post_desc = itemView.findViewById(R.id.post_description);
             ingredients = itemView.findViewById(R.id.tv_ingredients);
             directions = itemView.findViewById(R.id.tv_directions);

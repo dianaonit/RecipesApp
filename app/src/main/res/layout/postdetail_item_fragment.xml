@@ -162,10 +162,10 @@
               />
 
           <ImageView
-              android:id="@+id/sharing"
-              android:layout_width="25dp"
-              android:layout_height="25dp"
-              android:src="@drawable/share"
+              android:id="@+id/addnotes"
+              android:layout_width="30dp"
+              android:layout_height="30dp"
+              android:src="@drawable/addnotes"
               android:layout_marginTop="160dp"
               android:layout_marginStart="10dp"
               />

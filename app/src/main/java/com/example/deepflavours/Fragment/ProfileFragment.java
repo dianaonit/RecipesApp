@@ -25,6 +25,8 @@ import com.example.deepflavours.Adapter.FavoriteRecipesAdapter;
 import com.example.deepflavours.Adapter.RecipeAdapter;
 import com.example.deepflavours.Adapter.UserAdapter;
 import com.example.deepflavours.EditProfileActivity;
+import com.example.deepflavours.FollowersActivity;
+import com.example.deepflavours.FollowingsActivity;
 import com.example.deepflavours.Login;
 import com.example.deepflavours.MainActivity;
 import com.example.deepflavours.Model.Recipe;
@@ -68,12 +70,6 @@ public class ProfileFragment extends Fragment {
     String profileid;
 
 
-//    RecyclerView recyclerView_Followers;
-//    UserAdapter userAdapter;
-//    List<User> userList;
-//    List<String>idList;
-
-
 
 
 
@@ -96,19 +92,7 @@ public class ProfileFragment extends Fragment {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
 
-
-//       recyclerView_Followers=view.findViewById(R.id.recycler_view_followers);
-//       recyclerView_Followers.setHasFixedSize(true);
-//       recyclerView_Followers.setLayoutManager(new LinearLayoutManager(getContext()));
-//
-//       userList = new ArrayList<>();
-//       userAdapter = new UserAdapter(getContext(),userList);
-//       recyclerView_Followers.setAdapter(userAdapter);
-//       idList = new ArrayList<>();
-
-
-
-
+        
         image_profile = view.findViewById(R.id.image_profile);
         options = view.findViewById(R.id.iv_menu);
         username = view.findViewById(R.id.username);
@@ -161,23 +145,18 @@ public class ProfileFragment extends Fragment {
         followers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
-                        getContext(),R.style.BottomSheetDialogTheme
-                );
-                View bottomSheetView = LayoutInflater.from(getContext())
-                        .inflate(
-                                R.layout.bottom_sheet_followers,
-                                (LinearLayout)view.findViewById(R.id.bottomSheetContainerOptions)
-                        );
-                bottomSheetView.findViewById(R.id.ll_followers).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                Intent intent = new Intent(getContext(), FollowersActivity.class);
+                intent.putExtra("id",profileid);
+                startActivity(intent);
+            }
+        });
 
-                        bottomSheetDialog.dismiss();
-                    }
-                });
-                bottomSheetDialog.setContentView(bottomSheetView);
-                bottomSheetDialog.show();
+        following.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), FollowingsActivity.class);
+                intent.putExtra("id",profileid);
+                startActivity(intent);
             }
         });
 
@@ -249,13 +228,13 @@ public class ProfileFragment extends Fragment {
 
 
 
-
         userInfo();
         getFollowers();
         getNrPosts();
 
         readRecipes();
         readFavRecipes();
+
 
         return view;
     }
@@ -403,51 +382,9 @@ public class ProfileFragment extends Fragment {
 
     }
 
-//    private void getCurrentUserFollowers(){
-//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Follow")
-//                .child(profileid).child("followers");
-//        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                idList.clear();
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-//                    idList.add(snapshot.getKey());
-//                }
-//                showUsers();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
-//
-//    private void showUsers(){
-//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
-//        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                userList.clear();
-//                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-//                    User user = snapshot.getValue(User.class);
-//                    for (String profileid : idList){
-//                        if(user.getId().equals(profileid)){
-//                            userList.add(user);
-//                        }
-//
-//                    }
-//                }
-//                userAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//
-//    }
+
+
+
 
 
     private void getNrPosts(){
