@@ -385,8 +385,6 @@ public class ProfileFragment extends Fragment {
 
 
 
-
-
     private void getNrPosts(){
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes");

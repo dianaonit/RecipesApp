@@ -32,6 +32,7 @@
               android:background="#ffffff"
               app:menu="@menu/bottom_navigation"
               />
+
       </com.google.android.material.appbar.AppBarLayout>
 
 </RelativeLayout>

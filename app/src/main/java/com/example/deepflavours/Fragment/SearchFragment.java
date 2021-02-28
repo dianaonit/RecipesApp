@@ -16,8 +16,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.SearchView;
+import android.widget.TextView;
 
+import com.example.deepflavours.Adapter.MostLikedRecipeAdapter;
+import com.example.deepflavours.Adapter.RecipeAdapter;
 import com.example.deepflavours.Adapter.UserAdapter;
+import com.example.deepflavours.Model.Recipe;
 import com.example.deepflavours.Model.User;
 import com.example.deepflavours.R;
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +33,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -38,6 +44,13 @@ public class SearchFragment extends Fragment {
     private List<User> mUsers;
 
     EditText search_bar;
+
+    private RecyclerView recyclerView_mostLiked_Recipe;
+    private MostLikedRecipeAdapter mostLikedRecipeAdapter;
+    private List<Recipe> mostLikedRecipeList;
+
+    TextView mostLiked_Title,popular_Title;
+
 
 
 
@@ -51,12 +64,22 @@ public class SearchFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         search_bar = view.findViewById(R.id.search_bar);
+        mostLiked_Title = view.findViewById(R.id.mostlikedrecipes_category);
+        popular_Title = view.findViewById(R.id.popularRecipes_category);
 
         mUsers = new ArrayList<>();
         userAdapter = new UserAdapter(getContext(),mUsers);
         recyclerView.setAdapter(userAdapter);
 
-        readUsers();
+        recyclerView_mostLiked_Recipe = view.findViewById(R.id.recycler_view_mostlikedrecipes);
+        recyclerView_mostLiked_Recipe.setHasFixedSize(true);
+        recyclerView_mostLiked_Recipe.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+
+        mostLikedRecipeList = new ArrayList<>();
+
+        mostLikedRecipeAdapter = new MostLikedRecipeAdapter(getContext(),mostLikedRecipeList);
+        recyclerView_mostLiked_Recipe.setAdapter(mostLikedRecipeAdapter);
+
 
         search_bar.addTextChangedListener(new TextWatcher() {
             @Override
@@ -67,6 +90,20 @@ public class SearchFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 searchUsers(s.toString());
+                if(s.length()<1){
+                    recyclerView.setVisibility(View.GONE);
+                    mostLiked_Title.setVisibility(View.VISIBLE);
+                    recyclerView_mostLiked_Recipe.setVisibility(View.VISIBLE);
+                    popular_Title.setVisibility(View.VISIBLE);
+
+
+                }else{
+                    recyclerView.setVisibility(View.VISIBLE);
+                    mostLiked_Title.setVisibility(View.GONE);
+                    recyclerView_mostLiked_Recipe.setVisibility(View.GONE);
+                    popular_Title.setVisibility(View.GONE);
+
+                }
             }
 
             @Override
@@ -74,6 +111,10 @@ public class SearchFragment extends Fragment {
 
             }
         });
+
+        readUsers();
+
+        readRecipes();
 
         return view;
     }
@@ -103,7 +144,6 @@ public class SearchFragment extends Fragment {
 
     }
 
-
     private void readUsers(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
         reference.addValueEventListener(new ValueEventListener() {
@@ -125,5 +165,31 @@ public class SearchFragment extends Fragment {
             }
         });
     }
+
+
+    private void readRecipes(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mostLikedRecipeList.clear();
+
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Recipe recipe = snapshot.getValue(Recipe.class);
+                        mostLikedRecipeList.add(recipe);
+
+                }
+                mostLikedRecipeAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+
 
 }

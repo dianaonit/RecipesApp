@@ -99,8 +99,10 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
           public void onClick(View v) {
               viewHolder.btn_ingredients.setTextColor(Color.parseColor("#000000"));
               viewHolder.btn_directions.setTextColor(Color.parseColor("#aaa480"));
+              viewHolder.line_ingred.setVisibility(View.VISIBLE);
               viewHolder.ingredients.setVisibility(View.VISIBLE);
               viewHolder.directions.setVisibility(View.GONE);
+              viewHolder.line_dir.setVisibility(View.GONE);
           }
       });
 
@@ -110,7 +112,10 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
                 viewHolder.btn_ingredients.setTextColor(Color.parseColor("#aaa480"));
                 viewHolder.btn_directions.setTextColor(Color.parseColor("#000000"));
                 viewHolder.ingredients.setVisibility(View.GONE);
+                viewHolder.line_ingred.setVisibility(View.GONE);
                 viewHolder.directions.setVisibility(View.VISIBLE);
+                viewHolder.line_dir.setVisibility(View.VISIBLE);
+
             }
         });
 
@@ -189,6 +194,7 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
         public TextView post_title, cooktimesNr, servings, prepTime, cookTime, user_name, likes, commnr,comments,post_desc, ingredients, directions;
         public ImageView image_post, image_profile,back,favourite,cook,more,like;
         public Button btn_ingredients,btn_directions;
+        public  View line_ingred,line_dir;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -215,6 +221,8 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
             cooktimesNr = itemView.findViewById(R.id.cooktimes_nr);
             comments = itemView.findViewById(R.id.tv_allcomm);
             commnr = itemView.findViewById(R.id.tv_comm);
+            line_ingred = itemView.findViewById(R.id.line_ingredients);
+            line_dir = itemView.findViewById(R.id.line_directions);
 
 
 
