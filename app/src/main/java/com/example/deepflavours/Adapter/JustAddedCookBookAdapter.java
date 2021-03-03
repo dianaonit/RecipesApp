@@ -69,7 +69,7 @@ public class JustAddedCookBookAdapter extends RecyclerView.Adapter<JustAddedCook
                 editor.apply();
 
                 ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new RecipeDetailFragment()).commit();
+                        new RecipeDetailFragment("SaveFragment",recipe.getRecipeid())).commit();
             }
         });
 

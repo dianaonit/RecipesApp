@@ -133,7 +133,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 editor.apply();
 
                 ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new RecipeDetailFragment()).commit();
+                        new RecipeDetailFragment("HomeFragment",post.getRecipeid())).commit();
             }
         });
 

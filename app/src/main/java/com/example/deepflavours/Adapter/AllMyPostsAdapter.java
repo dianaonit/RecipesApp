@@ -32,10 +32,12 @@ public class AllMyPostsAdapter extends RecyclerView.Adapter<AllMyPostsAdapter.Vi
     public List<Recipe> mRecipe;
 
     private FirebaseUser firebaseUser;
+    private String profileid;
 
-    public AllMyPostsAdapter(Context mContext, List<Recipe> mRecipe) {
+    public AllMyPostsAdapter(Context mContext, List<Recipe> mRecipe,String profileid) {
         this.mContext = mContext;
         this.mRecipe = mRecipe;
+        this.profileid = profileid;
     }
 
     @NonNull
@@ -62,7 +64,7 @@ public class AllMyPostsAdapter extends RecyclerView.Adapter<AllMyPostsAdapter.Vi
                 editor.apply();
 
                 ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new RecipeDetailFragment()).commit();
+                        new RecipeDetailFragment("AllMyPostFragment",recipe.getRecipeid(),profileid)).commit();
             }
         });
 

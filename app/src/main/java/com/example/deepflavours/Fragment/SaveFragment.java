@@ -1,5 +1,7 @@
 package com.example.deepflavours.Fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -77,7 +79,7 @@ public class SaveFragment extends Fragment {
         cookedRecipes = new ArrayList<>();
 
         justAddedCookBookAdapter=new JustAddedCookBookAdapter(getContext(),savedRecipes);
-        favoriteRecipesAdapter=new FavoriteRecipesAdapter(getContext(),cookedRecipes);
+        favoriteRecipesAdapter=new FavoriteRecipesAdapter(getContext(),cookedRecipes,profileid,"SaveFragment");
 
         saveRecipesJustAdded_recyclerView.setAdapter(justAddedCookBookAdapter);
         cookedRecipes_recyclerView.setAdapter(favoriteRecipesAdapter);

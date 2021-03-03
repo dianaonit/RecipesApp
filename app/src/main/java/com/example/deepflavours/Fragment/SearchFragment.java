@@ -1,6 +1,8 @@
 package com.example.deepflavours.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -84,7 +86,7 @@ public class SearchFragment extends Fragment {
 
         mUsers = new ArrayList<>();
 
-        userAdapter = new UserAdapter(getContext(),mUsers);
+        userAdapter = new UserAdapter(getContext(),mUsers, "SearchFragment");
         recyclerView.setAdapter(userAdapter);
 
 

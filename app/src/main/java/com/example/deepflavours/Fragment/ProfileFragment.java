@@ -23,10 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.deepflavours.Adapter.FavoriteRecipesAdapter;
 import com.example.deepflavours.Adapter.RecipeAdapter;
-import com.example.deepflavours.Adapter.UserAdapter;
 import com.example.deepflavours.EditProfileActivity;
-import com.example.deepflavours.FollowersActivity;
-import com.example.deepflavours.FollowingsActivity;
 import com.example.deepflavours.Login;
 import com.example.deepflavours.MainActivity;
 import com.example.deepflavours.Model.Recipe;
@@ -62,26 +59,32 @@ public class ProfileFragment extends Fragment {
 
 
     CircleImageView image_profile;
-    ImageView options;
+    ImageView options,back;
     TextView username,bio,posts,following,followers,show_all,logout;
     Button edit_profile;
 
     FirebaseUser firebaseUser;
     String profileid;
-
-
-
-
+    String sourceFragment;
+    String previousUser;
 
     public ProfileFragment() {
 
     }
 
-     public ProfileFragment(String profileid){
+    public ProfileFragment(String profileid){
+        this.profileid = profileid;
+    }
+
+     public ProfileFragment(String profileid, String sourceFragment){
          this.profileid = profileid;
+         this.sourceFragment = sourceFragment;
      }
-
-
+    public ProfileFragment(String profileid, String sourceFragment, String previousUser){
+        this.profileid = profileid;
+        this.sourceFragment = sourceFragment;
+        this.previousUser = previousUser;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,10 +92,19 @@ public class ProfileFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_profile,container,false);
 
+        SharedPreferences preferences = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
+        String profileSourceFragment = preferences.getString("ProfileSourceFragment", "none");
+        if (profileSourceFragment.equals("none")) {
+            SharedPreferences.Editor editor = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+            editor.putString("ProfileSourceFragment", sourceFragment);
+            editor.apply();
+        }
+        if(sourceFragment == null){
+            sourceFragment = profileSourceFragment;
+        }
+
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-
-        
         image_profile = view.findViewById(R.id.image_profile);
         options = view.findViewById(R.id.iv_menu);
         username = view.findViewById(R.id.username);
@@ -103,16 +115,44 @@ public class ProfileFragment extends Fragment {
         show_all = view.findViewById(R.id.seeAllmypost);
         edit_profile = view.findViewById(R.id.editprofile_button);
         logout = view.findViewById(R.id.logout_option);
+        back =view.findViewById(R.id.btn_back_profile);
 
-
+        if(profileid == null) {
+            profileid = previousUser;
+        }
         if(profileid.equals(firebaseUser.getUid())){
             options.setVisibility(View.VISIBLE);
+            back.setVisibility(View.GONE);
             edit_profile.setText("Edit Profile");
         }else {
-            options.setVisibility(View.INVISIBLE);
+            options.setVisibility(View.GONE);
+            back.setVisibility(View.VISIBLE);
             checkFollow();
         }
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (sourceFragment) {
+                    case "LikesFragment":
+                        ((FragmentActivity)getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new LikesFragment(previousUser)).commit();
+                        break;
+                    case "FollowersFragment":
+                        ((FragmentActivity)getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new FollowersFragment()).commit();
+                        break;
+                    case "FollowingsFragment":
+                        ((FragmentActivity)getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new FollowingsFragment()).commit();
+                        break;
+                    case "SearchFragment":
+                        ((FragmentActivity)getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new SearchFragment()).commit();
+                        break;
+                }
+            }
+        });
 
 
         options.setOnClickListener(new View.OnClickListener() {
@@ -142,21 +182,29 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+
         followers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), FollowersActivity.class);
-                intent.putExtra("id",profileid);
-                startActivity(intent);
+                SharedPreferences.Editor editor = getContext().getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
+                editor.putString("profileid",profileid);
+                editor.apply();
+
+                ((FragmentActivity)getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new FollowersFragment()).commit();
             }
         });
+
 
         following.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), FollowingsActivity.class);
-                intent.putExtra("id",profileid);
-                startActivity(intent);
+                SharedPreferences.Editor editor = getContext().getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
+                editor.putString("profileid",profileid);
+                editor.apply();
+
+                ((FragmentActivity)getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new FollowingsFragment()).commit();
             }
         });
 
@@ -219,10 +267,10 @@ public class ProfileFragment extends Fragment {
         favouriteRecipes = new ArrayList<>();
 
 
-        recipeAdapter = new RecipeAdapter(getContext(),recipeList);
+        recipeAdapter = new RecipeAdapter(getContext(),recipeList,profileid);
         recyclerView.setAdapter(recipeAdapter);
 
-        favoriteRecipesAdapter=new FavoriteRecipesAdapter(getContext(),favouriteRecipes);
+        favoriteRecipesAdapter=new FavoriteRecipesAdapter(getContext(),favouriteRecipes,profileid,"ProfileFragment");
         favRecipes_recyclerView.setAdapter(favoriteRecipesAdapter);
 
 

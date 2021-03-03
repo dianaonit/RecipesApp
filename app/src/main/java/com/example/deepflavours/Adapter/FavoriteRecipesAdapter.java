@@ -35,10 +35,14 @@ public class FavoriteRecipesAdapter extends RecyclerView.Adapter<FavoriteRecipes
     public List<Recipe> mFavRecipe;
 
     private FirebaseUser firebaseUser;
+    private String profileid;
+    private String fragmentName;
 
-    public FavoriteRecipesAdapter(Context mContext, List<Recipe> mFavRecipe) {
+    public FavoriteRecipesAdapter(Context mContext, List<Recipe> mFavRecipe, String profileid, String fragmentName) {
         this.mContext = mContext;
         this.mFavRecipe = mFavRecipe;
+        this.profileid = profileid;
+        this.fragmentName = fragmentName;
     }
 
     @NonNull
@@ -69,7 +73,7 @@ public class FavoriteRecipesAdapter extends RecyclerView.Adapter<FavoriteRecipes
                 editor.apply();
 
                 ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new RecipeDetailFragment()).commit();
+                        new RecipeDetailFragment(fragmentName,recipe.getRecipeid(),profileid)).commit();
             }
         });
 

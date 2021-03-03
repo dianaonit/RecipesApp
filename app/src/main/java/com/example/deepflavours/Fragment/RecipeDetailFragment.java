@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,19 +36,49 @@ public class RecipeDetailFragment extends Fragment {
     private RecyclerView recyclerView;
     private PostDetailAdapter postDetailAdapter;
     private List<Recipe> postList;
+    private String previousActivity = null;
 
     String postid;
+    String profileid;
 
     ImageView back;
+
+    public RecipeDetailFragment() {
+
+    }
+
+    public RecipeDetailFragment(String postid) {
+        this.postid = postid;
+    }
+
+    public RecipeDetailFragment(String previousActivity, String postid) {
+        this.previousActivity = previousActivity;
+        this.postid = postid;
+    }
+
+    public RecipeDetailFragment(String previousActivity, String postid, String profileid) {
+        this.previousActivity = previousActivity;
+        this.postid = postid;
+        this.profileid = profileid;
+    }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_recipe_detail,container,false);
+        View view = inflater.inflate(R.layout.fragment_recipe_detail, container, false);
 
         SharedPreferences preferences = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
+        String sourceFragment = preferences.getString("fragment", "none");
+        if (sourceFragment.equals("none")) {
+            SharedPreferences.Editor editor = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+            editor.putString("fragment", previousActivity);
+            editor.apply();
+        }
+        if(previousActivity == null){
+            previousActivity = sourceFragment;
+        }
         postid = preferences.getString("postid", "none");
 
         back = view.findViewById(R.id.btn_back_detailpost);
@@ -56,9 +87,28 @@ public class RecipeDetailFragment extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MainActivity.class);
-                getContext().startActivity(intent);
-
+                switch (previousActivity) {
+                    case "ProfileFragment":
+                        ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new ProfileFragment(profileid)).commit();
+                        break;
+                    case "HomeFragment":
+                        ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new HomeFragment()).commit();
+                        break;
+                    case "SaveFragment":
+                        ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new SaveFragment(postid)).commit();
+                        break;
+                    case "SearchFragment":
+                        ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new SearchFragment()).commit();
+                        break;
+                    case "AllMyPostFragment":
+                        ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new AllMyPostFragment(profileid)).commit();
+                        break;
+                }
             }
         });
 
@@ -68,8 +118,8 @@ public class RecipeDetailFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        postList= new ArrayList<>();
-        postDetailAdapter = new PostDetailAdapter(getContext(),postList);
+        postList = new ArrayList<>();
+        postDetailAdapter = new PostDetailAdapter(getContext(), postList, profileid);
 
         recyclerView.setAdapter(postDetailAdapter);
 
@@ -79,7 +129,7 @@ public class RecipeDetailFragment extends Fragment {
     }
 
 
-    private void readPost(){
+    private void readPost() {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes").child(postid);
 
@@ -99,9 +149,6 @@ public class RecipeDetailFragment extends Fragment {
             }
         });
     }
-
-
-
 
 
 }

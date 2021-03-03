@@ -61,7 +61,7 @@ public class SearchRecipesAdapter  extends RecyclerView.Adapter<SearchRecipesAda
                 editor.apply();
 
                 ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new RecipeDetailFragment()).commit();
+                        new RecipeDetailFragment("SearchFragment",recipe.getRecipeid())).commit();
             }
         });
 

@@ -28,10 +28,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     public List<Recipe> mRecipe;
 
     private FirebaseUser firebaseUser;
+    private String profileid;
 
-    public RecipeAdapter(Context mContext, List<Recipe> mRecipe) {
+    public RecipeAdapter(Context mContext, List<Recipe> mRecipe,String profileid) {
         this.mContext = mContext;
         this.mRecipe = mRecipe;
+        this.profileid = profileid;
     }
 
     @NonNull
@@ -59,7 +61,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
                 editor.apply();
 
                 ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new RecipeDetailFragment()).commit();
+                        new RecipeDetailFragment("ProfileFragment",recipe.getRecipeid(),profileid)).commit();
             }
         });
 

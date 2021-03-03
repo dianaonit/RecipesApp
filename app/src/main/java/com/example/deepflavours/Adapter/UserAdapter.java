@@ -34,6 +34,8 @@ public class UserAdapter extends  RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     private Context mContext;
     private List<User> mUsers;
+    private String sourceFragment;
+    private String previousUser;
 
 
     private FirebaseUser firebaseUser;
@@ -42,6 +44,19 @@ public class UserAdapter extends  RecyclerView.Adapter<UserAdapter.ViewHolder> {
         this.mContext = mContext;
         this.mUsers = mUsers;
 
+    }
+
+    public UserAdapter(Context mContext, List<User> mUsers, String sourceFragment){
+        this.mContext = mContext;
+        this.mUsers = mUsers;
+        this.sourceFragment = sourceFragment;
+    }
+
+    public UserAdapter(Context mContext, List<User> mUsers, String sourceFragment, String previousUser){
+        this.mContext = mContext;
+        this.mUsers = mUsers;
+        this.sourceFragment = sourceFragment;
+        this.previousUser = previousUser;
     }
 
     @NonNull
@@ -74,7 +89,7 @@ public class UserAdapter extends  RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 public void onClick(View v) {
 
                             ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                    new ProfileFragment(user.getId())).commit();
+                                    new ProfileFragment(user.getId(),sourceFragment, previousUser)).commit();
 
                 }
             });
