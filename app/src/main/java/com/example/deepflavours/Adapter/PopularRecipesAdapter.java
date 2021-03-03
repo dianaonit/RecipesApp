@@ -19,37 +19,45 @@ import com.example.deepflavours.Model.Recipe;
 import com.example.deepflavours.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
-public class MostLikedRecipeAdapter extends RecyclerView.Adapter<MostLikedRecipeAdapter.ViewHolder> {
+public class PopularRecipesAdapter extends RecyclerView.Adapter<PopularRecipesAdapter.ViewHolder> {
 
     public Context mContext;
     public List<Recipe> mRecipe;
 
     private FirebaseUser firebaseUser;
 
-    public MostLikedRecipeAdapter(Context mContext, List<Recipe> mRecipe) {
+    public PopularRecipesAdapter(Context mContext, List<Recipe> mRecipe) {
         this.mContext = mContext;
         this.mRecipe = mRecipe;
     }
 
     @NonNull
     @Override
-    public MostLikedRecipeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public PopularRecipesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_mostlikedrecipe_searchfragment,viewGroup,false);
-        return new MostLikedRecipeAdapter.ViewHolder(view);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_popular_recipes,viewGroup,false);
+        return new PopularRecipesAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MostLikedRecipeAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull PopularRecipesAdapter.ViewHolder viewHolder, int i) {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         Recipe recipe =mRecipe.get(i);
 
         viewHolder.recipePost_Title.setText(recipe.getTitle());
+        viewHolder.recipePost_Desc.setText(recipe.getDescription());
         Glide.with(mContext).load(recipe.getRecipeimage()).into(viewHolder.recipePost_Image);
+
+        nrCooked(viewHolder.cooknr,recipe.getRecipeid());
 
         viewHolder.recipePost_Image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,21 +82,40 @@ public class MostLikedRecipeAdapter extends RecyclerView.Adapter<MostLikedRecipe
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        public CardView recipePost_CardView;
         public ImageView recipePost_Image;
-        public TextView recipePost_Title;
+        public TextView recipePost_Title,recipePost_Desc,cooknr;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            recipePost_CardView = itemView.findViewById(R.id.post_CardView);
-            recipePost_Image = itemView.findViewById(R.id.image_Post_CardView);
-            recipePost_Title = itemView.findViewById(R.id.post_titleCardView);
+            recipePost_Image = itemView.findViewById(R.id.popular_recipe_image);
+            recipePost_Title = itemView.findViewById(R.id.popular_recipe_title);
+            recipePost_Desc = itemView.findViewById(R.id.popular_recipe_description);
+            cooknr = itemView.findViewById(R.id.cooktimes_nr);
 
 
         }
     }
+
+    private void nrCooked(TextView cook, String postid){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("CookedRecipes")
+                .child(postid);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                cook.setText(dataSnapshot.getChildrenCount()+ "");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+
 
 
 }

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -14,7 +15,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.deepflavours.Fragment.HomeFragment;
 import com.example.deepflavours.Fragment.RecipeDetailFragment;
+import com.example.deepflavours.Login;
 import com.example.deepflavours.Model.Recipe;
 import com.example.deepflavours.Model.User;
 import com.example.deepflavours.R;
@@ -36,6 +39,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public List<Recipe> mPost;
 
     private FirebaseUser firebaseUser;
+    List<String> cookedRecipesIds= new ArrayList<>();
 
     public PostAdapter(Context mContext, List<Recipe> mPost) {
         this.mContext = mContext;
@@ -71,19 +75,55 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
 
 
+//        viewHolder.save.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(viewHolder.save.getTag().equals("save")){
+//                    FirebaseDatabase.getInstance().getReference().child("Saves").child(post.getRecipeid())
+//                            .child(firebaseUser.getUid()).setValue(true);
+//                }else{
+//                    FirebaseDatabase.getInstance().getReference().child("Saves").child(post.getRecipeid())
+//                            .child(firebaseUser.getUid()).removeValue();
+//                }
+//            }
+//        });
+
+
         viewHolder.save.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                if(viewHolder.save.getTag().equals("save")){
-                    FirebaseDatabase.getInstance().getReference().child("Saves").child(post.getRecipeid())
-                            .child(firebaseUser.getUid()).setValue(true);
-                }else{
-                    FirebaseDatabase.getInstance().getReference().child("Saves").child(post.getRecipeid())
-                            .child(firebaseUser.getUid()).removeValue();
-                }
+            public void onClick(View v) {
+
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("CookedRecipes").child(post.getRecipeid());
+                reference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        boolean isCookedByCurrentUser = false;
+
+
+                        for(DataSnapshot userSnapshot : dataSnapshot.getChildren()){
+                            String currentUserId =FirebaseAuth.getInstance().getCurrentUser().getUid();
+                            if(userSnapshot.getKey().equals(currentUserId)){
+                                isCookedByCurrentUser = true;
+
+                            }
+                        }
+
+                        if(!isCookedByCurrentUser  && viewHolder.save.getTag().equals("save")){
+                            FirebaseDatabase.getInstance().getReference().child("Saves").child(post.getRecipeid())
+                                    .child(firebaseUser.getUid()).setValue(true);
+
+                        }else if(viewHolder.save.getTag().equals("saved")){
+                            FirebaseDatabase.getInstance().getReference().child("Saves").child(post.getRecipeid())
+                                    .child(firebaseUser.getUid()).removeValue();
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
         });
-
 
         viewHolder.imagePost.setOnClickListener(new View.OnClickListener() {
             @Override

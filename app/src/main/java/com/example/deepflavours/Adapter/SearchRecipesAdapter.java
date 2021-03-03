@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,36 +23,37 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
-public class MostLikedRecipeAdapter extends RecyclerView.Adapter<MostLikedRecipeAdapter.ViewHolder> {
+public class SearchRecipesAdapter  extends RecyclerView.Adapter<SearchRecipesAdapter.ViewHolder>{
 
     public Context mContext;
     public List<Recipe> mRecipe;
 
     private FirebaseUser firebaseUser;
 
-    public MostLikedRecipeAdapter(Context mContext, List<Recipe> mRecipe) {
+    public SearchRecipesAdapter(Context mContext, List<Recipe> mRecipe) {
         this.mContext = mContext;
         this.mRecipe = mRecipe;
     }
 
     @NonNull
     @Override
-    public MostLikedRecipeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public SearchRecipesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_mostlikedrecipe_searchfragment,viewGroup,false);
-        return new MostLikedRecipeAdapter.ViewHolder(view);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_recipe_search,viewGroup,false);
+        return new SearchRecipesAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MostLikedRecipeAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull SearchRecipesAdapter.ViewHolder viewHolder, int i) {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         Recipe recipe =mRecipe.get(i);
 
-        viewHolder.recipePost_Title.setText(recipe.getTitle());
-        Glide.with(mContext).load(recipe.getRecipeimage()).into(viewHolder.recipePost_Image);
+        viewHolder.recipeSearch_Title.setText(recipe.getTitle());
+        viewHolder.recipeSearch_Desc.setText(recipe.getDescription());
+        Glide.with(mContext).load(recipe.getRecipeimage()).into(viewHolder.recipeSearch_Image);
 
-        viewHolder.recipePost_Image.setOnClickListener(new View.OnClickListener() {
+        viewHolder.item_recipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
@@ -60,10 +62,8 @@ public class MostLikedRecipeAdapter extends RecyclerView.Adapter<MostLikedRecipe
 
                 ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new RecipeDetailFragment()).commit();
-
             }
         });
-
 
     }
 
@@ -74,21 +74,21 @@ public class MostLikedRecipeAdapter extends RecyclerView.Adapter<MostLikedRecipe
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        public CardView recipePost_CardView;
-        public ImageView recipePost_Image;
-        public TextView recipePost_Title;
+        public ImageView recipeSearch_Image;
+        public TextView recipeSearch_Title,recipeSearch_Desc;
+        public LinearLayout item_recipe;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            recipePost_CardView = itemView.findViewById(R.id.post_CardView);
-            recipePost_Image = itemView.findViewById(R.id.image_Post_CardView);
-            recipePost_Title = itemView.findViewById(R.id.post_titleCardView);
+
+            item_recipe=itemView.findViewById(R.id.item_recipeSearch);
+            recipeSearch_Image= itemView.findViewById(R.id.recipesearch_image);
+            recipeSearch_Title = itemView.findViewById(R.id.serach_recipe_title);
+            recipeSearch_Desc = itemView.findViewById(R.id.search_recipe_description);
 
 
         }
     }
-
-
 }

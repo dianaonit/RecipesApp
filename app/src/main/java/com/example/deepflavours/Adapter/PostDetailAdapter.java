@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.deepflavours.CommentsActivity;
+import com.example.deepflavours.Fragment.HomeFragment;
 import com.example.deepflavours.Fragment.RecipeDetailFragment;
 import com.example.deepflavours.LikesActivity;
 import com.example.deepflavours.MainActivity;
@@ -115,7 +117,6 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
                 viewHolder.line_ingred.setVisibility(View.GONE);
                 viewHolder.directions.setVisibility(View.VISIBLE);
                 viewHolder.line_dir.setVisibility(View.VISIBLE);
-
             }
         });
 
@@ -154,9 +155,16 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
                 if(viewHolder.cook.getTag().equals("Start Cooking")){
                     FirebaseDatabase.getInstance().getReference().child("CookedRecipes").child(post.getRecipeid())
                             .child(firebaseUser.getUid()).setValue(true);
+                    FirebaseDatabase.getInstance().getReference().child("Saves").child(post.getRecipeid())
+                            .child(firebaseUser.getUid()).removeValue();
+
                 }else{
+
                     FirebaseDatabase.getInstance().getReference().child("CookedRecipes").child(post.getRecipeid())
                             .child(firebaseUser.getUid()).removeValue();
+
+
+
                 }
             }
         });
@@ -223,7 +231,6 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
             commnr = itemView.findViewById(R.id.tv_comm);
             line_ingred = itemView.findViewById(R.id.line_ingredients);
             line_dir = itemView.findViewById(R.id.line_directions);
-
 
 
         }
@@ -331,6 +338,7 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+
         });
     }
 

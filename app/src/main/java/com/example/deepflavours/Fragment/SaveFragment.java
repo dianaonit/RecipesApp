@@ -43,6 +43,9 @@ public class SaveFragment extends Fragment {
 
     String profileid;
 
+    List<String> cookedRecipesIds = new ArrayList<>();
+
+
     public SaveFragment() {
 
     }
@@ -50,8 +53,6 @@ public class SaveFragment extends Fragment {
     public SaveFragment(String profileid){
         this.profileid = profileid;
     }
-
-
 
 
 
@@ -82,8 +83,10 @@ public class SaveFragment extends Fragment {
         cookedRecipes_recyclerView.setAdapter(favoriteRecipesAdapter);
 
 
-        readSaveRecipes();
+
         readCookedRecipes();
+        readSaveRecipes();
+
 
 
         return view;
@@ -95,18 +98,21 @@ public class SaveFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot :dataSnapshot.getChildren()){
-                    for(DataSnapshot dataSnapshot1: snapshot.getChildren()){
-                        String userId = dataSnapshot1.getKey();
+                cookedRecipes.clear();
+                for(DataSnapshot cookedRecipesSnapshot :dataSnapshot.getChildren()){
+                    for(DataSnapshot userSnapshot: cookedRecipesSnapshot.getChildren()){
+                        String userId = userSnapshot.getKey();
                         if(userId.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
-                            String recipeId = snapshot.getKey();
-                            FirebaseDatabase.getInstance().getReference("Recipes").child(recipeId).addValueEventListener(new ValueEventListener() {
+                            String recipeIdCooked = cookedRecipesSnapshot.getKey();
+                            FirebaseDatabase.getInstance().getReference("Recipes").child(recipeIdCooked).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     Recipe recipe = snapshot.getValue(Recipe.class);
-                                    cookedRecipes.add(recipe);
+                                        cookedRecipes.add(recipe);
+                                        cookedRecipesIds.add(recipeIdCooked);
+                                        savedRecipes.remove(recipe);
 
-                                   favoriteRecipesAdapter.notifyDataSetChanged();
+                                        favoriteRecipesAdapter.notifyDataSetChanged();
                                 }
 
                                 @Override
@@ -116,6 +122,8 @@ public class SaveFragment extends Fragment {
                             });
                         }
                     }
+
+                    Collections.reverse(cookedRecipes);
                 }
 
             }
@@ -135,17 +143,23 @@ public class SaveFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot :dataSnapshot.getChildren()){
-                    for(DataSnapshot dataSnapshot1: snapshot.getChildren()){
-                        String userId = dataSnapshot1.getKey();
+                savedRecipes.clear();
+                for(DataSnapshot saveSnapshot : dataSnapshot.getChildren()){
+                    for(DataSnapshot userSnapshot : saveSnapshot.getChildren()){
+                        String userId = userSnapshot.getKey();
                         if(userId.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
-                            String recipeId = snapshot.getKey();
-                            FirebaseDatabase.getInstance().getReference("Recipes").child(recipeId).addValueEventListener(new ValueEventListener() {
+                          String  recipeIdSaved = saveSnapshot.getKey();
+                            FirebaseDatabase.getInstance().getReference("Recipes").child(recipeIdSaved).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     Recipe recipe = snapshot.getValue(Recipe.class);
-                                    savedRecipes.add(recipe);
-                                    Collections.reverse(savedRecipes);
+                                    if(!cookedRecipesIds.contains(recipe.getRecipeid())){
+                                        savedRecipes.add(recipe);
+                                    }else{
+                                        savedRecipes.remove(recipe);
+                                    }
+
+
                                     justAddedCookBookAdapter.notifyDataSetChanged();
                                 }
 
@@ -156,8 +170,15 @@ public class SaveFragment extends Fragment {
                             });
                         }
                     }
-                }
 
+                    Collections.reverse(savedRecipes);
+                }
+//                if(savedRecipes.isEmpty()){
+//                    Recipe recipe = new Recipe();
+//                    recipe.setTitle("generic title");
+//                    savedRecipes.add(recipe);
+//                    justAddedCookBookAdapter.notifyDataSetChanged();
+//                }
 
             }
 
@@ -166,7 +187,10 @@ public class SaveFragment extends Fragment {
 
             }
         });
+
     }
+
+
 
 
 }

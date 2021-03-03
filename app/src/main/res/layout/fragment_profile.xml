@@ -274,6 +274,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:orientation="horizontal"
+        android:overScrollMode="never"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/recipe_item_foodpost_profile" />
 
@@ -308,6 +309,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:orientation="vertical"
+        android:overScrollMode="never"
         tools:listitem="@layout/favorite_item_profile" />
 
 </RelativeLayout>
