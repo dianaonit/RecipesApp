@@ -67,303 +67,282 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         Recipe post = mPost.get(i);
+        if (post != null) {
+            viewHolder.post_title.setText(post.getTitle());
+            viewHolder.post_desc.setText(post.getDescription());
+            viewHolder.servings.setText(post.getServings());
+            viewHolder.prepTime.setText(post.getPreparationtime());
+            viewHolder.cookTime.setText(post.getCooktime());
+            viewHolder.ingredients.setText(post.getIngredients());
+            viewHolder.directions.setText(post.getDirections());
+
+            Glide.with(mContext).load(post.getRecipeimage()).into(viewHolder.image_post);
 
 
-
-        viewHolder.post_title.setText(post.getTitle());
-        viewHolder.post_desc.setText(post.getDescription());
-        viewHolder.servings.setText(post.getServings());
-        viewHolder.prepTime.setText(post.getPreparationtime());
-        viewHolder.cookTime.setText(post.getCooktime());
-        viewHolder.ingredients.setText(post.getIngredients());
-        viewHolder.directions.setText(post.getDirections());
-
-        Glide.with(mContext).load(post.getRecipeimage()).into(viewHolder.image_post);
+            viewHolder.btn_ingredients.setTextColor(Color.parseColor("#000000"));
+            viewHolder.btn_directions.setTextColor(Color.parseColor("#aaa480"));
+            viewHolder.ingredients.setVisibility(View.VISIBLE);
+            viewHolder.directions.setVisibility(View.GONE);
 
 
-        viewHolder.btn_ingredients.setTextColor(Color.parseColor("#000000"));
-        viewHolder.btn_directions.setTextColor(Color.parseColor("#aaa480"));
-        viewHolder.ingredients.setVisibility(View.VISIBLE);
-        viewHolder.directions.setVisibility(View.GONE);
+            userInfo(viewHolder.image_profile, viewHolder.user_name, post.getUserid());
+            nrLikes(viewHolder.likes, post.getRecipeid());
+            nrCooked(viewHolder.cooktimesNr, post.getRecipeid());
+            nrComments(viewHolder.commnr, post.getRecipeid());
+            isFavourite(post.getRecipeid(), viewHolder.favourite);
+            isCooked(post.getRecipeid(), viewHolder.cook);
+        }
 
 
-
-        userInfo(viewHolder.image_profile,viewHolder.user_name,post.getUserid());
-        nrLikes(viewHolder.likes,post.getRecipeid());
-        nrCooked(viewHolder.cooktimesNr,post.getRecipeid());
-        nrComments(viewHolder.commnr,post.getRecipeid());
-        isFavourite(post.getRecipeid(),viewHolder.favourite);
-        isCooked(post.getRecipeid(),viewHolder.cook);
-
-
-
-
-      viewHolder.btn_ingredients.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-              viewHolder.btn_ingredients.setTextColor(Color.parseColor("#000000"));
-              viewHolder.btn_directions.setTextColor(Color.parseColor("#aaa480"));
-              viewHolder.line_ingred.setVisibility(View.VISIBLE);
-              viewHolder.ingredients.setVisibility(View.VISIBLE);
-              viewHolder.directions.setVisibility(View.GONE);
-              viewHolder.line_dir.setVisibility(View.GONE);
-          }
-      });
-
-        viewHolder.btn_directions.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewHolder.btn_ingredients.setTextColor(Color.parseColor("#aaa480"));
-                viewHolder.btn_directions.setTextColor(Color.parseColor("#000000"));
-                viewHolder.ingredients.setVisibility(View.GONE);
-                viewHolder.line_ingred.setVisibility(View.GONE);
-                viewHolder.directions.setVisibility(View.VISIBLE);
-                viewHolder.line_dir.setVisibility(View.VISIBLE);
-            }
-        });
-
-
-
-        viewHolder.image_post.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
-                editor.putString("postid",post.getRecipeid());
-                editor.apply();
-
-                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new RecipeDetailFragment()).commit();
-            }
-        });
-
-
-        viewHolder.favourite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(viewHolder.favourite.getTag().equals("+add to fav")){
-                    FirebaseDatabase.getInstance().getReference().child("Favourites").child(post.getRecipeid())
-                            .child(firebaseUser.getUid()).setValue(true);
-                }else{
-                    FirebaseDatabase.getInstance().getReference().child("Favourites").child(post.getRecipeid())
-                            .child(firebaseUser.getUid()).removeValue();
+            viewHolder.btn_ingredients.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    viewHolder.btn_ingredients.setTextColor(Color.parseColor("#000000"));
+                    viewHolder.btn_directions.setTextColor(Color.parseColor("#aaa480"));
+                    viewHolder.line_ingred.setVisibility(View.VISIBLE);
+                    viewHolder.ingredients.setVisibility(View.VISIBLE);
+                    viewHolder.directions.setVisibility(View.GONE);
+                    viewHolder.line_dir.setVisibility(View.GONE);
                 }
-            }
-        });
+            });
+
+            viewHolder.btn_directions.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    viewHolder.btn_ingredients.setTextColor(Color.parseColor("#aaa480"));
+                    viewHolder.btn_directions.setTextColor(Color.parseColor("#000000"));
+                    viewHolder.ingredients.setVisibility(View.GONE);
+                    viewHolder.line_ingred.setVisibility(View.GONE);
+                    viewHolder.directions.setVisibility(View.VISIBLE);
+                    viewHolder.line_dir.setVisibility(View.VISIBLE);
+                }
+            });
 
 
-        viewHolder.cook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(viewHolder.cook.getTag().equals("Start Cooking")){
-                    FirebaseDatabase.getInstance().getReference().child("CookedRecipes").child(post.getRecipeid())
-                            .child(firebaseUser.getUid()).setValue(true);
-                    FirebaseDatabase.getInstance().getReference().child("Saves").child(post.getRecipeid())
-                            .child(firebaseUser.getUid()).removeValue();
+            viewHolder.favourite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (viewHolder.favourite.getTag().equals("+add to fav")) {
+                        FirebaseDatabase.getInstance().getReference().child("Favourites").child(post.getRecipeid())
+                                .child(firebaseUser.getUid()).setValue(true);
+                    } else {
+                        FirebaseDatabase.getInstance().getReference().child("Favourites").child(post.getRecipeid())
+                                .child(firebaseUser.getUid()).removeValue();
+                    }
+                }
+            });
 
-                }else{
 
-                    FirebaseDatabase.getInstance().getReference().child("CookedRecipes").child(post.getRecipeid())
-                            .child(firebaseUser.getUid()).removeValue();
+            viewHolder.cook.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (viewHolder.cook.getTag().equals("Start Cooking")) {
+                        FirebaseDatabase.getInstance().getReference().child("CookedRecipes").child(post.getRecipeid())
+                                .child(firebaseUser.getUid()).setValue(true);
+                        FirebaseDatabase.getInstance().getReference().child("Saves").child(post.getRecipeid())
+                                .child(firebaseUser.getUid()).removeValue();
+
+                    } else {
+                        FirebaseDatabase.getInstance().getReference().child("CookedRecipes").child(post.getRecipeid())
+                                .child(firebaseUser.getUid()).removeValue();
+                        FirebaseDatabase.getInstance().getReference().child("Saves").child(post.getRecipeid())
+                                .child(firebaseUser.getUid()).removeValue();
+                    }
+                }
+            });
 
 
+            viewHolder.comments.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, CommentsActivity.class);
+                    intent.putExtra("postid", post.getRecipeid());
+                    intent.putExtra("userid", post.getUserid());
+                    mContext.startActivity(intent);
+                }
+            });
+
+            viewHolder.like.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                    editor.putString("postid", post.getRecipeid());
+                    editor.apply();
+
+                    ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new LikesFragment(profileid)).commit();
 
                 }
-            }
-        });
-
-
-        viewHolder.comments.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, CommentsActivity.class);
-                intent.putExtra("postid",post.getRecipeid());
-                intent.putExtra("userid",post.getUserid());
-                mContext.startActivity(intent);
-            }
-        });
-
-        viewHolder.like.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
-                editor.putString("postid",post.getRecipeid());
-                editor.apply();
-
-                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new LikesFragment(profileid)).commit();
-
-            }
-        });
-
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return mPost.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder{
-
-        public TextView post_title, cooktimesNr, servings, prepTime, cookTime, user_name, likes, commnr,comments,post_desc, ingredients, directions;
-        public ImageView image_post, image_profile,back,favourite,cook,more,like;
-        public Button btn_ingredients,btn_directions;
-        public  View line_ingred,line_dir;
-
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            image_post = itemView.findViewById(R.id.recipe_image);
-            image_profile = itemView.findViewById(R.id.image_user);
-            post_title = itemView.findViewById(R.id.post_title);
-            servings = itemView.findViewById(R.id.tv_nrOfservings);
-            prepTime = itemView.findViewById(R.id.tv_timeOfprep);
-            cookTime = itemView.findViewById(R.id.tv_timeOfcook);
-            user_name = itemView.findViewById(R.id.name_user);
-            likes = itemView.findViewById(R.id.tv_likesnr);
-            like = itemView.findViewById(R.id.iv_like);
-            post_desc = itemView.findViewById(R.id.post_description);
-            ingredients = itemView.findViewById(R.id.tv_ingredients);
-            directions = itemView.findViewById(R.id.tv_directions);
-            btn_ingredients = itemView.findViewById(R.id.btn_ingredients);
-            btn_directions = itemView.findViewById(R.id.btn_directions);
-            back = itemView.findViewById(R.id.btn_back_detailpost);
-            favourite = itemView.findViewById(R.id.add_fav);
-            cook = itemView.findViewById(R.id.add_cooking);
-            more = itemView.findViewById(R.id.more_actions);
-            cooktimesNr = itemView.findViewById(R.id.cooktimes_nr);
-            comments = itemView.findViewById(R.id.tv_allcomm);
-            commnr = itemView.findViewById(R.id.tv_comm);
-            line_ingred = itemView.findViewById(R.id.line_ingredients);
-            line_dir = itemView.findViewById(R.id.line_directions);
+            });
 
 
         }
-    }
+
+        @Override
+        public int getItemCount () {
+            return mPost.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+
+            public TextView post_title, cooktimesNr, servings, prepTime, cookTime, user_name, likes, commnr, comments, post_desc, ingredients, directions;
+            public ImageView image_post, image_profile, back, favourite, cook, more, like;
+            public Button btn_ingredients, btn_directions;
+            public View line_ingred, line_dir;
 
 
-    private void userInfo(final ImageView image_profile,final TextView username, final String userid){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
 
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                Glide.with(mContext).load(user.getImageurl()).into(image_profile);
-                username.setText(user.getUsername());
-            }
+                image_post = itemView.findViewById(R.id.recipe_image);
+                image_profile = itemView.findViewById(R.id.image_user);
+                post_title = itemView.findViewById(R.id.post_title);
+                servings = itemView.findViewById(R.id.tv_nrOfservings);
+                prepTime = itemView.findViewById(R.id.tv_timeOfprep);
+                cookTime = itemView.findViewById(R.id.tv_timeOfcook);
+                user_name = itemView.findViewById(R.id.name_user);
+                likes = itemView.findViewById(R.id.tv_likesnr);
+                like = itemView.findViewById(R.id.iv_like);
+                post_desc = itemView.findViewById(R.id.post_description);
+                ingredients = itemView.findViewById(R.id.tv_ingredients);
+                directions = itemView.findViewById(R.id.tv_directions);
+                btn_ingredients = itemView.findViewById(R.id.btn_ingredients);
+                btn_directions = itemView.findViewById(R.id.btn_directions);
+                back = itemView.findViewById(R.id.btn_back_detailpost);
+                favourite = itemView.findViewById(R.id.add_fav);
+                cook = itemView.findViewById(R.id.add_cooking);
+                more = itemView.findViewById(R.id.more_actions);
+                cooktimesNr = itemView.findViewById(R.id.cooktimes_nr);
+                comments = itemView.findViewById(R.id.tv_allcomm);
+                commnr = itemView.findViewById(R.id.tv_comm);
+                line_ingred = itemView.findViewById(R.id.line_ingredients);
+                line_dir = itemView.findViewById(R.id.line_directions);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
-
-    private void nrLikes(TextView likes, String postid){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Likes")
-                .child(postid);
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                likes.setText(dataSnapshot.getChildrenCount()+ "");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    private void nrCooked(TextView cookednr, String postid){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("CookedRecipes")
-                .child(postid);
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                cookednr.setText(dataSnapshot.getChildrenCount()+ "");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
-    }
+        }
 
 
-    private void isFavourite(String postid, ImageView imageView){
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        private void userInfo ( final ImageView image_profile, final TextView username,
+        final String userid){
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
-                .child("Favourites")
-                .child(postid);
-
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child(firebaseUser.getUid()).exists()){
-                   imageView.setImageResource(R.drawable.fav_bej_full);
-                   imageView.setTag("favourite");
-                }else{
-                   imageView.setImageResource(R.drawable.fav_bej);
-                   imageView.setTag("+add to fav");
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    User user = dataSnapshot.getValue(User.class);
+                    Glide.with(mContext).load(user.getImageurl()).into(image_profile);
+                    username.setText(user.getUsername());
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-    }
-
-    private void isCooked(String postid, ImageView imageView){
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
-                .child("CookedRecipes")
-                .child(postid);
-
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child(firebaseUser.getUid()).exists()){
-                    imageView.setImageResource(R.drawable.cooking_full_bej);
-                    imageView.setTag("Cooked Recipe");
-                }else{
-                    imageView.setImageResource(R.drawable.cooking_bej);
-                    imageView.setTag("Start Cooking");
                 }
-            }
+            });
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+        }
 
-            }
+        private void nrLikes (TextView likes, String postid){
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Likes")
+                    .child(postid);
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    likes.setText(dataSnapshot.getChildrenCount() + "");
+                }
 
-        });
-    }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-    private void nrComments(TextView commentsnr, String postid){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Comments")
-                .child(postid);
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                commentsnr.setText(dataSnapshot.getChildrenCount()+ "");
-            }
+                }
+            });
+        }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+        private void nrCooked (TextView cookednr, String postid){
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("CookedRecipes")
+                    .child(postid);
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    cookednr.setText(dataSnapshot.getChildrenCount() + "");
+                }
 
-            }
-        });
-    }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
 
 
+        private void isFavourite (String postid, ImageView imageView){
+            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
+                    .child("Favourites")
+                    .child(postid);
+
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.child(firebaseUser.getUid()).exists()) {
+                        imageView.setImageResource(R.drawable.fav_bej_full);
+                        imageView.setTag("favourite");
+                    } else {
+                        imageView.setImageResource(R.drawable.fav_bej);
+                        imageView.setTag("+add to fav");
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
+        private void isCooked (String postid, ImageView imageView){
+            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
+                    .child("CookedRecipes")
+                    .child(postid);
+
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.child(firebaseUser.getUid()).exists()) {
+                        imageView.setImageResource(R.drawable.cooking_full_bej);
+                        imageView.setTag("Cooked Recipe");
+                    } else {
+                        imageView.setImageResource(R.drawable.cooking_bej);
+                        imageView.setTag("Start Cooking");
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+
+            });
+        }
+
+        private void nrComments (TextView commentsnr, String postid){
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Comments")
+                    .child(postid);
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    commentsnr.setText(dataSnapshot.getChildrenCount() + "");
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
 
 }

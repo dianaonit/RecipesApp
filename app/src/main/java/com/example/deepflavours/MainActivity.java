@@ -50,7 +50,19 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        selectedFragment = new HomeFragment();
+        if (fragment.equals("ProfileFragment")) {
+            selectedFragment = new ProfileFragment(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            bottomNavigationView.setSelectedItemId(R.id.nav_profile);
+        } else if(fragment.equals("SearchFragment")) {
+            selectedFragment = new SearchFragment();
+            bottomNavigationView.setSelectedItemId(R.id.nav_search);
+        }else if(fragment.equals("SaveFragment")){
+            selectedFragment = new SaveFragment();
+            bottomNavigationView.setSelectedItemId(R.id.nav_saved);
+        }else {
+            selectedFragment = new HomeFragment();
+            bottomNavigationView.setSelectedItemId(R.id.nav_home);
+        }
 
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();

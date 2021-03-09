@@ -155,14 +155,16 @@ public class SaveFragment extends Fragment {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     Recipe recipe = snapshot.getValue(Recipe.class);
-                                    if(!cookedRecipesIds.contains(recipe.getRecipeid())){
-                                        savedRecipes.add(recipe);
-                                    }else{
-                                        savedRecipes.remove(recipe);
+                                    if(recipe!=null) {
+                                        if (!cookedRecipesIds.contains(recipe.getRecipeid())) {
+                                            savedRecipes.add(recipe);
+                                        } else {
+                                            savedRecipes.remove(recipe);
+                                        }
+
+
+                                        justAddedCookBookAdapter.notifyDataSetChanged();
                                     }
-
-
-                                    justAddedCookBookAdapter.notifyDataSetChanged();
                                 }
 
                                 @Override

@@ -27,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FavoriteRecipesAdapter extends RecyclerView.Adapter<FavoriteRecipesAdapter.ViewHolder> {
@@ -56,26 +57,31 @@ public class FavoriteRecipesAdapter extends RecyclerView.Adapter<FavoriteRecipes
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        Recipe recipe =mFavRecipe.get(i);
 
-        viewHolder.favoritepost_title.setText(recipe.getTitle());
-        viewHolder.favoritepost_description.setText(recipe.getDescription());
-        Glide.with(mContext).load(recipe.getRecipeimage()).into(viewHolder.favoritepost_image);
-
-
-        nrCooked(viewHolder.cooknr,recipe.getRecipeid());
-
-        viewHolder.favoritepost_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
-                editor.putString("postid",recipe.getRecipeid());
-                editor.apply();
-
-                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new RecipeDetailFragment(fragmentName,recipe.getRecipeid(),profileid)).commit();
+            Recipe recipe = mFavRecipe.get(i);
+            if(recipe == null && mFavRecipe.size()==1){
+                mFavRecipe = new ArrayList<>();
             }
-        });
+            if(recipe!=null) {
+                viewHolder.favoritepost_title.setText(recipe.getTitle());
+                viewHolder.favoritepost_description.setText(recipe.getDescription());
+                Glide.with(mContext).load(recipe.getRecipeimage()).into(viewHolder.favoritepost_image);
+
+
+                nrCooked(viewHolder.cooknr, recipe.getRecipeid());
+
+                viewHolder.favoritepost_image.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                        editor.putString("postid", recipe.getRecipeid());
+                        editor.apply();
+
+                        ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new RecipeDetailFragment(fragmentName, recipe.getRecipeid(), profileid)).commit();
+                    }
+                });
+            }
 
     }
 

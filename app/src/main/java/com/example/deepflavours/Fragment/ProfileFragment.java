@@ -120,6 +120,7 @@ public class ProfileFragment extends Fragment {
         if(profileid == null) {
             profileid = previousUser;
         }
+
         if(profileid.equals(firebaseUser.getUid())){
             options.setVisibility(View.VISIBLE);
             back.setVisibility(View.GONE);

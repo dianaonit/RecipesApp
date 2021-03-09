@@ -38,7 +38,8 @@
                     android:layout_height="27dp"
                     android:src="@drawable/menu"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="20dp" />
+                    android:layout_marginEnd="20dp"
+                 />
 
             </RelativeLayout>
 

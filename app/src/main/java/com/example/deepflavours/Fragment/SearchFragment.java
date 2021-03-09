@@ -287,7 +287,7 @@ public class SearchFragment extends Fragment {
                     referenceRecipe.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if(likeSnapshot.getChildrenCount()>1){
+                                if(likeSnapshot.getChildrenCount()>0){
                                     mostLikedRecipeIds.add(recipeId);
                                 }
                         }
@@ -340,7 +340,7 @@ public class SearchFragment extends Fragment {
                     referenceRecipe.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if(cookedSnapshot.getChildrenCount()>1){
+                            if(cookedSnapshot.getChildrenCount()>0){
                                popularRecipeIds.add(recipeId);
                             }
                         }

@@ -3,6 +3,7 @@ package com.example.deepflavours;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -17,6 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.deepflavours.Fragment.HomeFragment;
+import com.example.deepflavours.Fragment.ProfileFragment;
+import com.example.deepflavours.Fragment.SaveFragment;
 import com.example.deepflavours.Model.User;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,6 +43,8 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.HashMap;
 
+import static java.security.AccessController.getContext;
+
 public class EditProfileActivity extends AppCompatActivity {
 
 
@@ -51,7 +57,11 @@ public class EditProfileActivity extends AppCompatActivity {
     private Uri mImageUri;
     private StorageTask uploadTask;
 
+
     StorageReference storageRef;
+
+
+
 
 
     @Override
@@ -156,7 +166,9 @@ public class EditProfileActivity extends AppCompatActivity {
 
         if(!error){
             updateProfile(fullname.getText().toString(), bio.getText().toString());
+
             finish();
+
         }
 
 
