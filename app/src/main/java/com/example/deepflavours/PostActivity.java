@@ -149,8 +149,8 @@ public class PostActivity extends AppCompatActivity {
         }
 
 
-        if (rPrepTime.length() > 10) {
-            prepTime.setError("Max length: 10 char!");
+        if (rPrepTime.length() > 3) {
+            prepTime.setError("Max length: 3 char!");
             prepTime.requestFocus();
             error = true;
         } else if (rPrepTime.isEmpty()) {
@@ -163,8 +163,8 @@ public class PostActivity extends AppCompatActivity {
         }
 
 
-        if (rCookTime.length() > 10) {
-            cookTime.setError("Max length: 10 char!");
+        if (rCookTime.length() > 3) {
+            cookTime.setError("Max length: 3 char!");
             cookTime.requestFocus();
             error = true;
         } else if (rCookTime.isEmpty()) {

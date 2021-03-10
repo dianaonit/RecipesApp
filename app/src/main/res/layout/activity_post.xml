@@ -128,10 +128,10 @@
                 android:layout_marginEnd="10dp"
                 android:drawableEnd="@drawable/ic_baseline_access_time_filled_24"
                 android:hint="Preparation time(in minute)"
-                android:inputType="text"
+                android:inputType="number"
                 android:textColor="#aaa480"
                 app:met_floatingLabel="normal"
-                app:met_maxCharacters="10" />
+                app:met_maxCharacters="3" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/cookTime"
@@ -144,7 +144,7 @@
                 android:inputType="number"
                 android:textColor="#aaa480"
                 app:met_floatingLabel="normal"
-                app:met_maxCharacters="10" />
+                app:met_maxCharacters="3" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/ingredients"
@@ -167,7 +167,6 @@
                 android:drawableEnd="@drawable/ic_baseline_live_help_24"
                 android:hint="Directions"
                 android:inputType="text|textMultiLine"
-
                 android:textColor="#aaa480"
                 app:met_floatingLabel="normal" />
 

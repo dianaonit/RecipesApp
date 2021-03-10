@@ -63,5 +63,35 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         tools:listitem="@layout/item_showall" />
 
+    <LinearLayout
+        android:id="@+id/ll_noPost"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/bar"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_nopost"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:alpha="0.5"
+            android:src="@drawable/photo_camera" />
+
+        <TextView
+            android:id="@+id/no_posts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.5"
+            android:layout_marginTop="3dp"
+            android:text="No Posts Yet "
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            />
+
+    </LinearLayout>
+
 
 </RelativeLayout>

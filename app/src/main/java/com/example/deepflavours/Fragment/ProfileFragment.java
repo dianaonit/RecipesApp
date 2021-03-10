@@ -56,12 +56,12 @@ public class ProfileFragment extends Fragment {
     private List<Recipe> favouriteRecipes;
 
 
-
-
     CircleImageView image_profile;
-    ImageView options,back;
-    TextView username,bio,posts,following,followers,show_all,logout;
+    ImageView options, back;
+    TextView username, bio, posts, following, followers, show_all, logout;
     Button edit_profile;
+    LinearLayout noFoodPost, noFavPost;
+
 
     FirebaseUser firebaseUser;
     String profileid;
@@ -72,15 +72,16 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    public ProfileFragment(String profileid){
+    public ProfileFragment(String profileid) {
         this.profileid = profileid;
     }
 
-     public ProfileFragment(String profileid, String sourceFragment){
-         this.profileid = profileid;
-         this.sourceFragment = sourceFragment;
-     }
-    public ProfileFragment(String profileid, String sourceFragment, String previousUser){
+    public ProfileFragment(String profileid, String sourceFragment) {
+        this.profileid = profileid;
+        this.sourceFragment = sourceFragment;
+    }
+
+    public ProfileFragment(String profileid, String sourceFragment, String previousUser) {
         this.profileid = profileid;
         this.sourceFragment = sourceFragment;
         this.previousUser = previousUser;
@@ -90,7 +91,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_profile,container,false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         SharedPreferences preferences = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
         String profileSourceFragment = preferences.getString("ProfileSourceFragment", "none");
@@ -99,7 +100,7 @@ public class ProfileFragment extends Fragment {
             editor.putString("ProfileSourceFragment", sourceFragment);
             editor.apply();
         }
-        if(sourceFragment == null){
+        if (sourceFragment == null) {
             sourceFragment = profileSourceFragment;
         }
 
@@ -115,17 +116,20 @@ public class ProfileFragment extends Fragment {
         show_all = view.findViewById(R.id.seeAllmypost);
         edit_profile = view.findViewById(R.id.editprofile_button);
         logout = view.findViewById(R.id.logout_option);
-        back =view.findViewById(R.id.btn_back_profile);
+        back = view.findViewById(R.id.btn_back_profile);
+        noFoodPost = view.findViewById(R.id.ll_noFoodPost);
+        noFavPost = view.findViewById(R.id.ll_noFavoritePost);
 
-        if(profileid == null) {
+
+        if (profileid == null) {
             profileid = previousUser;
         }
 
-        if(profileid.equals(firebaseUser.getUid())){
+        if (profileid.equals(firebaseUser.getUid())) {
             options.setVisibility(View.VISIBLE);
             back.setVisibility(View.GONE);
             edit_profile.setText("Edit Profile");
-        }else {
+        } else {
             options.setVisibility(View.GONE);
             back.setVisibility(View.VISIBLE);
             checkFollow();
@@ -136,19 +140,19 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 switch (sourceFragment) {
                     case "LikesFragment":
-                        ((FragmentActivity)getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new LikesFragment(previousUser)).commit();
                         break;
                     case "FollowersFragment":
-                        ((FragmentActivity)getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new FollowersFragment()).commit();
                         break;
                     case "FollowingsFragment":
-                        ((FragmentActivity)getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new FollowingsFragment()).commit();
                         break;
                     case "SearchFragment":
-                        ((FragmentActivity)getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new SearchFragment()).commit();
                         break;
                 }
@@ -160,17 +164,17 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
-                        getContext(),R.style.BottomSheetDialogTheme
+                        getContext(), R.style.BottomSheetDialogTheme
                 );
                 View bottomSheetView = LayoutInflater.from(getContext())
                         .inflate(
                                 R.layout.bottom_sheet_options,
-                                (LinearLayout)view.findViewById(R.id.bottomSheetContainerOptions)
+                                (LinearLayout) view.findViewById(R.id.bottomSheetContainerOptions)
                         );
                 bottomSheetView.findViewById(R.id.logout_option).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getContext(),Login.class);
+                        Intent intent = new Intent(getContext(), Login.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         getContext().startActivity(intent);
@@ -187,11 +191,11 @@ public class ProfileFragment extends Fragment {
         followers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences.Editor editor = getContext().getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
-                editor.putString("profileid",profileid);
+                SharedPreferences.Editor editor = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                editor.putString("profileid", profileid);
                 editor.apply();
 
-                ((FragmentActivity)getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new FollowersFragment()).commit();
             }
         });
@@ -200,30 +204,27 @@ public class ProfileFragment extends Fragment {
         following.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences.Editor editor = getContext().getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
-                editor.putString("profileid",profileid);
+                SharedPreferences.Editor editor = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                editor.putString("profileid", profileid);
                 editor.apply();
 
-                ((FragmentActivity)getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new FollowingsFragment()).commit();
             }
         });
 
 
+        show_all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                editor.putString("profileid", profileid);
+                editor.apply();
 
-     show_all.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View v) {
-             SharedPreferences.Editor editor = getContext().getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
-             editor.putString("profileid",profileid);
-             editor.apply();
-
-             ((FragmentActivity)getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                     new AllMyPostFragment()).commit();
-         }
-     });
-
-
+                ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new AllMyPostFragment()).commit();
+            }
+        });
 
 
         edit_profile.setOnClickListener(new View.OnClickListener() {
@@ -231,16 +232,16 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 String btn = edit_profile.getText().toString();
 
-                if(btn.equals("Edit Profile")){
+                if (btn.equals("Edit Profile")) {
                     startActivity(new Intent(getContext(), EditProfileActivity.class));
-                }else if(btn.equals("follow")){
+                } else if (btn.equals("follow")) {
 
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
                             .child("following").child(profileid).setValue(true);
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(profileid)
                             .child("followers").child(firebaseUser.getUid()).setValue(true);
 
-                }else if(btn.equals("following")){
+                } else if (btn.equals("following")) {
 
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
                             .child("following").child(profileid).removeValue();
@@ -252,11 +253,10 @@ public class ProfileFragment extends Fragment {
         });
 
 
-
         //recycler view my post
         recyclerView = view.findViewById(R.id.foodpost_profile_RecyclerView);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         //recycler view favorite post(liked post)
         favRecipes_recyclerView = view.findViewById(R.id.favoritepost_profile_RecyclerView);
@@ -268,13 +268,11 @@ public class ProfileFragment extends Fragment {
         favouriteRecipes = new ArrayList<>();
 
 
-        recipeAdapter = new RecipeAdapter(getContext(),recipeList,profileid);
+        recipeAdapter = new RecipeAdapter(getContext(), recipeList, profileid);
         recyclerView.setAdapter(recipeAdapter);
 
-        favoriteRecipesAdapter=new FavoriteRecipesAdapter(getContext(),favouriteRecipes,profileid,"ProfileFragment");
+        favoriteRecipesAdapter = new FavoriteRecipesAdapter(getContext(), favouriteRecipes, profileid, "ProfileFragment");
         favRecipes_recyclerView.setAdapter(favoriteRecipesAdapter);
-
-
 
 
         userInfo();
@@ -289,58 +287,26 @@ public class ProfileFragment extends Fragment {
     }
 
 
-    private void readRecipes(){
+    private void readRecipes() {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 recipeList.clear();
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Recipe recipe = snapshot.getValue(Recipe.class);
-                    if(recipe.getUserid().equals(profileid)) {
+                    if (recipe.getUserid().equals(profileid)) {
                         recipeList.add(recipe);
                     }
 
                 }
                 Collections.reverse(recipeList);
                 recipeAdapter.notifyDataSetChanged();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    private void readFavRecipes(){
-
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Favourites");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                favouriteRecipes.clear();
-                for(DataSnapshot snapshot :dataSnapshot.getChildren()){
-                   for(DataSnapshot dataSnapshot1: snapshot.getChildren()){
-                       String userId = dataSnapshot1.getKey();
-                       if(userId.equals(profileid)){
-                           String recipeId = snapshot.getKey();
-                           FirebaseDatabase.getInstance().getReference("Recipes").child(recipeId).addValueEventListener(new ValueEventListener() {
-                               @Override
-                               public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                   Recipe recipe = snapshot.getValue(Recipe.class);
-                                   favouriteRecipes.add(recipe);
-                                   favoriteRecipesAdapter.notifyDataSetChanged();
-                               }
-
-                               @Override
-                               public void onCancelled(@NonNull DatabaseError error) {
-
-                               }
-                           });
-                       }
-                   }
+                if (recipeList.isEmpty()) {
+                    recyclerView.setVisibility(View.INVISIBLE);
+                    noFoodPost.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -352,8 +318,57 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    private void readFavRecipes() {
 
-    private void userInfo(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Favourites");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                favouriteRecipes.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
+                        String userId = dataSnapshot1.getKey();
+                        if (userId.equals(profileid)) {
+                            String recipeId = snapshot.getKey();
+                            FirebaseDatabase.getInstance().getReference("Recipes").child(recipeId).addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    Recipe recipe = snapshot.getValue(Recipe.class);
+                                    favouriteRecipes.add(recipe);
+                                    favoriteRecipesAdapter.notifyDataSetChanged();
+
+                                }
+
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+
+
+                        }
+
+                    }
+
+                }
+                if (dataSnapshot.getChildrenCount() == 0) {
+                    favRecipes_recyclerView.setVisibility(View.GONE);
+                    noFavPost.setVisibility(View.VISIBLE);
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+    private void userInfo() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(profileid);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -375,16 +390,16 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    private void checkFollow(){
+    private void checkFollow() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
                 .child("Follow").child(firebaseUser.getUid()).child("following");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child(profileid).exists()){
+                if (dataSnapshot.child(profileid).exists()) {
                     edit_profile.setText("following");
-                }else{
+                } else {
                     edit_profile.setText("follow");
                 }
             }
@@ -398,14 +413,14 @@ public class ProfileFragment extends Fragment {
     }
 
 
-    private void getFollowers(){
+    private void getFollowers() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
                 .child("Follow").child(profileid).child("followers");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                followers.setText(""+ dataSnapshot.getChildrenCount());
+                followers.setText("" + dataSnapshot.getChildrenCount());
             }
 
             @Override
@@ -420,7 +435,7 @@ public class ProfileFragment extends Fragment {
         reference1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                following.setText(""+ dataSnapshot.getChildrenCount());
+                following.setText("" + dataSnapshot.getChildrenCount());
             }
 
             @Override
@@ -432,9 +447,7 @@ public class ProfileFragment extends Fragment {
     }
 
 
-
-
-    private void getNrPosts(){
+    private void getNrPosts() {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes");
 
@@ -443,14 +456,14 @@ public class ProfileFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int nrPosts = 0;
 
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Recipe recipe = snapshot.getValue(Recipe.class);
-                    if(recipe.getUserid().equals(profileid)){
+                    if (recipe.getUserid().equals(profileid)) {
                         nrPosts++;
                     }
                 }
 
-                posts.setText(""+nrPosts);
+                posts.setText("" + nrPosts);
 
             }
 
@@ -460,7 +473,6 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
-
 
 
 }

@@ -22,6 +22,8 @@ import android.widget.Toast;
 
 import com.example.deepflavours.Adapter.PostAdapter;
 import com.example.deepflavours.Adapter.PostDetailAdapter;
+import com.example.deepflavours.EditPostActivity;
+import com.example.deepflavours.EditProfileActivity;
 import com.example.deepflavours.Login;
 import com.example.deepflavours.MainActivity;
 import com.example.deepflavours.Model.Recipe;
@@ -137,6 +139,15 @@ public class RecipeDetailFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         deletePost(postid);
+                        bottomSheetDialog.dismiss();
+
+                    }
+                });
+
+                bottomSheetView.findViewById(R.id.edit_option).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getContext(), EditPostActivity.class));
                         bottomSheetDialog.dismiss();
 
                     }

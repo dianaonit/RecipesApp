@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.example.deepflavours.Adapter.AllMyPostsAdapter;
 import com.example.deepflavours.MainActivity;
@@ -38,6 +39,7 @@ public class AllMyPostFragment extends Fragment {
     private List<Recipe> recipeList;
 
     ImageView back;
+    LinearLayout noPost;
 
     String profileid ;
 
@@ -63,6 +65,8 @@ public class AllMyPostFragment extends Fragment {
 
 
         recyclerView = view.findViewById(R.id.all_foodpost_fragment_RecyclerView);
+        noPost = view.findViewById(R.id.ll_noPost);
+
         back = view.findViewById(R.id.btn_back);
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +107,11 @@ public class AllMyPostFragment extends Fragment {
                 }
                 Collections.reverse(recipeList);
                 allMyPostsAdapter.notifyDataSetChanged();
+
+                if(recipeList.isEmpty()){
+                    recyclerView.setVisibility(View.GONE);
+                    noPost.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
