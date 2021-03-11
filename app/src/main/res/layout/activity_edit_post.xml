@@ -76,7 +76,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/post_title"
             android:hint="Title"
-
             android:layout_marginTop="20dp"
             app:met_floatingLabel="normal"
             android:layout_marginStart="10dp"

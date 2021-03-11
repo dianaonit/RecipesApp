@@ -6,6 +6,7 @@
     <color name="teal_200">#aaa480</color>
     <color name="teal_700">#aaa480</color>
     <color name="black">#FF000000</color>
+    <color name="red">#ff9999</color>
     <color name="white">#FFFFFFFF</color>
     <color name="circle_indicator1"  >#E8E7E4</color>
     <color name="circle_indicator2" >#aaa480</color>

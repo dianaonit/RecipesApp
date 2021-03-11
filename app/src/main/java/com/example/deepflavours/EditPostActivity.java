@@ -7,10 +7,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.deepflavours.Model.Recipe;
 import com.example.deepflavours.Model.User;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,15 +27,15 @@ import java.util.HashMap;
 public class EditPostActivity extends AppCompatActivity {
 
     ImageView close, save;
-    MaterialEditText title, description, servings, prepTime, cookTime, ingredients, directions;
 
+    TextInputEditText title, description, servings, prepTime, cookTime, ingredients, directions;
     String postid;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_post);
+        setContentView(R.layout.activity_edit_post_test);
 
         close = findViewById(R.id.btn_close);
         save = findViewById(R.id.btn_save);

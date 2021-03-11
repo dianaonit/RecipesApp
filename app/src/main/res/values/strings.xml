@@ -32,15 +32,8 @@
     <string name="email_exists">There is a user with this email!</string>
     <string name="login_success">Successfully logged in!</string>
 
-    <string-array name="servings">
-        <item>1pp</item>
-        <item>2pp</item>
-        <item>3pp</item>
-        <item>4pp</item>
 
-    </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 
 </resources>
