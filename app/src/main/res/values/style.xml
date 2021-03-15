@@ -15,7 +15,10 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
-
-
+    <style name="ThemeForFullScreen" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark" >@color/colorPrimaryDark</item>
+    </style>
 
 </resources>

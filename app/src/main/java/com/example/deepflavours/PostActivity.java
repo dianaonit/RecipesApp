@@ -3,6 +3,7 @@ package com.example.deepflavours;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.app.ProgressDialog;
@@ -11,6 +12,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,6 +31,7 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -48,14 +51,13 @@ public class PostActivity extends AppCompatActivity {
     StorageReference storageReference;
 
     ImageView image_added, close, post;
-    MaterialEditText title, description, servings, prepTime, cookTime, ingredients, directions;
+    TextInputEditText title, description, servings, prepTime, cookTime, ingredients, directions;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
-
 
         close = findViewById(R.id.close);
         image_added = findViewById(R.id.image_added);
@@ -292,4 +294,6 @@ public class PostActivity extends AppCompatActivity {
         }
 
     }
+
+
 }

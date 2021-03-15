@@ -39,6 +39,8 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
+
+
         //trimitere la ui-ul de OnBoarding
         ImageView left_arrow= findViewById(R.id.left_arrow);
         left_arrow.setOnClickListener(view -> {
@@ -140,7 +142,6 @@ public class SignUp extends AppCompatActivity {
 
 
         if(!error) {
-
             pd = new ProgressDialog(SignUp.this,ProgressDialog.THEME_DEVICE_DEFAULT_LIGHT);
             pd.setMessage("Please wait..");
             pd.show();
@@ -150,7 +151,6 @@ public class SignUp extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                //User user = new User(uName,uEmail,uPass,uVerPass);
                                 FirebaseUser firebaseUser = uFirebaseAuth.getCurrentUser();
                                 String userid = firebaseUser.getUid();
 

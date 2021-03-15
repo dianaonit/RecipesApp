@@ -36,7 +36,6 @@ public class Login extends AppCompatActivity {
     Button btnLogIn;
     FirebaseAuth uFirebaseAuth;
     FirebaseUser firebaseUser;
-    ProgressDialog pd;
 
 
     @Override
@@ -47,6 +46,7 @@ public class Login extends AppCompatActivity {
 
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
 
 
          //trimitere la ui-ul OnBoarding
@@ -115,15 +115,15 @@ public class Login extends AppCompatActivity {
 
 
         if(!error) {
-            pd = new ProgressDialog(Login.this,ProgressDialog.THEME_DEVICE_DEFAULT_LIGHT);
-            pd.setMessage("Please wait..");
-            pd.show();
+            ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Please wait..");
+            progressDialog.show();
 
             uFirebaseAuth.signInWithEmailAndPassword(uEmail, uPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        pd.dismiss();
+                        progressDialog.dismiss();
                         Toast.makeText(Login.this, getResources().getString(R.string.login_success), Toast.LENGTH_LONG).show();
                         new Thread(new Runnable() {
                             public void run() {
@@ -132,12 +132,14 @@ public class Login extends AppCompatActivity {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         User user = dataSnapshot.getValue(User.class);
-                                        if(user.getConnected()){
-                                            Intent intent = new Intent(Login.this,MainActivity.class);
-                                            startActivity(intent);
-                                        }else{
-                                            startActivity(new Intent(Login.this,ViewPagerSlides.class));
-                                        }
+
+                                            if (user.getConnected()) {
+                                                Intent intent = new Intent(Login.this, MainActivity.class);
+                                                startActivity(intent);
+                                            } else {
+                                                startActivity(new Intent(Login.this, ViewPagerSlides.class));
+                                            }
+
                                     }
 
                                     @Override
@@ -150,7 +152,7 @@ public class Login extends AppCompatActivity {
                             }
                         }).start();
                     } else {
-                        pd.dismiss();
+                        progressDialog.dismiss();
                         Toast.makeText(Login.this,getResources().getString(R.string.login_failed) , Toast.LENGTH_LONG).show();
                     }
                 }

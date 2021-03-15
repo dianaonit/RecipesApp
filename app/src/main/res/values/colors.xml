@@ -10,4 +10,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="circle_indicator1"  >#E8E7E4</color>
     <color name="circle_indicator2" >#aaa480</color>
+    <color name="colorAccent" >#aaa480</color>
+    <color name="colorPrimary" >#eeeeee</color>
+    <color name="colorPrimaryDark">#eeeeee</color>
 </resources>
