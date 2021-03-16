@@ -63,24 +63,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
 
 
-//      viewHolder.comment.setOnClickListener(new View.OnClickListener() {
-//          @Override
-//          public void onClick(View v) {
-//              Intent intent  = new Intent(mContext, MainActivity.class);
-//              intent.putExtra("userid",comment.getUser());
-//              mContext.startActivity(intent);
-//          }
-//      });
-//
-//        viewHolder.imageprofile.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent  = new Intent(mContext, MainActivity.class);
-//                intent.putExtra("userid",comment.getUser());
-//                mContext.startActivity(intent);
-//            }
-//        });
-
 
       //functionalitate stergere comentariu
       viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {

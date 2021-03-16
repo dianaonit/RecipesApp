@@ -30,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -142,11 +143,15 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
                         FirebaseDatabase.getInstance().getReference().child("Saves").child(post.getRecipeid())
                                 .child(firebaseUser.getUid()).removeValue();
 
+                        addNotifications(post.getUserid(), post.getRecipeid());
+
                     } else {
                         FirebaseDatabase.getInstance().getReference().child("CookedRecipes").child(post.getRecipeid())
                                 .child(firebaseUser.getUid()).removeValue();
                         FirebaseDatabase.getInstance().getReference().child("Saves").child(post.getRecipeid())
                                 .child(firebaseUser.getUid()).removeValue();
+
+
                     }
                 }
             });
@@ -258,6 +263,21 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
                 }
             });
         }
+
+    private void addNotifications(String userid, String postid){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications").child(userid);
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("userid", firebaseUser.getUid());
+        hashMap.put("text" , "cooked your recipe");
+        hashMap.put("postid", postid );
+        hashMap.put("ispost", true);
+
+        reference.push().setValue(hashMap);
+
+    }
+
+
 
         private void nrCooked (TextView cookednr, String postid){
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("CookedRecipes")

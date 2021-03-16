@@ -6,12 +6,14 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.example.deepflavours.Adapter.PostAdapter;
@@ -37,6 +39,9 @@ public class HomeFragment extends Fragment {
 
     private List<String> followingList;
 
+    private ImageView notifications;
+    String profileid;
+
 
 
 
@@ -47,6 +52,8 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home,container,false);
 
         recyclerView = view.findViewById(R.id.recycler_view_homepost);
+        notifications = view.findViewById(R.id.notifications);
+
 
         recyclerView.setHasFixedSize(true);
        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -62,6 +69,21 @@ public class HomeFragment extends Fragment {
 
 
         checkFollowing();
+
+
+
+        notifications.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                editor.putString("profileid", profileid);
+                editor.apply();
+
+                ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new NotificationFragment()).commit();
+            }
+        });
+
 
         return view;
     }

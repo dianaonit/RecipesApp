@@ -3,67 +3,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    tools:context=".Fragment.HomeFragment">
-
+    android:background="@color/white"
+    tools:context=".Fragment.NotificationFragment">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/bar"
         android:background="#ffffff">
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/toolbar"
             android:background="#ffffff">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <ImageView
+                    android:id="@+id/btn_back"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/left_arrow_button" />
+
                 <TextView
-                    android:id="@+id/app_name"
+                    android:id="@+id/textview_title_activity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/amaranth_bold"
-                    android:text="DeepFlavours"
-                    android:textColor="#aaa480"
-                    android:textSize="30sp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_toEndOf="@id/btn_back"
+                    android:text="Notifications"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="40dp"
-                    android:src="@drawable/ic_baseline_favorite_24_bej" />
-
-                <ImageView
-                    android:id="@+id/notifications"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="40dp"/>
 
             </RelativeLayout>
 
+
         </androidx.appcompat.widget.Toolbar>
+
 
     </com.google.android.material.appbar.AppBarLayout>
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/notification_recyclerview"
         android:layout_below="@id/bar"
-        android:overScrollMode="never"
-        android:id="@+id/recycler_view_homepost"
-        tools:listitem="@layout/post_item_home_fragment"
         />
-
-
 
 
 </RelativeLayout>

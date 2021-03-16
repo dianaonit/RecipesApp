@@ -31,9 +31,8 @@
     <string name="signup_failed">Failed to create account.Try again!</string>
     <string name="email_exists">There is a user with this email!</string>
     <string name="login_success">Successfully logged in!</string>
-
-
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
