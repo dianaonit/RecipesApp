@@ -95,6 +95,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
 
 
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -102,6 +103,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             post_image = itemView.findViewById(R.id.post_image);
             username = itemView.findViewById(R.id.username);
             text = itemView.findViewById(R.id.notification);
+
         }
     }
 

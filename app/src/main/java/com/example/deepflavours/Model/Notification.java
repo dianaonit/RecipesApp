@@ -3,6 +3,7 @@ package com.example.deepflavours.Model;
 public class Notification {
 
     private String userid;
+    private String receiver;
     private String text;
     private String postid;
     private boolean ispost;
@@ -12,7 +13,9 @@ public class Notification {
         this.text = text;
         this.postid = postid;
         this.ispost = ispost;
+
     }
+
 
 
     public Notification(){

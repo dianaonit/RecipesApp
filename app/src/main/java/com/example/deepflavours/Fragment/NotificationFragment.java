@@ -4,12 +4,14 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.deepflavours.Adapter.NotificationAdapter;
@@ -33,6 +35,7 @@ public class NotificationFragment extends Fragment {
     private RecyclerView recyclerView_notification;
     private NotificationAdapter notificationAdapter;
     private List<Notification> notificationList;
+    ImageView back;
 
 
     @Override
@@ -40,6 +43,16 @@ public class NotificationFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_notification, container, false);
+
+        back = view.findViewById(R.id.btn_back);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((FragmentActivity)getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new HomeFragment()).commit();
+            }
+        });
 
 
         recyclerView_notification = view.findViewById(R.id.notification_recyclerview);

@@ -34,19 +34,24 @@
                     android:textStyle="bold" />
 
                 <ImageView
+                    android:id="@+id/notifications"
+                    android:padding="2dp"
+                    android:foregroundGravity="center"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="40dp"
-                    android:src="@drawable/ic_baseline_favorite_24_bej" />
-
+                    android:src="@drawable/notify" />
                 <ImageView
-                    android:id="@+id/notifications"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
+                    android:id="@+id/notifications_dot"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="40dp"/>
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="40dp"
+                    android:src="@drawable/ic_baseline_circle_24"
+                    />
 
             </RelativeLayout>
 

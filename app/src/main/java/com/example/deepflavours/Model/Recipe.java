@@ -3,7 +3,9 @@ package com.example.deepflavours.Model;
 import android.net.Uri;
 
 public class Recipe {
-
+//    private String key;
+//    private Double ratingValue;
+//    private Long ratingCount;
     private String recipeid;
     private String recipeimage;
     private String title;
@@ -114,5 +116,27 @@ public class Recipe {
         this.preparationtime = preparationtime;
     }
 
-
+//    public String getKey() {
+//        return key;
+//    }
+//
+//    public void setKey(String key) {
+//        this.key = key;
+//    }
+//
+//    public Double getRatingValue() {
+//        return ratingValue;
+//    }
+//
+//    public void setRatingValue(Double ratingValue) {
+//        this.ratingValue = ratingValue;
+//    }
+//
+//    public Long getRatingCount() {
+//        return ratingCount;
+//    }
+//
+//    public void setRatingCount(Long ratingCount) {
+//        this.ratingCount = ratingCount;
+//    }
 }

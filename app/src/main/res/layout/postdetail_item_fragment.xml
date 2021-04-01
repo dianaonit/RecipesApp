@@ -82,55 +82,61 @@
                 android:alpha="0.6"
                 app:cardBackgroundColor="@color/cardview_light_background">
 
-                <RatingBar
-                    android:id="@+id/ratingbar_recipe"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.AppCompat.RatingBar.Small"
-                    android:layout_marginTop="15dp"
-                    android:numStars="5"
-                    android:rating="3.5"
-                    android:stepSize="0.5"
-                    android:isIndicator="true"
-                    android:layout_marginStart="20dp"
-                    android:progressBackgroundTint="@color/black" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="("
-                    android:layout_marginStart="110dp"
-                    android:layout_marginTop="15dp"
-                    android:textSize="12sp"
-                    android:textColor="#000000" />
-                <TextView
-                    android:id="@+id/nr_ratingbar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="118dp"
-                    android:layout_marginTop="15dp"
-                    android:textSize="12sp"
-                    android:textColor="#000000"
-                    android:text="244"
-                    android:textStyle="bold"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rewiewd"
-                    android:layout_marginStart="142dp"
-                    android:layout_marginTop="17dp"
-                    android:textSize="10sp"
-                    android:textColor="#000000" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=")"
-                    android:layout_marginStart="185dp"
-                    android:layout_marginTop="15dp"
-                    android:textSize="12sp"
-                    android:textColor="#000000" />
+                    <RatingBar
+                        android:id="@+id/ratingbar_recipe_postdetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.AppCompat.RatingBar.Small"
+                       android:layout_marginTop="15dp"
+                        android:numStars="5"
+                        android:stepSize="1"
+                        android:isIndicator="true"
+                        android:layout_marginStart="20dp"
+                        android:progressBackgroundTint="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="( "
+                        android:layout_marginTop="15dp"
+                        android:textSize="12sp"
+                        android:textColor="#000000" />
+                    <TextView
+                        android:id="@+id/nr_ratingbar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:textSize="12sp"
+                        android:textColor="#000000"
+                        android:text="0"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rewiewd"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginTop="15dp"
+                        android:textSize="10sp"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" )"
+                        android:layout_marginTop="15dp"
+                        android:textSize="12sp"
+                        android:textColor="#000000" />
+
+                </LinearLayout>
+
+
 
 
             </androidx.cardview.widget.CardView>
@@ -141,6 +147,16 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:orientation="vertical">
+
+
+          <ImageView
+              android:id="@+id/add_rating"
+              android:layout_width="30dp"
+              android:layout_height="30dp"
+              android:src="@drawable/rating_star"
+              android:layout_marginTop="15dp"
+              android:layout_marginStart="10dp"
+              />
 
           <ImageView
               android:id="@+id/add_fav"
@@ -165,7 +181,7 @@
               android:layout_width="30dp"
               android:layout_height="30dp"
               android:src="@drawable/addnotes"
-              android:layout_marginTop="160dp"
+              android:layout_marginTop="130dp"
               android:layout_marginStart="10dp"
               />
 

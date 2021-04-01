@@ -90,7 +90,7 @@
 
 
         <androidx.appcompat.widget.AppCompatRatingBar
-            android:id="@+id/ratingbar_recipe"
+            android:id="@+id/ratingbar_recipe_save"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
             android:isIndicator="true"
             android:numStars="5"
             android:progressBackgroundTint="#000000"
-            android:stepSize="0.1" />
+            android:stepSize="1" />
 
     </LinearLayout>
 
@@ -111,7 +111,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/cooktimes_nr"
+            android:id="@+id/cooktimes_nr_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

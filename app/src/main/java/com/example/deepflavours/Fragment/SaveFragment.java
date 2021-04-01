@@ -46,7 +46,7 @@ public class SaveFragment extends Fragment {
 
     String profileid;
 
-//    LinearLayout noSavedPostYet;
+
     LinearLayout noCookedRecipes;
 
     List<String> cookedRecipesIds = new ArrayList<>();
@@ -66,10 +66,10 @@ public class SaveFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_save, container, false);
 
-//        noSavedPostYet = view.findViewById(R.id.ll_noSavePost);
+
         noCookedRecipes = view.findViewById(R.id.ll_noCookedRecipes);
 
-        //recycler view saved post(justadded)
+
         saveRecipesJustAdded_recyclerView = view.findViewById(R.id.savefragment_justadded_RecyclerView);
         saveRecipesJustAdded_recyclerView.setHasFixedSize(true);
         saveRecipesJustAdded_recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
@@ -183,18 +183,9 @@ public class SaveFragment extends Fragment {
 
                     }
 
-//                    if (dataSnapshot.getChildrenCount() == 0 ) {
-//                        saveRecipesJustAdded_recyclerView.setVisibility(View.GONE);
-//                        noSavedPostYet.setVisibility(View.VISIBLE);
-//                    }
-//
                     Collections.reverse(savedRecipes);
 
-
                 }
-
-
-
             }
 
             @Override
@@ -204,6 +195,12 @@ public class SaveFragment extends Fragment {
         });
 
     }
+
+
+
+
+
+
 
 
 }

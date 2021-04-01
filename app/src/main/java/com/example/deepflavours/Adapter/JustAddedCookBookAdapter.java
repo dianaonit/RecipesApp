@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.deepflavours.Fragment.RecipeDetailFragment;
+import com.example.deepflavours.Model.Rating;
 import com.example.deepflavours.Model.Recipe;
 import com.example.deepflavours.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -60,6 +61,7 @@ public class JustAddedCookBookAdapter extends RecyclerView.Adapter<JustAddedCook
 
 
         nrCooked(viewHolder.cooknr,recipe.getRecipeid());
+        calculateRating(recipe.getRecipeid(),viewHolder.ratingbar_recipe);
 
         viewHolder.savepostImage_justadded.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,9 +103,9 @@ public class JustAddedCookBookAdapter extends RecyclerView.Adapter<JustAddedCook
             title_cardview1=itemView.findViewById(R.id.title_cardview_justadded);
             title_item_cookbook=itemView.findViewById(R.id.title_cookbook_justadded);
             description_item_cookbook=itemView.findViewById(R.id.description_cookbook_justadded);
-            cooknr=itemView.findViewById(R.id.cooktimes_nr);
+            cooknr=itemView.findViewById(R.id.cooktimes_nr_save);
             cooktimes_text=itemView.findViewById(R.id.cooktimes_text);
-            ratingbar_recipe=itemView.findViewById(R.id.ratingbar_recipe);
+            ratingbar_recipe=itemView.findViewById(R.id.ratingbar_recipe_save);
 
         }
     }
@@ -123,6 +125,34 @@ public class JustAddedCookBookAdapter extends RecyclerView.Adapter<JustAddedCook
 
             }
         });
+    }
+
+
+    private void calculateRating(String postid, RatingBar ratingBar) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Ratings").child(postid);
+
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int sum = 0;
+                int ratingValue = 0;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Rating rating = snapshot.getValue(Rating.class);
+                    sum = sum + rating.getUserRatingValue();
+                }
+                if((int) dataSnapshot.getChildrenCount()>0) {
+                    ratingValue = sum / (int) dataSnapshot.getChildrenCount();
+                }
+                ratingBar.setRating(ratingValue);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
 }

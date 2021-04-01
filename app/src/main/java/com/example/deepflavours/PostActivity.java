@@ -33,6 +33,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -52,7 +53,7 @@ public class PostActivity extends AppCompatActivity {
 
     ImageView image_added, close, post;
     TextInputEditText title, description, servings, prepTime, cookTime, ingredients, directions;
-
+    FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +71,7 @@ public class PostActivity extends AppCompatActivity {
         directions = findViewById(R.id.directions);
         servings = findViewById(R.id.servings);
 
-
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         storageReference = FirebaseStorage.getInstance().getReference("recipes");
 
         close.setOnClickListener(new View.OnClickListener() {
@@ -237,6 +238,8 @@ public class PostActivity extends AppCompatActivity {
                         Uri downloadUri = task.getResult();
                         myUrl = downloadUri.toString();
 
+
+
                         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes");
                         String recipeid = reference.push().getKey();
 
@@ -253,6 +256,8 @@ public class PostActivity extends AppCompatActivity {
                         hashMap.put("userid", FirebaseAuth.getInstance().getCurrentUser().getUid());
 
                         reference.child(recipeid).setValue(hashMap);
+
+
 
                         progressDialog.dismiss();
 
