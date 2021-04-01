@@ -110,10 +110,11 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
             nrRatings(viewHolder.ratingnr,post.getRecipeid());
             isFavourite(post.getRecipeid(), viewHolder.favourite);
             isCooked(post.getRecipeid(), viewHolder.cook);
+
+            calculateRating(post.getRecipeid(),viewHolder.rating);
+
         }
 
-
-        calculateRating(post.getRecipeid(),viewHolder.rating);
 
 
         viewHolder.btn_ingredients.setOnClickListener(new View.OnClickListener() {

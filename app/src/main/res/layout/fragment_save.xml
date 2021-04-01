@@ -1,45 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#ffffff"
     tools:context=".Fragment.SaveFragment">
-
-
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="#ffffff">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/iv_menu_savefragment"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="20dp"
-                    android:src="@drawable/menu" />
-            </RelativeLayout>
-
-        </androidx.appcompat.widget.Toolbar>
 
 
     <LinearLayout
         android:id="@+id/linearlayout_cookbook"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
         android:layout_marginStart="23dp"
-        >
+        android:layout_marginTop="20dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -60,38 +34,9 @@
         android:layout_alignParentEnd="true"
         android:orientation="horizontal"
         android:overScrollMode="never"
+        android:layout_marginTop="6dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_cookbook_justadded" />
-
-<!--    <LinearLayout-->
-<!--        android:id="@+id/ll_noSavePost"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_above="@id/ll_cookedrecipes"-->
-<!--        android:layout_below="@id/linearlayout_cookbook"-->
-<!--        android:gravity="center"-->
-<!--        android:orientation="vertical"-->
-<!--        android:visibility="gone">-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/iv_noSavePost"-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:alpha="0.5"-->
-<!--            android:src="@drawable/save_black" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/no_save_posts"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="3dp"-->
-<!--            android:alpha="0.5"-->
-<!--            android:text="No Saved Posts Yet "-->
-<!--            android:textColor="#000000"-->
-<!--            android:textSize="15sp"-->
-<!--            android:textStyle="bold" />-->
-
-<!--    </LinearLayout>-->
 
     <LinearLayout
         android:id="@+id/ll_cookedrecipes"
@@ -104,8 +49,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cooked Recipes"
             android:alpha="0.8"
+            android:text="Cooked Recipes"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -119,6 +64,7 @@
         android:layout_below="@id/ll_cookedrecipes"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="6dp"
         android:orientation="horizontal"
         android:overScrollMode="never"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -130,8 +76,8 @@
         android:layout_height="match_parent"
         android:layout_below="@id/ll_cookedrecipes"
         android:gravity="center"
-        android:visibility="gone"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/iv_no_cooked_recipes"
@@ -144,16 +90,14 @@
             android:id="@+id/no_cooked_recipes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:alpha="0.5"
             android:layout_marginTop="3dp"
+            android:alpha="0.5"
             android:text="No Cooked Recipes Yet "
             android:textColor="#000000"
-            android:textStyle="bold"
             android:textSize="15sp"
-            />
+            android:textStyle="bold" />
 
     </LinearLayout>
-
 
 
 </RelativeLayout>

@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/favoritepost_CardView0"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="80dp"
     android:layout_marginStart="10dp"
     android:layout_marginTop="5dp"
     android:layout_marginEnd="10dp"
     android:layout_marginBottom="2dp"
     android:background="#FFFFFF"
     app:cardBackgroundColor="#ffffff"
-    app:cardCornerRadius="17dp"
+    app:cardCornerRadius="10dp"
     app:cardElevation="2dp"
     app:cardPreventCornerOverlap="true">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/favoritepost_CardView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="center_vertical"
         android:layout_marginStart="7dp"
-        android:layout_marginTop="10dp"
         app:cardCornerRadius="10dp">
 
         <ImageView
@@ -34,8 +34,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <TextView
@@ -45,7 +45,7 @@
             android:alpha="0.8"
             android:text="Chicken Laska"
             android:textColor="#000000"
-            android:textSize="17dp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
@@ -55,7 +55,7 @@
             android:alpha="0.6"
             android:text="ChickenLaska"
             android:textColor="#000000"
-            android:textSize="10dp"
+            android:textSize="7dp"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -63,8 +63,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="70dp">
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="40dp">
 
         <androidx.appcompat.widget.AppCompatRatingBar
             android:id="@+id/ratingbar_recipe_cooked"
@@ -84,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="290dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="40dp"
         android:orientation="vertical">
 
         <TextView
@@ -92,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:alpha="0.5"
+            android:alpha="0.8"
             android:text="10"
             android:textColor="#000000"
             android:textSize="10sp"

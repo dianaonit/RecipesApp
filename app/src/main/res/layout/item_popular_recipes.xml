@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/favoritepost_CardView0"
     android:layout_width="match_parent"
@@ -19,8 +18,8 @@
         android:id="@+id/favoritepost_CardView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-       android:layout_marginStart="10dp"
         android:layout_gravity="center_vertical"
+        android:layout_marginStart="10dp"
         app:cardCornerRadius="10dp">
 
         <ImageView
@@ -34,8 +33,9 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_marginStart="90dp"
-        android:layout_marginTop="15dp"
+
         android:orientation="vertical">
 
         <TextView
@@ -61,33 +61,33 @@
     </LinearLayout>
 
     <LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="280dp"
-     android:layout_gravity="center_vertical"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/cooktimes_nr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:alpha="0.5"
-        android:text="10"
-        android:textColor="#000000"
-        android:textSize="15sp"
-        android:textStyle="bold" />
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="280dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/cooktimes_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:alpha="0.4"
-        android:text="Cooked"
-        android:textColor="#000000"
-        android:textSize="12sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/cooktimes_nr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:alpha="0.8"
+            android:text="10"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/cooktimes_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.4"
+            android:text="Cooked"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>

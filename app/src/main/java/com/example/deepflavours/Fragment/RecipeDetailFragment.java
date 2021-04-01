@@ -251,6 +251,8 @@ public class RecipeDetailFragment extends Fragment {
                                     FirebaseDatabase.getInstance().getReference("Saves").child(postId).removeValue();
                                     FirebaseDatabase.getInstance().getReference("Favourites").child(postId).removeValue();
                                     FirebaseDatabase.getInstance().getReference("Likes").child(postId).removeValue();
+                                    FirebaseDatabase.getInstance().getReference("Ratings").child(postId).removeValue();
+                                    FirebaseDatabase.getInstance().getReference("Notifications").child(postId).removeValue();
                                     Toast.makeText(getContext(),"Deleted!",Toast.LENGTH_SHORT).show();
 
 
