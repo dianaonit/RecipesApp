@@ -3,9 +3,6 @@ package com.example.deepflavours.Model;
 import android.net.Uri;
 
 public class Recipe {
-//    private String key;
-//    private Double ratingValue;
-//    private Long ratingCount;
     private String recipeid;
     private String recipeimage;
     private String title;

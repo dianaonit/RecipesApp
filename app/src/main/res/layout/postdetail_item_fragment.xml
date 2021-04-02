@@ -315,10 +315,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:alpha="0.7"
+                android:alpha="0.3"
                 android:text="View all comments or add one"
                 android:padding="10dp"
-                android:textColor="#aaa480"
+                android:textColor="#03DAC6"
                 android:textSize="15dp" />
 
         </LinearLayout>

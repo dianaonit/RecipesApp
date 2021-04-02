@@ -30,6 +30,7 @@ import com.example.deepflavours.Login;
 import com.example.deepflavours.Model.Rating;
 import com.example.deepflavours.Model.Recipe;
 import com.example.deepflavours.Model.User;
+import com.example.deepflavours.NotesActivity;
 import com.example.deepflavours.R;
 import com.google.android.gms.common.internal.service.Common;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -85,6 +86,14 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         Recipe post = mPost.get(i);
+
+
+        if(post.getUserid().equals(firebaseUser.getUid())){
+            viewHolder.add_notes.setVisibility(View.GONE);
+        }else {
+            viewHolder.add_notes.setVisibility(View.VISIBLE);
+        }
+
         if (post != null) {
             viewHolder.post_title.setText(post.getTitle());
             viewHolder.post_desc.setText(post.getDescription());
@@ -114,7 +123,6 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
             calculateRating(post.getRecipeid(),viewHolder.rating);
 
         }
-
 
 
         viewHolder.btn_ingredients.setOnClickListener(new View.OnClickListener() {
@@ -202,11 +210,12 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
             }
         });
 
-        viewHolder.notes.setOnClickListener(new View.OnClickListener() {
+        viewHolder.add_notes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                    Intent intent = new Intent(mContext, NotesActivity.class);
-//                    mContext.startActivity(intent);
+                    Intent intent = new Intent(mContext, NotesActivity.class);
+                    mContext.startActivity(intent);
+
             }
         });
 
@@ -217,7 +226,7 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
                 View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_rating, null);
 
                 ratingBar_user = itemView.findViewById(R.id.user_ratingbar);
-                Rating rating1 = new Rating();
+                Rating updateRating = new Rating();
 
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Ratings").child(post.getRecipeid());
                 reference.addValueEventListener(new ValueEventListener() {
@@ -227,9 +236,9 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
                             Rating rating = dataSnapshot.getValue(Rating.class);
                             if(rating.getUserId().equals(firebaseUser.getUid())){
                                 ratingBar_user.setRating(rating.getUserRatingValue());
-                                rating1.setUserId(rating.getUserId());
-                                rating1.setRatingId(rating.getRatingId());
-                                rating1.setUserRatingValue(rating.getUserRatingValue());
+                                updateRating.setUserId(rating.getUserId());
+                                updateRating.setRatingId(rating.getRatingId());
+                                updateRating.setUserRatingValue(rating.getUserRatingValue());
                             }
                         }
 
@@ -258,8 +267,8 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
 
-                                if(rating1.getRatingId()!=null && !rating1.getRatingId().isEmpty()) {
-                                    updateRating(post.getRecipeid(), rating1);
+                                if(updateRating.getRatingId()!=null && !updateRating.getRatingId().isEmpty()) {
+                                    updateRating(post.getRecipeid(), updateRating);
                                     Toast.makeText(mContext,"Updated rating!", Toast.LENGTH_LONG).show();
 
                                 }else {
@@ -287,7 +296,7 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView post_title, cooktimesNr, servings, prepTime, cookTime, user_name, likes, commnr, comments, post_desc, ingredients, directions,ratingnr;
-        public ImageView image_post, image_profile, back, favourite, cook, more, like, notes, add_rating;
+        public ImageView image_post, image_profile, back, favourite, cook, more, like, add_notes, add_rating;
         public Button btn_ingredients, btn_directions;
         public View line_ingred, line_dir;
         public RatingBar rating;
@@ -319,7 +328,7 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
             commnr = itemView.findViewById(R.id.tv_comm);
             line_ingred = itemView.findViewById(R.id.line_ingredients);
             line_dir = itemView.findViewById(R.id.line_directions);
-            notes = itemView.findViewById(R.id.addnotes);
+            add_notes = itemView.findViewById(R.id.addnotes);
             add_rating = itemView.findViewById(R.id.add_rating);
             rating = itemView.findViewById(R.id.ratingbar_recipe_postdetail);
             ratingnr = itemView.findViewById(R.id.nr_ratingbar);

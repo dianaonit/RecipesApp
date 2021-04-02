@@ -28,7 +28,9 @@ import com.example.deepflavours.Login;
 import com.example.deepflavours.MainActivity;
 import com.example.deepflavours.Model.Recipe;
 import com.example.deepflavours.Model.User;
+import com.example.deepflavours.NotesActivity;
 import com.example.deepflavours.R;
+import com.example.deepflavours.UserNotesActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -170,8 +172,17 @@ public class ProfileFragment extends Fragment {
                 View bottomSheetView = LayoutInflater.from(getContext())
                         .inflate(
                                 R.layout.bottom_sheet_options,
-                                (LinearLayout) view.findViewById(R.id.bottomSheetContainerOptions)
+                                (LinearLayout) view.findViewById(R.id.bottomSheetContainerOptionsProfile)
                         );
+                bottomSheetView.findViewById(R.id.notes_option).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getContext(), UserNotesActivity.class);
+                        getContext().startActivity(intent);
+                        bottomSheetDialog.dismiss();
+                    }
+                });
+
                 bottomSheetView.findViewById(R.id.logout_option).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
