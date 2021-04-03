@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".UserNotesActivity"></activity>
+        <activity android:name=".NoteDetailActivity"></activity>
+        <activity android:name=".UserNotesActivity" />
         <activity android:name=".Model.Note" />
         <activity android:name=".NotesActivity" />
         <activity

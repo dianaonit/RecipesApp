@@ -6,13 +6,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.deepflavours.Model.Note;
 import com.example.deepflavours.Model.Rating;
 import com.example.deepflavours.Model.Recipe;
+import com.example.deepflavours.Model.User;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class NotesActivity extends AppCompatActivity {
 
@@ -30,6 +35,8 @@ public class NotesActivity extends AppCompatActivity {
     TextInputEditText titleN, descriptionN, servingsN, prepTimeN, cookTimeN, ingredientsN, directionsN;
     String postid;
     private FirebaseUser firebaseUser;
+//    List<Note> noteList;
+//    EditText searchBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +55,25 @@ public class NotesActivity extends AppCompatActivity {
         cookTimeN = findViewById(R.id.cook_time_notes);
         ingredientsN = findViewById(R.id.ingredients_notes);
         directionsN = findViewById(R.id.directions_notes);
+
+//        searchBar = findViewById(R.id.searchbar_notes);
+//        searchBar.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                searchNotes(s.toString());
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
+
 
         SharedPreferences preferences = this.getSharedPreferences("PREFS", Context.MODE_PRIVATE);
 
@@ -241,6 +267,7 @@ public class NotesActivity extends AppCompatActivity {
                             hasNote=true;
                             updateNote.setNoteId(note.getNoteId());
                             updateNote.setUserId(note.getUserId());
+                            updateNote.setRecipeId(note.getRecipeId());
                             updateNote.setTitle(titleN.getText().toString());
                             updateNote.setDescription(descriptionN.getText().toString());
                             updateNote.setServings(servingsN.getText().toString());
@@ -279,6 +306,7 @@ public class NotesActivity extends AppCompatActivity {
 
         HashMap<String, Object> notesHashMap = new HashMap<>();
         notesHashMap.put("userId", firebaseUser.getUid());
+        notesHashMap.put("recipeId", postid);
         notesHashMap.put("noteId", noteId);
         notesHashMap.put("title", titleN.getText().toString());
         notesHashMap.put("description", descriptionN.getText().toString());
@@ -308,6 +336,8 @@ public class NotesActivity extends AppCompatActivity {
 
         reference.updateChildren(updateNote);
     }
+
+
 
 
 }

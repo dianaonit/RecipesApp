@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.example.deepflavours.Adapter.AllMyPostsAdapter;
@@ -63,7 +64,10 @@ public class UserNotesActivity extends AppCompatActivity {
 
         readNotes();
 
+
     }
+
+
 
 
     public void readNotes(){

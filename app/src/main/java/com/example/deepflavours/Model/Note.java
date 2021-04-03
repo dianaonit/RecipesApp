@@ -8,6 +8,7 @@ public class Note {
 
 
     private String noteId;
+    private String recipeId;
     private String userId;
     private String title;
     private String ingredients;
@@ -22,9 +23,10 @@ public class Note {
 
     }
 
-    public Note(String noteId, String userId, String title, String ingredients, String directions, String description, String servings, String cookTime, String preparationTime) {
+    public Note(String noteId, String userId, String title, String ingredients, String directions, String description, String servings, String cookTime, String preparationTime,String recipeId) {
         this.noteId = noteId;
         this.userId = userId;
+        this.recipeId= recipeId;
         this.title = title;
         this.ingredients = ingredients;
         this.directions = directions;
@@ -32,6 +34,14 @@ public class Note {
         this.servings = servings;
         this.cookTime = cookTime;
         this.preparationTime = preparationTime;
+    }
+
+    public String getRecipeId() {
+        return recipeId;
+    }
+
+    public void setRecipeId(String recipeId) {
+        this.recipeId = recipeId;
     }
 
     public String getNoteId() {
