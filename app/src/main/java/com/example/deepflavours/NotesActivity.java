@@ -35,8 +35,7 @@ public class NotesActivity extends AppCompatActivity {
     TextInputEditText titleN, descriptionN, servingsN, prepTimeN, cookTimeN, ingredientsN, directionsN;
     String postid;
     private FirebaseUser firebaseUser;
-//    List<Note> noteList;
-//    EditText searchBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,23 +55,6 @@ public class NotesActivity extends AppCompatActivity {
         ingredientsN = findViewById(R.id.ingredients_notes);
         directionsN = findViewById(R.id.directions_notes);
 
-//        searchBar = findViewById(R.id.searchbar_notes);
-//        searchBar.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                searchNotes(s.toString());
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
 
 
         SharedPreferences preferences = this.getSharedPreferences("PREFS", Context.MODE_PRIVATE);

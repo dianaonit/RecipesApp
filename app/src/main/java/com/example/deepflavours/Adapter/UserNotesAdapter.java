@@ -1,7 +1,9 @@
 package com.example.deepflavours.Adapter;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.deepflavours.Fragment.RecipeDetailFragment;
 import com.example.deepflavours.Model.Note;
+import com.example.deepflavours.NoteDetailActivity;
 import com.example.deepflavours.R;
 import com.example.deepflavours.UserNotesActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,11 +37,9 @@ public class UserNotesAdapter extends RecyclerView.Adapter<UserNotesAdapter.View
     private FirebaseUser firebaseUser;
 
 
-
     public UserNotesAdapter(Context mContext, List<Note> mNote) {
         this.mContext = mContext;
         this.mNote = mNote;
-
     }
 
 
@@ -60,9 +64,9 @@ public class UserNotesAdapter extends RecyclerView.Adapter<UserNotesAdapter.View
         viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                if(note.getUserId().equals(firebaseUser.getUid())){
+                if (note.getUserId().equals(firebaseUser.getUid())) {
 
-                    AlertDialog alertDialog = new AlertDialog.Builder(mContext,AlertDialog.THEME_DEVICE_DEFAULT_LIGHT).create();
+                    AlertDialog alertDialog = new AlertDialog.Builder(mContext, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT).create();
 
                     alertDialog.setTitle("Do you want to delete?");
                     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "No",
@@ -81,8 +85,8 @@ public class UserNotesAdapter extends RecyclerView.Adapter<UserNotesAdapter.View
                                             .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful()){
-                                                Toast.makeText(mContext,"Deleted note!",Toast.LENGTH_SHORT).show();
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(mContext, "Deleted note!", Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
@@ -95,6 +99,20 @@ public class UserNotesAdapter extends RecyclerView.Adapter<UserNotesAdapter.View
             }
         });
 
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                editor.putString("noteid",note.getNoteId());
+                editor.apply();
+
+                Intent intent = new Intent(mContext, NoteDetailActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
+
+
     }
 
     @Override
@@ -103,10 +121,7 @@ public class UserNotesAdapter extends RecyclerView.Adapter<UserNotesAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
-
         public TextView noteTitle, noteDirections;
-
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
