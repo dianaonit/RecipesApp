@@ -104,10 +104,12 @@ public class SaveFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 cookedRecipes.clear();
+                boolean hasCookedRecipes = false;
                 for (DataSnapshot cookedRecipesSnapshot : dataSnapshot.getChildren()) {
                     for (DataSnapshot userSnapshot : cookedRecipesSnapshot.getChildren()) {
                         String userId = userSnapshot.getKey();
                         if (userId.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                            hasCookedRecipes = true;
                             String recipeIdCooked = cookedRecipesSnapshot.getKey();
                             FirebaseDatabase.getInstance().getReference("Recipes").child(recipeIdCooked).addValueEventListener(new ValueEventListener() {
                                 @Override
@@ -130,7 +132,7 @@ public class SaveFragment extends Fragment {
 
                     Collections.reverse(cookedRecipes);
                 }
-                if (dataSnapshot.getChildrenCount() == 0) {
+                if (!hasCookedRecipes) {
                     cookedRecipes_recyclerView.setVisibility(View.GONE);
                     noCookedRecipes.setVisibility(View.VISIBLE);
                 }

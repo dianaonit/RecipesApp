@@ -86,6 +86,12 @@ public class UserNotesActivity extends AppCompatActivity {
         });
 
         idList = new ArrayList<>();
+
+
+
+
+
+
         readNotes();
 
     }

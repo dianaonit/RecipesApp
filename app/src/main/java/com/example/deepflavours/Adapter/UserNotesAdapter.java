@@ -103,11 +103,9 @@ public class UserNotesAdapter extends RecyclerView.Adapter<UserNotesAdapter.View
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
-                editor.putString("noteid",note.getNoteId());
-                editor.apply();
-
                 Intent intent = new Intent(mContext, NoteDetailActivity.class);
+                intent.putExtra("noteId", note.getNoteId());
+                intent.putExtra("recipeId", note.getRecipeId());
                 mContext.startActivity(intent);
             }
         });

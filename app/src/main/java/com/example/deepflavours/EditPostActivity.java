@@ -93,7 +93,7 @@ public class EditPostActivity extends AppCompatActivity {
 
         final String rTitle = title.getText().toString().trim();
         final String rDescription = description.getText().toString().trim();
-        final String rSevings = servings.getText().toString().trim();
+        final String rServings = servings.getText().toString().trim();
         final String rPrepTime = prepTime.getText().toString().trim();
         final String rCookTime = cookTime.getText().toString().trim();
         final String rIngredients = ingredients.getText().toString().trim();
@@ -130,11 +130,11 @@ public class EditPostActivity extends AppCompatActivity {
         }
 
 
-        if (rSevings.length() > 2) {
+        if (rServings.length() > 2) {
             servings.setError("Max length: 2 char!");
             servings.requestFocus();
             error = true;
-        } else if (rSevings.isEmpty()) {
+        } else if (rServings.isEmpty()) {
             servings.setError("Can't be empty!");
             servings.requestFocus();
             error = true;

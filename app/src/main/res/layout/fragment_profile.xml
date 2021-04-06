@@ -88,7 +88,8 @@
                         android:layout_width="15dp"
                         android:layout_height="15dp"
                         android:layout_marginStart="10dp"
-                        android:src="@drawable/ic_baseline_location_on_24" />
+                        android:src="@drawable/maps"
+                        android:alpha="0.5"/>
 
                     <TextView
                         android:id="@+id/tv_bio"

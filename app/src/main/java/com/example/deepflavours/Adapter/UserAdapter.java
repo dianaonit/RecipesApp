@@ -1,8 +1,6 @@
 package com.example.deepflavours.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.deepflavours.Fragment.ProfileFragment;
-import com.example.deepflavours.MainActivity;
 import com.example.deepflavours.Model.User;
 import com.example.deepflavours.R;
 import com.google.firebase.auth.FirebaseAuth;

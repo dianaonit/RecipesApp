@@ -339,39 +339,32 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 favouriteRecipes.clear();
+                boolean hasFavRecipes = false;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
                         String userId = dataSnapshot1.getKey();
                         if (userId.equals(profileid)) {
                             String recipeId = snapshot.getKey();
+                            hasFavRecipes = true;
                             FirebaseDatabase.getInstance().getReference("Recipes").child(recipeId).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     Recipe recipe = snapshot.getValue(Recipe.class);
                                     favouriteRecipes.add(recipe);
                                     favoriteRecipesAdapter.notifyDataSetChanged();
-
                                 }
-
-
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError error) {
 
                                 }
                             });
-
-
                         }
-
                     }
-
                 }
-                if (dataSnapshot.getChildrenCount() == 0) {
+                if (!hasFavRecipes) {
                     favRecipes_recyclerView.setVisibility(View.GONE);
                     noFavPost.setVisibility(View.VISIBLE);
                 }
-
-
             }
 
             @Override

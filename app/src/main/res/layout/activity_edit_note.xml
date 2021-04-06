@@ -5,29 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    tools:context=".EditPostActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".EditNoteActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
-       >
+        android:background="#ffffff">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ffffff"
-           >
+            android:background="#ffffff">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/btn_close"
+                    android:id="@+id/btn_back_to_note"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_alignParentStart="true"
@@ -40,16 +38,16 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="20dp"
-                    android:layout_toEndOf="@id/btn_close"
-                    android:text="Edit Post Details "
+                    android:layout_toEndOf="@id/btn_back_to_note"
+                    android:text="Edit your note"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <ImageView
-                    android:id="@+id/btn_save"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:id="@+id/btn_save_edit_notes"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="20dp"
@@ -64,9 +62,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
-
-        android:overScrollMode="never">
+        android:overScrollMode="never"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -92,7 +89,7 @@
                 app:helperTextTextColor="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/post_title"
+                    android:id="@+id/post_title_edit_notes"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@drawable/style_edit_post"
@@ -120,19 +117,18 @@
                 app:helperTextTextColor="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/post_description"
+                    android:id="@+id/post_description_edit_notes"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:background="@drawable/style_edit_post"
-                    android:inputType="text|textMultiLine"
-                    android:padding="8dp"
-                    android:maxLines="2"
                     android:gravity="start|top"
+                    android:inputType="text|textMultiLine"
+                    android:maxLines="2"
+                    android:padding="8dp"
                     android:textColor="#000000"
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </com.google.android.material.textfield.TextInputLayout>
-
 
 
             <TextView
@@ -146,6 +142,7 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
@@ -173,11 +170,10 @@
                     android:textStyle="bold" />
 
 
-
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="110dp"
                     android:layout_marginEnd="10dp"
                     android:alpha="0.6"
                     android:maxLength="2"
@@ -188,17 +184,16 @@
                     app:counterOverflowTextColor="@color/red"
                     app:counterTextColor="@color/black"
                     app:helperText="portions"
-                    android:layout_marginStart="110dp"
                     app:helperTextTextColor="@color/black">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/servings"
+                        android:id="@+id/servings_edit_notes"
                         android:layout_width="120dp"
                         android:layout_height="40dp"
                         android:background="@drawable/style_edit_post"
+                        android:gravity="start|top"
                         android:inputType="number"
                         android:padding="8dp"
-                        android:gravity="start|top"
                         android:textColor="#000000"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -227,10 +222,10 @@
                     android:textStyle="bold" />
 
 
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
                     android:layout_marginEnd="10dp"
                     android:alpha="0.6"
                     android:maxLength="3"
@@ -241,17 +236,16 @@
                     app:counterOverflowTextColor="@color/red"
                     app:counterTextColor="@color/black"
                     app:helperText="minute"
-                    android:layout_marginStart="40dp"
                     app:helperTextTextColor="@color/black">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/prep_time"
+                        android:id="@+id/prep_time_edit_notes"
                         android:layout_width="120dp"
                         android:layout_height="40dp"
                         android:background="@drawable/style_edit_post"
+                        android:gravity="start|top"
                         android:inputType="number"
                         android:padding="8dp"
-                        android:gravity="start|top"
                         android:textColor="#000000"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -281,6 +275,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="70dp"
                     android:layout_marginEnd="10dp"
                     android:alpha="0.6"
                     android:maxLength="3"
@@ -291,17 +286,16 @@
                     app:counterOverflowTextColor="@color/red"
                     app:counterTextColor="@color/black"
                     app:helperText="minute"
-                    android:layout_marginStart="70dp"
                     app:helperTextTextColor="@color/black">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/cook_time"
+                        android:id="@+id/cook_time_edit_notes"
                         android:layout_width="120dp"
                         android:layout_height="40dp"
                         android:background="@drawable/style_edit_post"
+                        android:gravity="start|top"
                         android:inputType="number"
                         android:padding="8dp"
-                        android:gravity="start|top"
                         android:textColor="#000000"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -321,6 +315,7 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
@@ -340,8 +335,9 @@
                 android:theme="@style/myEditTextStyle"
                 app:helperText="Write ingredients for the recipe"
                 app:helperTextTextColor="@color/black">
+
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ingredients"
+                    android:id="@+id/ingredients_edit_notes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/style_edit_post"
@@ -352,7 +348,6 @@
                     android:textStyle="bold" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
 
 
             <TextView
@@ -366,6 +361,7 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
@@ -388,7 +384,7 @@
                 app:helperTextTextColor="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/directions"
+                    android:id="@+id/directions_edit_notes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/style_edit_post"

@@ -51,7 +51,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="20dp"
-                    android:src="@drawable/checked" />
+                    android:src="@drawable/tick"
+                    android:alpha="0.5"/>
 
             </RelativeLayout>
 

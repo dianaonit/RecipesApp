@@ -6,17 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.example.deepflavours.Model.Note;
-import com.example.deepflavours.Model.Rating;
 import com.example.deepflavours.Model.Recipe;
-import com.example.deepflavours.Model.User;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,9 +19,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.HashMap;
-import java.util.List;
+
 
 public class NotesActivity extends AppCompatActivity {
 
@@ -58,7 +51,6 @@ public class NotesActivity extends AppCompatActivity {
 
 
         SharedPreferences preferences = this.getSharedPreferences("PREFS", Context.MODE_PRIVATE);
-
         postid = preferences.getString("postid", "none");
 
         DatabaseReference referenceNote = FirebaseDatabase.getInstance().getReference("Notes").child(postid);
@@ -136,7 +128,7 @@ public class NotesActivity extends AppCompatActivity {
 
         final String nTitle = titleN.getText().toString().trim();
         final String nDescription = descriptionN.getText().toString().trim();
-        final String nSevings = servingsN.getText().toString().trim();
+        final String nServings = servingsN.getText().toString().trim();
         final String nPrepTime = prepTimeN.getText().toString().trim();
         final String nCookTime = cookTimeN.getText().toString().trim();
         final String nIngredients = ingredientsN.getText().toString().trim();
@@ -173,11 +165,11 @@ public class NotesActivity extends AppCompatActivity {
         }
 
 
-        if (nSevings.length() > 2) {
+        if (nServings.length() > 2) {
             servingsN.setError("Max length: 2 char!");
             servingsN.requestFocus();
             error = true;
-        } else if (nSevings.isEmpty()) {
+        } else if (nServings.isEmpty()) {
             servingsN.setError("Can't be empty!");
             servingsN.requestFocus();
             error = true;
@@ -274,6 +266,7 @@ public class NotesActivity extends AppCompatActivity {
 
                 }
             });
+
             finish();
 
         }
