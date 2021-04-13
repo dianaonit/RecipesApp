@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">DeepFlavours</string>
+    //Start Cooking Activity
     <string name="deep_flavours">Deep Flavours</string>
     <string name="deliciously_simple">Deliciously Simple</string>
-    <string name="startcooking_btn">Începe să gătești</string>
+    <string name="startcooking_btn">Start gătit</string>
+
+    //On Boarding - choose LogIn or SignUp
     <string name="tv_description">Rețete echilibrate nutrițional, ușor de gătit. Ingrediente locale proaspete de calitate.</string>
     <string name="createaccount_btn">Creare Cont</string>
     <string name="tv_haveaccount">Ai deja cont?</string>
     <string name="tv_login">Autentificare</string>
     <string name="tv_back">Înapoi</string>
+
+    //SignUp - create account
     <string name="tv_welcome">Hai să pregătim mese \ngustoase!</string>
     <string name="editTextName"><font size="30">Numele tău complet</font></string>
     <string name="editTextEmail"><font size="30">E-mail-ul tău</font></string>
     <string name="editTextPassword"><font size="30">Parolă</font></string>
     <string name="editTextPasswordVer"><font size="30">Verificare parolă</font></string>
     <string name="tv_SignUp">Înscrie-te</string>
+    <string name="please_wait">Te rog, așteaptă..</string>
+
+    //LogIn - auth
     <string name="tv_welcomeback">Bine ai revenit la \nDeep Flavours!</string>
-    <string name="Language">Selectează limba...</string>
-    <string name="languageTypeRo">Română</string>
-    <string name="languageTypeEn">Engleză</string>
-    <string name="languageTypeDe">Germană</string>
-    <string name="languageTypeFr">Franceză</string>
+
+    //Validation (LogIn and SignUp)
     <string name="empty_errfName">Introducerea numelui complet este obligatorie!</string>
     <string name="empty_errEmail">Introducerea adresei de e-mail este obligatorie!</string>
     <string name="empty_errPass">Introducerea parolei este obligatorie!</string>
@@ -32,6 +37,155 @@
     <string name="signup_failed">Eroare la crearea contului.Încearcă din nou!</string>
     <string name="email_exists">Există un utilizator cu acest e-mail!</string>
     <string name="login_success">Autentificare realizată cu succes!</string>
+
+
+    //Translate
+    <string name="Language">Selectează limba...</string>
+    <string name="languageTypeRo">Română</string>
+    <string name="languageTypeEn">Engleză</string>
+    <string name="languageTypeDe">Germană</string>
+    <string name="languageTypeFr">Franceză</string>
+
+    //Home fragment
+    <string name="tv_cookedthis">au gătit</string>
+    <string name="already_cooking_this">Ai deja această rețetă in lista de rețete gătite!</string>
+
+    //Detail recipe fragment
+    <string name="tv_reviews">Recenzii</string>
+    <string name="tv_comm_and_add">Vezi toate comentariile sau adaugă unul </string>
+    <string name="tv_servings">Porții</string>
+    <string name="tv_prep_time">Pregătire</string>
+    <string name="tv_cook_time">Gătire</string>
+    <string name="tv_ingredients">Ingrediente</string>
+    <string name="tv_directions">Îndrumări</string>
+
+    //Comments activity
+    <string name="tv_comments">Comentarii</string>
+    <string name="add_comments">Adaugă un comentariu..</string>
+    <string name="btn_post_comments">Postează</string>
+    <string name="empty_comment">Nu poți trimite un comentariu gol!</string>
+    <string name="delete">Vrei să îl ștergi?</string>
+    <string name="yes">Da</string>
+    <string name="no">Nu</string>
+
+    //Layout Rating Recipe
+    <string name="tv_rating_recipe">Evaluare rețetă</string>
+    <string name="btn_cancel">Anulează</string>
+    <string name="btn_ok">Trimite</string>
+    <string name="evaluating_recipe">Mulțumim pentru evaluarea rețetei!</string>
+    <string name="update_evaluating_recipe">Ați actualizat evaluarea rețetei!</string>
+
+    //Add/Update Note Activity
+    <string name="tv_add_note">Notiță proprie</string>
+    <string name="helpText_title">Titlu rețetă</string>
+    <string name="helpText_description">Descriere rețetă</string>
+    <string name="tv_details">Detalii despre preparare</string>
+    <string name="tv_preparation_time">Timp de preparare</string>
+    <string name="tv_cooking_time">Timp de gătire</string>
+    <string name="helpText_portions">porții</string>
+    <string name="helpText_minute">minute</string>
+    <string name="helpText_ingredients">Scrieți ingredientele rețetei</string>
+    <string name="helpText_directions">Scrieți instrucțiunile de pregătire </string>
+    <string name="update_note">Notiță actualizată!</string>
+    <string name="add_note">Notiță adăugată!</string>
+       //Validation
+            <string name="title_length">Lungime maximă: 25 caractere!</string>
+            <string name="empty_error">Nu poate fi gol!</string>
+            <string name="description_length">Lungime maximă: 40 caractere!</string>
+            <string name="servings_length">Lungime maximă: 2 caractere!</string>
+            <string name="prep_cook_length">Lungime maximă: 3 caractere!</string>
+
+    //Search Fragment
+    <string name="hint_search">Caută..</string>
+    <string name="tv_liked_recipes">Cele mai apreciate rețete</string>
+    <string name="tv_popular_recipes">Rețete populare</string>
+    <string name="tv_cooked">Gătită</string>
+    <string name="btn_following">urmărești</string>
+    <string name="btn_follow">urmărește</string>
+
+    //Save Fragment
+    <string name="tv_cookbook">Cartea mea de bucate</string>
+    <string name="tv_cooked_recipes">Rețete Gătite</string>
+    <string name="not_cooked">Nu s-a gătit încă</string>
+    <string name="not_cooked_recipes">Nu sunt rețete gătite</string>
+
+    //Likes Fragment
+    <string name="hint_search_like">Caută în aprecieri..</string>
+
+    //Profile Fragment
+    <string name="edit_profile">Editare Profil</string>
+    <string name="tv_food_post">Rețetele mele</string>
+    <string name="tv_show_all">Arată tot</string>
+    <string name="tv_favorite_recipes">Rețete Favorite</string>
+    <string name="no_post">Nu sunt postări</string>
+    <string name="posts">Postări</string>
+    <string name="followers">Urmăritori</string>
+    <string name="followings">Urmăriri</string>
+    <string name="tv_no_favorite_recipes">Fără rețete preferate</string>
+      //Bottom Sheet Options
+    <string name="profile_options">Opțiuni</string>
+    <string name="language">Limbă</string>
+    <string name="notes">Notițele mele cu rețete</string>
+    <string name="log_out">Deconectare</string>
+
+    //Edit Profile Activity
+    <string name="ch_profile_photo">Schimbă Fotografia de Profil</string>
+    <string name="full_name_update">Nume Complet</string>
+    <string name="add_location">Locație</string>
+    <string name="uploading_photo">Se încarcă..</string>
+    <string name="failed_uploading_photo">Încărcarea a eșuat!</string>
+    <string name="failed_no_image_selected">Nici o imagine selectată!</string>
+
+
+            //Validation
+    <string name="full_name_length">Lungime maximă: 25 caractere!</string>
+    <string name="location_length">Lungime maximă: 27 caractere!</string>
+
+    //Followers Fragment
+    <string name="hint_search_followers">Caută în urmăritori..</string>
+
+    //Followings Fragment
+    <string name="hint_search_followings">Caută în urmăriri..</string>
+
+    //My Food Post Fragment
+    <string name="all_food_post">Toate rețetele mele</string>
+
+    //Edit Post Detail
+    <string name="edit_post">Editează detaliile postării</string>
+    <string name="delete_post">Șterge postarea</string>
+    <string name="delete_question">Vrei să o ștergi?</string>
+    <string name="delete_post_no">Nu</string>
+    <string name="delete_post_yes">Da</string>
+
+    //User Notes Activity
+    <string name="hint_search_notes">Caută în notițe..</string>
+    <string name="delete_note">Notița a fost ștearsă!</string>
+
+    //Note Detail Activity
+    <string name="tv_note_title">Notiță:</string>
+    <string name="tv_note_desc">Descriere notiță:</string>
+
+    //Edit Note Activity
+    <string name="tv_edit_note">Editează notița</string>
+
+    //Post Activity
+    <string name="pd_posting">Se postează..</string>
+    <string name="failed_posting">Eșuare!</string>
+    <string name="no_image">Nici o imagine selectată!</string>
+    <string name="new_post">Postare nouă</string>
+
+    //Wiew Pager Slides - introduction
+    <string name="slide_headings1">Deep Flavours</string>
+    <string name="slide_headings2">Personalizați-vă  farfuria</string>
+    <string name="slide_headings3">Spor la gătit</string>
+    <string name="slide_desc1">Ingredientul ce ne aduce împreună.</string>
+    <string name="slide_desc2">Personalizeazăți farfuria folosind ingrediente din bucătăria dumneavoastră.</string>
+    <string name="slide_desc3">Sfat: gătește întotdeauna cu pasiune!</string>
+    <string name="skip">Sari</string>
+    <string name="back">Înapoi</string>
+    <string name="next">Următorul</string>
+    <string name="get_started">Începe</string>
+
 
 
 </resources>

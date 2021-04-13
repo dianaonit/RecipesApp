@@ -144,28 +144,34 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
         if(uFullName.length()>25){
-            fullname.setError("Max length: 25 char!");
+            fullname.setError(getResources().getString(R.string.full_name_length));
             fullname.requestFocus();
             error = true;
-        }else{
+        }else if(uFullName.isEmpty()){
+            fullname.setError(getResources().getString(R.string.empty_error));
+            fullname.requestFocus();
+            error = true;
+        }else {
             fullname.setError(null);
             fullname.requestFocus();
         }
 
         if(uBio.length()>27){
-            bio.setError("Max length: 27 char!");
+            bio.setError(getResources().getString(R.string.location_length));
             bio.requestFocus();
             error = true;
-        }else{
+        }else if(uBio.isEmpty()){
+            bio.setError(getResources().getString(R.string.empty_error));
+            bio.requestFocus();
+            error = true;
+        }else {
             bio.setError(null);
             bio.requestFocus();
         }
 
         if(!error){
             updateProfile(fullname.getText().toString(), bio.getText().toString());
-
             finish();
-
         }
 
 
@@ -191,22 +197,22 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
     private void uploadImage(){
-        ProgressDialog pd = new ProgressDialog(this);
-        pd.setMessage("Uploading..");
+        ProgressDialog pd = new ProgressDialog(this, R.style.Theme_AppCompat_Light_Dialog);
+        pd.setMessage(getResources().getString(R.string.uploading_photo));
         pd.show();
 
         if(mImageUri != null){
-            StorageReference filereference = storageRef.child(System.currentTimeMillis()
+            StorageReference fileReference = storageRef.child(System.currentTimeMillis()
             + "."+ getFileExtension(mImageUri));
 
-            uploadTask = filereference.putFile(mImageUri);
+            uploadTask = fileReference.putFile(mImageUri);
             uploadTask.continueWithTask(new Continuation() {
                 @Override
                 public Object then(@NonNull Task task) throws Exception {
                     if(!task.isSuccessful()){
                         throw task.getException();
                     }
-                    return filereference.getDownloadUrl();
+                    return fileReference.getDownloadUrl();
                 }
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
@@ -223,7 +229,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         reference.updateChildren(hashMap);
                         pd.dismiss();
                     }else{
-                        Toast.makeText(EditProfileActivity.this,"Failed",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditProfileActivity.this,getResources().getString(R.string.failed_uploading_photo),Toast.LENGTH_SHORT).show();
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -233,7 +239,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
             });
         }else {
-            Toast.makeText(this,"No image selected",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,getResources().getString(R.string.failed_no_image_selected),Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -250,8 +256,6 @@ public class EditProfileActivity extends AppCompatActivity {
             mImageUri = result.getUri();
 
             uploadImage();
-        }else {
-            Toast.makeText(this,"Something gone wrong!",Toast.LENGTH_SHORT).show();
         }
     }
 }

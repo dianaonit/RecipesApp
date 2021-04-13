@@ -95,7 +95,7 @@ public class UserAdapter extends  RecyclerView.Adapter<UserAdapter.ViewHolder> {
             viewHolder.btn_follow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(viewHolder.btn_follow.getText().toString().equals("follow")){
+                    if(viewHolder.btn_follow.getText().toString().equals("follow") || viewHolder.btn_follow.getText().toString().equals("folgen") || viewHolder.btn_follow.getText().toString().equals("suivre") || viewHolder.btn_follow.getText().toString().equals("urmărește") ){
                         FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
                                 .child("following").child(user.getId()).setValue(true);
                         FirebaseDatabase.getInstance().getReference().child("Follow").child(user.getId())
@@ -130,7 +130,6 @@ public class UserAdapter extends  RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
 
 
-
     @Override
     public int getItemCount() {
         return mUsers.size();
@@ -162,9 +161,9 @@ public class UserAdapter extends  RecyclerView.Adapter<UserAdapter.ViewHolder> {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if(dataSnapshot.child(userid).exists()){
-                        button.setText("following");
+                        button.setText(mContext.getResources().getString(R.string.btn_following));
                     }else{
-                        button.setText("follow");
+                        button.setText(mContext.getResources().getString(R.string.btn_follow));
                     }
             }
 

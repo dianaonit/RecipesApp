@@ -115,8 +115,8 @@ public class Login extends AppCompatActivity {
 
 
         if(!error) {
-            ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setMessage("Please wait..");
+            ProgressDialog progressDialog = new ProgressDialog(this,R.style.Theme_AppCompat_Light_Dialog);
+            progressDialog.setMessage(getResources().getString(R.string.please_wait));
             progressDialog.show();
 
             uFirebaseAuth.signInWithEmailAndPassword(uEmail, uPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

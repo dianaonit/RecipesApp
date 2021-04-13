@@ -138,11 +138,11 @@ public class NotesActivity extends AppCompatActivity {
 
 
         if (nTitle.length() > 25) {
-            titleN.setError("Max length: 25 char!");
+            titleN.setError(getResources().getString(R.string.title_length));
             titleN.requestFocus();
             error = true;
         } else if (nTitle.isEmpty()) {
-            titleN.setError("Can't be empty!");
+            titleN.setError(getResources().getString(R.string.empty_error));
             titleN.requestFocus();
             error = true;
         } else {
@@ -152,11 +152,11 @@ public class NotesActivity extends AppCompatActivity {
 
 
         if (nDescription.length() > 40) {
-            descriptionN.setError("Max length: 40 char!");
+            descriptionN.setError(getResources().getString(R.string.description_length));
             descriptionN.requestFocus();
             error = true;
         } else if (nDescription.isEmpty()) {
-            descriptionN.setError("Can't be empty!");
+            descriptionN.setError(getResources().getString(R.string.empty_error));
             descriptionN.requestFocus();
             error = true;
         } else {
@@ -166,11 +166,11 @@ public class NotesActivity extends AppCompatActivity {
 
 
         if (nServings.length() > 2) {
-            servingsN.setError("Max length: 2 char!");
+            servingsN.setError(getResources().getString(R.string.servings_length));
             servingsN.requestFocus();
             error = true;
         } else if (nServings.isEmpty()) {
-            servingsN.setError("Can't be empty!");
+            servingsN.setError(getResources().getString(R.string.empty_error));
             servingsN.requestFocus();
             error = true;
         } else {
@@ -180,11 +180,11 @@ public class NotesActivity extends AppCompatActivity {
 
 
         if (nPrepTime.length() > 3) {
-            prepTimeN.setError("Max length: 3 char!");
+            prepTimeN.setError(getResources().getString(R.string.prep_cook_length));
             prepTimeN.requestFocus();
             error = true;
         } else if (nPrepTime.isEmpty()) {
-            prepTimeN.setError("Can't be empty!");
+            prepTimeN.setError(getResources().getString(R.string.empty_error));
             prepTimeN.requestFocus();
             error = true;
         } else {
@@ -194,11 +194,11 @@ public class NotesActivity extends AppCompatActivity {
 
 
         if (nCookTime.length() > 3) {
-            cookTimeN.setError("Max length: 3 char!");
+            cookTimeN.setError(getResources().getString(R.string.prep_cook_length));
             cookTimeN.requestFocus();
             error = true;
         } else if (nCookTime.isEmpty()) {
-            cookTimeN.setError("Can't be empty!");
+            cookTimeN.setError(getResources().getString(R.string.empty_error));
             cookTimeN.requestFocus();
             error = true;
         } else {
@@ -207,7 +207,7 @@ public class NotesActivity extends AppCompatActivity {
         }
 
         if (nIngredients.isEmpty()) {
-            ingredientsN.setError("Can't be empty!");
+            ingredientsN.setError(getResources().getString(R.string.empty_error));
             ingredientsN.requestFocus();
             error = true;
         } else {
@@ -216,7 +216,7 @@ public class NotesActivity extends AppCompatActivity {
         }
 
         if (nDirections.isEmpty()) {
-            directionsN.setError("Can't be empty!");
+            directionsN.setError(getResources().getString(R.string.empty_error));
             directionsN.requestFocus();
             error = true;
         } else {
@@ -251,12 +251,12 @@ public class NotesActivity extends AppCompatActivity {
                             updateNote.setDirections(directionsN.getText().toString());
 
                             updateNotes(postid, updateNote);
-                            Toast.makeText(NotesActivity.this, "Updated note!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(NotesActivity.this, getResources().getString(R.string.update_note), Toast.LENGTH_LONG).show();
                         }
                     }
                     if(!hasNote && updateNote.getNoteId()==null){
                         addNotes(postid);
-                        Toast.makeText(NotesActivity.this, "Just added a note!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(NotesActivity.this, getResources().getString(R.string.add_note), Toast.LENGTH_LONG).show();
                     }
                 }
 

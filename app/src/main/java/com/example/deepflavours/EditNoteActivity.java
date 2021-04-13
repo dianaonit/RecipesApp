@@ -105,11 +105,11 @@ public class EditNoteActivity extends AppCompatActivity {
 
 
         if (nTitle.length() > 25) {
-            nEditTitle.setError("Max length: 25 char!");
+            nEditTitle.setError(getResources().getString(R.string.title_length));
             nEditTitle.requestFocus();
             error = true;
         } else if (nTitle.isEmpty()) {
-            nEditTitle.setError("Can't be empty!");
+            nEditTitle.setError(getResources().getString(R.string.empty_error));
             nEditTitle.requestFocus();
             error = true;
         } else {
@@ -119,11 +119,11 @@ public class EditNoteActivity extends AppCompatActivity {
 
 
         if (nDescription.length() > 40) {
-            nEditDesc.setError("Max length: 40 char!");
+            nEditDesc.setError(getResources().getString(R.string.description_length));
             nEditDesc.requestFocus();
             error = true;
         } else if (nDescription.isEmpty()) {
-            nEditDesc.setError("Can't be empty!");
+            nEditDesc.setError(getResources().getString(R.string.empty_error));
             nEditDesc.requestFocus();
             error = true;
         } else {
@@ -133,11 +133,11 @@ public class EditNoteActivity extends AppCompatActivity {
 
 
         if (nServings.length() > 2) {
-            nEditServings.setError("Max length: 2 char!");
+            nEditServings.setError(getResources().getString(R.string.servings_length));
             nEditServings.requestFocus();
             error = true;
         } else if (nServings.isEmpty()) {
-            nEditServings.setError("Can't be empty!");
+            nEditServings.setError(getResources().getString(R.string.empty_error));
             nEditServings.requestFocus();
             error = true;
         } else {
@@ -147,11 +147,11 @@ public class EditNoteActivity extends AppCompatActivity {
 
 
         if (nPrepTime.length() > 3) {
-            nEditPrepTime.setError("Max length: 3 char!");
+            nEditPrepTime.setError(getResources().getString(R.string.prep_cook_length));
             nEditPrepTime.requestFocus();
             error = true;
         } else if (nPrepTime.isEmpty()) {
-            nEditPrepTime.setError("Can't be empty!");
+            nEditPrepTime.setError(getResources().getString(R.string.empty_error));
             nEditPrepTime.requestFocus();
             error = true;
         } else {
@@ -161,11 +161,11 @@ public class EditNoteActivity extends AppCompatActivity {
 
 
         if (nCookTime.length() > 3) {
-            nEditCookTime.setError("Max length: 3 char!");
+            nEditCookTime.setError(getResources().getString(R.string.prep_cook_length));
             nEditCookTime.requestFocus();
             error = true;
         } else if (nCookTime.isEmpty()) {
-            nEditCookTime.setError("Can't be empty!");
+            nEditCookTime.setError(getResources().getString(R.string.empty_error));
             nEditCookTime.requestFocus();
             error = true;
         } else {
@@ -174,7 +174,7 @@ public class EditNoteActivity extends AppCompatActivity {
         }
 
         if (nIngredients.isEmpty()) {
-            nEditIngredients.setError("Can't be empty!");
+            nEditIngredients.setError(getResources().getString(R.string.empty_error));
             nEditIngredients.requestFocus();
             error = true;
         } else {
@@ -183,7 +183,7 @@ public class EditNoteActivity extends AppCompatActivity {
         }
 
         if (nDirections.isEmpty()) {
-            nEditDirections.setError("Can't be empty!");
+            nEditDirections.setError(getResources().getString(R.string.empty_error));
             nEditDirections.requestFocus();
             error = true;
         } else {
@@ -215,7 +215,7 @@ public class EditNoteActivity extends AppCompatActivity {
 
                         updateNotes(note.getRecipeId(), updateNote);
 
-                        Toast.makeText(EditNoteActivity.this, "Updated note!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(EditNoteActivity.this, getResources().getString(R.string.update_note), Toast.LENGTH_LONG).show();
                     }
 
                 }

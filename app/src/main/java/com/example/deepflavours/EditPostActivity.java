@@ -103,11 +103,11 @@ public class EditPostActivity extends AppCompatActivity {
 
 
         if (rTitle.length() > 25) {
-            title.setError("Max length: 25 char!");
+            title.setError(getResources().getString(R.string.title_length));
             title.requestFocus();
             error = true;
         } else if (rTitle.isEmpty()) {
-            title.setError("Can't be empty!");
+            title.setError(getResources().getString(R.string.empty_error));
             title.requestFocus();
             error = true;
         } else {
@@ -117,11 +117,11 @@ public class EditPostActivity extends AppCompatActivity {
 
 
         if (rDescription.length() > 40) {
-            description.setError("Max length: 40 char!");
+            description.setError(getResources().getString(R.string.description_length));
             description.requestFocus();
             error = true;
         } else if (rDescription.isEmpty()) {
-            description.setError("Can't be empty!");
+            description.setError(getResources().getString(R.string.empty_error));
             description.requestFocus();
             error = true;
         } else {
@@ -131,11 +131,11 @@ public class EditPostActivity extends AppCompatActivity {
 
 
         if (rServings.length() > 2) {
-            servings.setError("Max length: 2 char!");
+            servings.setError(getResources().getString(R.string.servings_length));
             servings.requestFocus();
             error = true;
         } else if (rServings.isEmpty()) {
-            servings.setError("Can't be empty!");
+            servings.setError(getResources().getString(R.string.empty_error));
             servings.requestFocus();
             error = true;
         } else {
@@ -145,11 +145,11 @@ public class EditPostActivity extends AppCompatActivity {
 
 
         if (rPrepTime.length() > 3) {
-            prepTime.setError("Max length: 3 char!");
+            prepTime.setError(getResources().getString(R.string.prep_cook_length));
             prepTime.requestFocus();
             error = true;
         } else if (rPrepTime.isEmpty()) {
-            prepTime.setError("Can't be empty!");
+            prepTime.setError(getResources().getString(R.string.empty_error));
             prepTime.requestFocus();
             error = true;
         } else {
@@ -159,11 +159,11 @@ public class EditPostActivity extends AppCompatActivity {
 
 
         if (rCookTime.length() > 3) {
-            cookTime.setError("Max length: 3 char!");
+            cookTime.setError(getResources().getString(R.string.prep_cook_length));
             cookTime.requestFocus();
             error = true;
         } else if (rCookTime.isEmpty()) {
-            cookTime.setError("Can't be empty!");
+            cookTime.setError(getResources().getString(R.string.empty_error));
             cookTime.requestFocus();
             error = true;
         } else {
@@ -172,7 +172,7 @@ public class EditPostActivity extends AppCompatActivity {
         }
 
         if (rIngredients.isEmpty()) {
-            ingredients.setError("Can't be empty!");
+            ingredients.setError(getResources().getString(R.string.empty_error));
             ingredients.requestFocus();
             error = true;
         } else {
@@ -181,7 +181,7 @@ public class EditPostActivity extends AppCompatActivity {
         }
 
         if (rDirections.isEmpty()) {
-            directions.setError("Can't be empty!");
+            directions.setError(getResources().getString(R.string.empty_error));
             directions.requestFocus();
             error = true;
         } else {
@@ -214,6 +214,7 @@ public class EditPostActivity extends AppCompatActivity {
         hashMap.put("directions", directions);
 
         reference.updateChildren(hashMap);
+
     }
 
 

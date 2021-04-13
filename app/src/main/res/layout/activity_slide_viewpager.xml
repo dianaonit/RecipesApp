@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
@@ -12,8 +10,8 @@
         android:id="@+id/iv_viewpager"
         android:layout_width="match_parent"
         android:layout_height="530dp"
-        android:background="@drawable/desert1"
         android:alpha="0.9"
+        android:background="@drawable/desert1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,11 +22,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="590dp"
+        android:layout_marginEnd="15dp"
         android:fontFamily="@font/amaranth_bold"
         android:text="Deep Flavours"
         android:textColor="#000000"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <TextView
@@ -46,9 +46,6 @@
         android:textColor="#000000"
         android:textSize="15sp"
         android:textStyle="italic" />
-
-
-
 
 
 </RelativeLayout>

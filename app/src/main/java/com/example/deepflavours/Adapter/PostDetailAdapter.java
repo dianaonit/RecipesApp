@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -254,7 +255,9 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
 
                 alertDialog.setView(itemView);
 
-                alertDialog.setButton(android.app.AlertDialog.BUTTON_NEGATIVE, "Cancel",
+
+
+                alertDialog.setButton(android.app.AlertDialog.BUTTON_NEGATIVE,mContext.getResources().getString(R.string.btn_cancel),
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
@@ -262,18 +265,18 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Vi
                             }
                         });
 
-                alertDialog.setButton(android.app.AlertDialog.BUTTON_POSITIVE, "OK",
+                alertDialog.setButton(android.app.AlertDialog.BUTTON_POSITIVE, mContext.getResources().getString(R.string.btn_ok),
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
 
                                 if(updateRating.getRatingId()!=null && !updateRating.getRatingId().isEmpty()) {
                                     updateRating(post.getRecipeid(), updateRating);
-                                    Toast.makeText(mContext,"Updated rating!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(mContext,mContext.getResources().getString(R.string.update_evaluating_recipe), Toast.LENGTH_LONG).show();
 
                                 }else {
                                     addRating(post.getRecipeid());
-                                    Toast.makeText(mContext,"Thanks for rating!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(mContext,mContext.getResources().getString(R.string.evaluating_recipe), Toast.LENGTH_LONG).show();
                                 }
 
                             }

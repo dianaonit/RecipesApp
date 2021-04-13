@@ -141,7 +141,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                             FirebaseDatabase.getInstance().getReference().child("Saves").child(post.getRecipeid())
                                     .child(firebaseUser.getUid()).removeValue();
                         } else if (isCookedByCurrentUser && viewHolder.save.getTag().equals("save")) {
-                            Toast.makeText(mContext, "You already have this in your cooked recipes list!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(mContext, mContext.getResources().getString(R.string.already_cooking_this), Toast.LENGTH_LONG).show();
                         }
                     }
 

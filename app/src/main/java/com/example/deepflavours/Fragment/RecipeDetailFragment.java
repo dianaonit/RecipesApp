@@ -230,8 +230,8 @@ public class RecipeDetailFragment extends Fragment {
 
     private void deletePost(String postId){
         AlertDialog alertDialog = new AlertDialog.Builder(getContext(),AlertDialog.THEME_DEVICE_DEFAULT_LIGHT).create();
-        alertDialog.setTitle("Do you want to delete?");
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "No",
+        alertDialog.setTitle(getResources().getString(R.string.delete_question));
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getResources().getString(R.string.delete_post_no),
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
@@ -239,7 +239,7 @@ public class RecipeDetailFragment extends Fragment {
                     }
                 });
 
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getResources().getString(R.string.delete_post_yes),
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {

@@ -68,15 +68,15 @@ public class UserNotesAdapter extends RecyclerView.Adapter<UserNotesAdapter.View
 
                     AlertDialog alertDialog = new AlertDialog.Builder(mContext, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT).create();
 
-                    alertDialog.setTitle("Do you want to delete?");
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "No",
+                    alertDialog.setTitle(mContext.getResources().getString(R.string.delete_question));
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, mContext.getResources().getString(R.string.delete_post_no),
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int which) {
                                     dialogInterface.dismiss();
                                 }
                             });
-                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
+                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, mContext.getResources().getString(R.string.delete_post_yes),
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int which) {
@@ -86,7 +86,7 @@ public class UserNotesAdapter extends RecyclerView.Adapter<UserNotesAdapter.View
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(mContext, "Deleted note!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(mContext, mContext.getResources().getString(R.string.delete_note), Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });

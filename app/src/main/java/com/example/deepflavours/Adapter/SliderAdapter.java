@@ -31,17 +31,17 @@ public class SliderAdapter extends PagerAdapter {
     };
 
 
-    public String[] slide_headings = {
+    public int[] slide_headings = {
 
-            "Deep Flavours",
-            "Customise Your Dish",
-            "Happy Cooking"
+            R.string.slide_headings1,
+            R.string.slide_headings2,
+            R.string.slide_headings3
     };
 
-    public String[] slide_desc = {
-            "The ingredient that binds us together.",
-            "Customise your dish by using the ingredients that are in your kitchen.",
-            "Simply advice: always cook with passion!"
+    public int[] slide_desc = {
+            R.string.slide_desc1,
+            R.string.slide_desc2,
+            R.string.slide_desc3
     };
 
     @Override

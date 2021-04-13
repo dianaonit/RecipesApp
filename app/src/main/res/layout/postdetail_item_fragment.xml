@@ -12,30 +12,34 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/post_title"
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:text="Spicy Scrambled Egg Tacos"
-            android:textColor="#aaa480"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/post_title"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:text="Spicy Scrambled Egg Tacos"
+                android:textColor="#aaa480"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
-            android:layout_marginStart="14dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/cooktimes_nr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:alpha="0.5"
+                android:layout_gravity="center_horizontal"
                 android:textColor="#000000"
                 android:textSize="10sp"
                 android:textStyle="bold" />
@@ -45,10 +49,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.4"
-                android:text="cooked this"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/tv_cookedthis"
                 android:textColor="#000000"
                 android:textSize="7sp"
                 android:textStyle="bold" />
+
         </LinearLayout>
 
     </LinearLayout>
@@ -120,7 +126,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Reviewed"
+                        android:text="@string/tv_reviews"
                         android:layout_marginStart="3dp"
                         android:layout_marginTop="15dp"
                         android:textSize="10sp"
@@ -147,7 +153,6 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:orientation="vertical">
-
 
           <ImageView
               android:id="@+id/add_rating"
@@ -316,10 +321,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:alpha="0.3"
-                android:text="View all comments or add one"
+                android:text="@string/tv_comm_and_add"
                 android:padding="10dp"
                 android:textColor="#03DAC6"
-                android:textSize="15dp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -351,6 +356,7 @@
             android:id="@+id/linearlayout_servings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <TextView
@@ -358,7 +364,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.5"
-                android:text="Servings"
+                android:text="@string/tv_servings"
+                android:layout_gravity="center_horizontal"
                 android:textSize="15sp"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -366,14 +373,15 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_gravity="center_horizontal"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_nrOfservings"
                     android:layout_width="wrap_content"
+                    android:maxWidth="30dp"
                     android:layout_height="wrap_content"
-                    android:text="2"
+                    android:text="12"
                     android:textSize="20sp"
                     android:textColor="#000000"
                     android:textStyle="bold" />
@@ -394,6 +402,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <TextView
@@ -401,7 +410,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.5"
-                android:text="Prep Time"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/tv_prep_time"
                 android:textSize="15sp"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -409,14 +419,15 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_gravity="center_horizontal"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_timeOfprep"
                     android:layout_width="wrap_content"
+                    android:maxWidth="40dp"
                     android:layout_height="wrap_content"
-                    android:text="25"
+                    android:text="256"
                     android:textSize="20sp"
                     android:textColor="#000000"
                     android:textStyle="bold" />
@@ -438,7 +449,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <TextView
@@ -446,7 +457,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.5"
-                android:text="Cook Time"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/tv_cook_time"
                 android:textSize="15sp"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -454,12 +466,13 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_gravity="center_horizontal"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_timeOfcook"
                     android:layout_width="wrap_content"
+                    android:maxWidth="40dp"
                     android:layout_height="wrap_content"
                     android:text="35"
                     android:textSize="20sp"
@@ -499,7 +512,7 @@
                 android:id="@+id/btn_ingredients"
                 android:layout_height="35dp"
                 android:layout_width="match_parent"
-                android:text="Ingredients"
+                android:text="@string/tv_ingredients"
                 android:textColor="#000000"
                 android:alpha="0.6"
                 android:textStyle="bold"
@@ -525,7 +538,7 @@
                 android:id="@+id/btn_directions"
                 android:layout_height="35dp"
                 android:layout_width="match_parent"
-                android:text="Directions"
+                android:text="@string/tv_directions"
                 android:textColor="#000000"
                 android:alpha="0.6"
                 android:textStyle="bold"

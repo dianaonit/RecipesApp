@@ -111,13 +111,13 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+               android:gravity="center_horizontal"
                 android:orientation="vertical">
 
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
                     android:layout_marginTop="30dp"
                     android:orientation="horizontal">
 
@@ -144,7 +144,7 @@
                             android:layout_gravity="center"
                             android:alpha="0.6"
                             android:maxLines="1"
-                            android:text="Posts"
+                            android:text="@string/posts"
                             android:textColor="#000000"
                             android:textSize="12sp" />
 
@@ -175,7 +175,7 @@
                             android:layout_gravity="center"
                             android:alpha="0.6"
                             android:maxLines="1"
-                            android:text="Followers"
+                            android:text="@string/followers"
                             android:textColor="#000000"
                             android:textSize="12sp" />
 
@@ -206,7 +206,7 @@
                             android:layout_gravity="center"
                             android:alpha="0.6"
                             android:maxLines="1"
-                            android:text="Followings"
+                            android:text="@string/followings"
                             android:textColor="#000000"
                             android:textSize="12sp" />
 
@@ -218,14 +218,14 @@
 
                 <LinearLayout
                     android:layout_width="250dp"
-                    android:layout_height="35dp"
+                    android:layout_height="40dp"
+                    android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/editprofile_button"
                         android:layout_width="175dp"
                         android:layout_height="30dp"
-                        android:layout_marginStart="19dp"
                         android:layout_marginTop="4dp"
                         android:background="@drawable/btn_createaccount"
                         android:text="" />
@@ -251,12 +251,12 @@
 
         <TextView
             android:id="@+id/myfoodpost"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="22dp"
             android:alpha="0.7"
-            android:text="Food Post"
+            android:text="@string/tv_food_post"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -265,9 +265,9 @@
             android:id="@+id/seeAllmypost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="180dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="20dp"
-            android:text="Show all"
+            android:text="@string/tv_show_all"
             android:textColor="#aaa480"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -310,7 +310,7 @@
             android:layout_height="wrap_content"
             android:alpha="0.5"
             android:layout_marginTop="3dp"
-            android:text="No Posts Yet "
+            android:text="@string/no_post"
             android:textColor="#000000"
             android:textStyle="bold"
             android:textSize="20sp"
@@ -335,7 +335,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
             android:alpha="0.7"
-            android:text="Favorite Recipes"
+            android:text="@string/tv_favorite_recipes"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -376,7 +376,7 @@
             android:layout_height="wrap_content"
             android:alpha="0.5"
             android:layout_marginTop="3dp"
-            android:text="No Favorite Posts Yet "
+            android:text="@string/tv_no_favorite_recipes"
             android:textColor="#000000"
             android:textStyle="bold"
             android:textSize="20sp"

@@ -72,15 +72,15 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
                   AlertDialog alertDialog = new AlertDialog.Builder(mContext,AlertDialog.THEME_DEVICE_DEFAULT_LIGHT).create();
 
-                  alertDialog.setTitle("Do you want to delete?");
-                  alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "No",
+                  alertDialog.setTitle(mContext.getResources().getString(R.string.delete));
+                  alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, mContext.getResources().getString(R.string.no),
                           new DialogInterface.OnClickListener() {
                               @Override
                               public void onClick(DialogInterface dialogInterface, int which) {
                                   dialogInterface.dismiss();
                               }
                           });
-                  alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
+                  alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, mContext.getResources().getString(R.string.yes),
                           new DialogInterface.OnClickListener() {
                               @Override
                               public void onClick(DialogInterface dialogInterface, int which) {

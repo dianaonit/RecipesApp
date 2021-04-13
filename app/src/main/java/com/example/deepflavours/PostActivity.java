@@ -111,11 +111,11 @@ public class PostActivity extends AppCompatActivity {
 
 
         if (rTitle.length() > 25) {
-            title.setError("Max length: 25 char!");
+            title.setError(getResources().getString(R.string.title_length));
             title.requestFocus();
             error = true;
         } else if (rTitle.isEmpty()) {
-            title.setError("Can't be empty!");
+            title.setError(getResources().getString(R.string.empty_error));
             title.requestFocus();
             error = true;
         } else {
@@ -125,11 +125,11 @@ public class PostActivity extends AppCompatActivity {
 
 
         if (rDescription.length() > 40) {
-            description.setError("Max length: 40 char!");
+            description.setError(getResources().getString(R.string.description_length));
             description.requestFocus();
             error = true;
         } else if (rDescription.isEmpty()) {
-            description.setError("Can't be empty!");
+            description.setError(getResources().getString(R.string.empty_error));
             description.requestFocus();
             error = true;
         } else {
@@ -139,11 +139,11 @@ public class PostActivity extends AppCompatActivity {
 
 
         if (rSevings.length() > 2) {
-            servings.setError("Max length: 2 char!");
+            servings.setError(getResources().getString(R.string.servings_length));
             servings.requestFocus();
             error = true;
         } else if (rSevings.isEmpty()) {
-            servings.setError("Can't be empty!");
+            servings.setError(getResources().getString(R.string.empty_error));
             servings.requestFocus();
             error = true;
         } else {
@@ -153,11 +153,11 @@ public class PostActivity extends AppCompatActivity {
 
 
         if (rPrepTime.length() > 3) {
-            prepTime.setError("Max length: 3 char!");
+            prepTime.setError(getResources().getString(R.string.prep_cook_length));
             prepTime.requestFocus();
             error = true;
         } else if (rPrepTime.isEmpty()) {
-            prepTime.setError("Can't be empty!");
+            prepTime.setError(getResources().getString(R.string.empty_error));
             prepTime.requestFocus();
             error = true;
         } else {
@@ -167,11 +167,11 @@ public class PostActivity extends AppCompatActivity {
 
 
         if (rCookTime.length() > 3) {
-            cookTime.setError("Max length: 3 char!");
+            cookTime.setError(getResources().getString(R.string.prep_cook_length));
             cookTime.requestFocus();
             error = true;
         } else if (rCookTime.isEmpty()) {
-            cookTime.setError("Can't be empty!");
+            cookTime.setError(getResources().getString(R.string.empty_error));
             cookTime.requestFocus();
             error = true;
         } else {
@@ -180,7 +180,7 @@ public class PostActivity extends AppCompatActivity {
         }
 
         if (rIngredients.isEmpty()) {
-            ingredients.setError("Can't be empty!");
+            ingredients.setError(getResources().getString(R.string.empty_error));
             ingredients.requestFocus();
             error = true;
         } else {
@@ -189,7 +189,7 @@ public class PostActivity extends AppCompatActivity {
         }
 
         if (rDirections.isEmpty()) {
-            directions.setError("Can't be empty!");
+            directions.setError(getResources().getString(R.string.empty_error));
             directions.requestFocus();
             error = true;
         } else {
@@ -212,16 +212,16 @@ public class PostActivity extends AppCompatActivity {
     }
 
     private void uploadImage() {
-        ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Posting..");
+        ProgressDialog progressDialog = new ProgressDialog(this, R.style.Theme_AppCompat_Light_Dialog);
+        progressDialog.setMessage(getResources().getString(R.string.pd_posting));
         progressDialog.show();
 
         if (imageUri != null) {
 
-            StorageReference filereference = storageReference.child(System.currentTimeMillis()
+            StorageReference fileReference = storageReference.child(System.currentTimeMillis()
                     + "." + getFileExtension(imageUri));
 
-            uploadTask = filereference.putFile(imageUri);
+            uploadTask = fileReference.putFile(imageUri);
             uploadTask.continueWithTask(new Continuation() {
                 @Override
                 public Object then(@NonNull Task task) throws Exception {
@@ -229,7 +229,7 @@ public class PostActivity extends AppCompatActivity {
                         throw task.getException();
                     }
 
-                    return filereference.getDownloadUrl();
+                    return fileReference.getDownloadUrl();
                 }
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
@@ -265,7 +265,7 @@ public class PostActivity extends AppCompatActivity {
                         finish();
 
                     } else {
-                        Toast.makeText(PostActivity.this, "Failed!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PostActivity.this, getResources().getString(R.string.failed_posting), Toast.LENGTH_SHORT).show();
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -276,7 +276,7 @@ public class PostActivity extends AppCompatActivity {
             });
 
         } else {
-            Toast.makeText(this, "No Image Selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.no_image), Toast.LENGTH_SHORT).show();
 
         }
 

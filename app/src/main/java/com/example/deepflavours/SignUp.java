@@ -141,7 +141,7 @@ public class SignUp extends AppCompatActivity {
 
         if (!error) {
             pd = new ProgressDialog(SignUp.this, ProgressDialog.THEME_DEVICE_DEFAULT_LIGHT);
-            pd.setMessage("Please wait..");
+            pd.setMessage(getResources().getString(R.string.please_wait));
             pd.show();
 
             uFirebaseAuth.createUserWithEmailAndPassword(uEmail, uPass)

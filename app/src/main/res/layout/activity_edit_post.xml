@@ -5,22 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    tools:context=".EditPostActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".EditPostActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
-       >
+        android:background="#ffffff">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ffffff"
-           >
+            android:background="#ffffff">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -41,7 +39,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="20dp"
                     android:layout_toEndOf="@id/btn_close"
-                    android:text="Edit Post Details "
+                    android:text="@string/edit_post"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -64,9 +62,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
+        android:overScrollMode="never"
 
-        android:overScrollMode="never">
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -88,7 +86,7 @@
                 app:counterMaxLength="25"
                 app:counterOverflowTextColor="@color/red"
                 app:counterTextColor="@color/black"
-                app:helperText="Recipe Title"
+                app:helperText="@string/helpText_title"
                 app:helperTextTextColor="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -116,7 +114,7 @@
                 app:counterMaxLength="40"
                 app:counterOverflowTextColor="@color/red"
                 app:counterTextColor="@color/black"
-                app:helperText="Recipe Description"
+                app:helperText="@string/helpText_description"
                 app:helperTextTextColor="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -124,15 +122,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:background="@drawable/style_edit_post"
-                    android:inputType="text|textMultiLine"
-                    android:padding="8dp"
-                    android:maxLines="2"
                     android:gravity="start|top"
+                    android:inputType="text|textMultiLine"
+                    android:maxLines="2"
+                    android:padding="8dp"
                     android:textColor="#000000"
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </com.google.android.material.textfield.TextInputLayout>
-
 
 
             <TextView
@@ -142,10 +139,12 @@
                 android:layout_marginTop="25dp"
                 android:fontFamily="@font/amaranth_bold"
                 android:padding="1dp"
-                android:text="Details about preparation"
+                android:text="@string/tv_details"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
@@ -158,156 +157,153 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:orientation="horizontal"
-                android:padding="8dp">
+                android:orientation="horizontal">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:alpha="0.7"
-                    android:text="Servings"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    android:alpha="0.6"
-                    android:maxLength="2"
-                    android:textColorHint="@color/black"
-                    android:theme="@style/myEditTextStyle"
-                    app:counterEnabled="true"
-                    app:counterMaxLength="2"
-                    app:counterOverflowTextColor="@color/red"
-                    app:counterTextColor="@color/black"
-                    app:helperText="portions"
-                    android:layout_marginStart="110dp"
-                    app:helperTextTextColor="@color/black">
+                    android:orientation="vertical"
+                    android:padding="8dp">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/servings"
-                        android:layout_width="120dp"
-                        android:layout_height="40dp"
-                        android:background="@drawable/style_edit_post"
-                        android:inputType="number"
-                        android:padding="8dp"
-                        android:gravity="start|top"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="20dp"
+                        android:alpha="0.7"
+                        android:text="@string/tv_servings"
                         android:textColor="#000000"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:orientation="horizontal"
-                android:padding="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:alpha="0.7"
-                    android:text="Preparation time"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:alpha="0.6"
-                    android:maxLength="3"
-                    android:textColorHint="@color/black"
-                    android:theme="@style/myEditTextStyle"
-                    app:counterEnabled="true"
-                    app:counterMaxLength="3"
-                    app:counterOverflowTextColor="@color/red"
-                    app:counterTextColor="@color/black"
-                    app:helperText="minute"
-                    android:layout_marginStart="40dp"
-                    app:helperTextTextColor="@color/black">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/prep_time"
-                        android:layout_width="120dp"
-                        android:layout_height="40dp"
-                        android:background="@drawable/style_edit_post"
-                        android:inputType="number"
-                        android:padding="8dp"
-                        android:gravity="start|top"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="20dp"
+                        android:alpha="0.7"
+                        android:text="@string/tv_preparation_time"
                         android:textColor="#000000"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:orientation="horizontal"
-                android:padding="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:alpha="0.7"
-                    android:text="Cooking time"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:alpha="0.6"
-                    android:maxLength="3"
-                    android:textColorHint="@color/black"
-                    android:theme="@style/myEditTextStyle"
-                    app:counterEnabled="true"
-                    app:counterMaxLength="3"
-                    app:counterOverflowTextColor="@color/red"
-                    app:counterTextColor="@color/black"
-                    app:helperText="minute"
-                    android:layout_marginStart="70dp"
-                    app:helperTextTextColor="@color/black">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/cook_time"
-                        android:layout_width="120dp"
-                        android:layout_height="40dp"
-                        android:background="@drawable/style_edit_post"
-                        android:inputType="number"
-                        android:padding="8dp"
-                        android:gravity="start|top"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="20dp"
+                        android:alpha="0.7"
+                        android:text="@string/tv_cooking_time"
                         android:textColor="#000000"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
-                </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:alpha="0.6"
+                        android:maxLength="2"
+                        android:textColorHint="@color/black"
+                        android:theme="@style/myEditTextStyle"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="2"
+                        app:counterOverflowTextColor="@color/red"
+                        app:counterTextColor="@color/black"
+                        app:helperText="@string/helpText_portions"
+                        app:helperTextTextColor="@color/black">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/servings"
+                            android:layout_width="100dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/style_edit_post"
+                            android:gravity="start|top"
+                            android:inputType="number"
+                            android:padding="8dp"
+                            android:textColor="#000000"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:alpha="0.6"
+                        android:maxLength="3"
+                        android:textColorHint="@color/black"
+                        android:theme="@style/myEditTextStyle"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="3"
+                        app:counterOverflowTextColor="@color/red"
+                        app:counterTextColor="@color/black"
+                        app:helperText="@string/helpText_minute"
+                        app:helperTextTextColor="@color/black">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/prep_time"
+                            android:layout_width="100dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/style_edit_post"
+                            android:gravity="start|top"
+                            android:inputType="number"
+                            android:padding="8dp"
+                            android:textColor="#000000"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+
+                        android:layout_marginEnd="10dp"
+                        android:alpha="0.6"
+                        android:maxLength="3"
+                        android:textColorHint="@color/black"
+                        android:theme="@style/myEditTextStyle"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="3"
+                        app:counterOverflowTextColor="@color/red"
+                        app:counterTextColor="@color/black"
+                        app:helperText="@string/helpText_minute"
+                        app:helperTextTextColor="@color/black">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/cook_time"
+                            android:layout_width="100dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/style_edit_post"
+                            android:gravity="start|top"
+                            android:inputType="number"
+                            android:padding="8dp"
+                            android:textColor="#000000"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
             </LinearLayout>
 
             <TextView
@@ -317,10 +313,11 @@
                 android:layout_marginTop="25dp"
                 android:fontFamily="@font/amaranth_bold"
                 android:padding="1dp"
-                android:text="Ingredients"
+                android:text="@string/tv_ingredients"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
@@ -338,8 +335,9 @@
                 android:alpha="0.6"
                 android:maxLength="25"
                 android:theme="@style/myEditTextStyle"
-                app:helperText="Write ingredients for the recipe"
+                app:helperText="@string/helpText_ingredients"
                 app:helperTextTextColor="@color/black">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ingredients"
                     android:layout_width="match_parent"
@@ -354,7 +352,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -362,10 +359,11 @@
                 android:layout_marginTop="25dp"
                 android:fontFamily="@font/amaranth_bold"
                 android:padding="1dp"
-                android:text="Directions"
+                android:text="@string/tv_directions"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
@@ -384,7 +382,7 @@
                 android:alpha="0.6"
                 android:maxLength="25"
                 android:theme="@style/myEditTextStyle"
-                app:helperText="Write some directions"
+                app:helperText="@string/helpText_directions"
                 app:helperTextTextColor="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText

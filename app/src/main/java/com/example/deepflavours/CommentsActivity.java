@@ -93,7 +93,7 @@ public class CommentsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(addcomment.getText().toString().equals("")){
-                    Toast.makeText(CommentsActivity.this,"You can't send empty comment!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CommentsActivity.this,getResources().getString(R.string.empty_comment),Toast.LENGTH_SHORT).show();
                 }else{
                     addComment();
                 }

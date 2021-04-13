@@ -2,9 +2,14 @@ package com.example.deepflavours.Fragment;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +20,7 @@ import android.widget.TextView;
 
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,6 +36,7 @@ import com.example.deepflavours.Model.Recipe;
 import com.example.deepflavours.Model.User;
 import com.example.deepflavours.NotesActivity;
 import com.example.deepflavours.R;
+import com.example.deepflavours.StartCooking;
 import com.example.deepflavours.UserNotesActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,6 +51,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -70,6 +78,7 @@ public class ProfileFragment extends Fragment {
     String profileid;
     String sourceFragment;
     String previousUser;
+    String languageCode;
 
     public ProfileFragment() {
 
@@ -95,6 +104,13 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("Language", Context.MODE_PRIVATE);
+        languageCode = sharedPreferences.getString("Selected_language","");
+        if(!languageCode.isEmpty()){
+            setLocale(languageCode);
+        }
+
 
         SharedPreferences preferences = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
         String profileSourceFragment = preferences.getString("ProfileSourceFragment", "none");
@@ -128,14 +144,17 @@ public class ProfileFragment extends Fragment {
             profileid = previousUser;
         }
 
-        if (profileid.equals(firebaseUser.getUid())) {
-            options.setVisibility(View.VISIBLE);
-            back.setVisibility(View.GONE);
-            edit_profile.setText("Edit Profile");
-        } else {
-            options.setVisibility(View.GONE);
-            back.setVisibility(View.VISIBLE);
-            checkFollow();
+        if (profileid!=null) {
+
+            if (profileid.equals(firebaseUser.getUid())) {
+                options.setVisibility(View.VISIBLE);
+                back.setVisibility(View.GONE);
+                edit_profile.setText(getResources().getString(R.string.edit_profile));
+            } else {
+                options.setVisibility(View.GONE);
+                back.setVisibility(View.VISIBLE);
+                checkFollow();
+            }
         }
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -174,6 +193,15 @@ public class ProfileFragment extends Fragment {
                                 R.layout.bottom_sheet_options,
                                 (LinearLayout) view.findViewById(R.id.bottomSheetContainerOptionsProfile)
                         );
+
+                bottomSheetView.findViewById(R.id.language_option).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showChangeLanguageDialog();
+                        bottomSheetDialog.dismiss();
+                    }
+                });
+
                 bottomSheetView.findViewById(R.id.notes_option).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -244,10 +272,9 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 String btn = edit_profile.getText().toString();
 
-                if (btn.equals("Edit Profile")) {
+                if (btn.equals("Edit Profile") || btn.equals("Profil bearbeiten") || btn.equals("Editer le profil") || btn.equals("Editare Profil")) {
                     startActivity(new Intent(getContext(), EditProfileActivity.class));
-                } else if (btn.equals("follow")) {
-
+                } else if (btn.equals("follow") || btn.equals("folgen") || btn.equals("suivre") || btn.equals("urmărește")) {
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
                             .child("following").child(profileid).setValue(true);
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(profileid)
@@ -255,12 +282,15 @@ public class ProfileFragment extends Fragment {
 
                     addNotifications();
 
-                } else if (btn.equals("following")) {
+                    edit_profile.setText(getResources().getString(R.string.btn_following));
 
+                } else if (btn.equals("following") || btn.equals("folgenden") || btn.equals("suivante") || btn.equals("urmărești") ) {
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
                             .child("following").child(profileid).removeValue();
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(profileid)
                             .child("followers").child(firebaseUser.getUid()).removeValue();
+
+                    edit_profile.setText(getResources().getString(R.string.btn_follow));
 
                 }
             }
@@ -299,6 +329,72 @@ public class ProfileFragment extends Fragment {
 
         return view;
     }
+
+
+    private void showChangeLanguageDialog() {
+        Resources resources = getResources();
+        final String[] listItems = {resources.getString(R.string.languageTypeRo),resources.getString(R.string.languageTypeEn),resources.getString(R.string.languageTypeDe),resources.getString(R.string.languageTypeFr)};
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext(), R.style.Theme_AppCompat_Light_Dialog_Alert);
+
+
+        mBuilder.setTitle(R.string.Language);
+        int checkedItem;
+        if(languageCode.equalsIgnoreCase("ro")){
+            checkedItem = 0;
+        } else if( languageCode.equalsIgnoreCase("en")) {
+            checkedItem = 1;
+        } else if(languageCode.equalsIgnoreCase("de")){
+            checkedItem = 2;
+        } else if(languageCode.equalsIgnoreCase("fr")){
+            checkedItem = 3;
+        } else{
+            checkedItem = -1;
+        }
+        mBuilder.setSingleChoiceItems(listItems, checkedItem, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (i == 0) {
+                    setLocale("ro");
+                } else if (i == 1) {
+                    setLocale("en");
+                } else if (i == 2) {
+                    setLocale("de");
+                } else if (i == 3) {
+                    setLocale("fr");
+                }
+                dialogInterface.dismiss();
+
+                Intent intent = getActivity().getIntent();
+                getActivity().finish();
+                startActivity(intent);
+            }
+        });
+
+
+        AlertDialog mDialog = mBuilder.create();
+        mDialog.show();
+    }
+
+    private void setLocale(String localeCode) {
+        Locale locale = new Locale(localeCode);
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            configuration.setLocale(locale);
+        } else {
+            configuration.locale = locale;
+        }
+        getActivity().getResources().updateConfiguration(configuration, getActivity().getResources().getDisplayMetrics());
+
+        SharedPreferences.Editor editor = getContext().getSharedPreferences("Language", getContext().MODE_PRIVATE).edit();
+        editor.putString("Selected_language", localeCode);
+        editor.apply();
+    }
+
+
+
+
 
 
     private void readRecipes() {
@@ -397,7 +493,10 @@ public class ProfileFragment extends Fragment {
 
                 User user = dataSnapshot.getValue(User.class);
 
-                Glide.with(getContext()).load(user.getImageurl()).into(image_profile);
+                if(getContext()!=null){
+                    Glide.with(getContext()).load(user.getImageurl()).into(image_profile);
+                }
+
                 username.setText(user.getUsername());
                 bio.setText(user.getBio());
             }
@@ -415,13 +514,13 @@ public class ProfileFragment extends Fragment {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
                 .child("Follow").child(firebaseUser.getUid()).child("following");
 
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(profileid).exists()) {
-                    edit_profile.setText("following");
+                if (dataSnapshot.child(profileid).exists()  ) {
+                    edit_profile.setText(getResources().getString(R.string.btn_following));
                 } else {
-                    edit_profile.setText("follow");
+                    edit_profile.setText(getResources().getString(R.string.btn_follow));
                 }
             }
 

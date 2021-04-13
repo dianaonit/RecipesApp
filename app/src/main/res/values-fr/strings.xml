@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">DeepFlavours</string>
+    //Start Cooking Activity
     <string name="deep_flavours">Deep Flavours</string>
     <string name="deliciously_simple">Deliciously Simple</string>
     <string name="startcooking_btn">Commencer la cuisson</string>
+
+    //On Boarding - choose LogIn or SignUp
     <string name="tv_description">Recettes nutritionnellement équilibrées et faciles à cuisiner. Des ingrédients locaux frais de qualité.</string>
     <string name="createaccount_btn">Créer un Compte</string>
     <string name="tv_haveaccount">Vous avez déjà un compte?</string>
     <string name="tv_login">S\'identifier</string>
     <string name="tv_back">Arrière</string>
+
+    //SignUp - create account
     <string name="tv_welcome">Commençons à faire \nde bons repas!</string>
     <string name="editTextName"><font size="30">Ton nom complet</font></string>
     <string name="editTextEmail"><font size="30">Votre email</font></string>
     <string name="editTextPassword"><font size="30">Mot de passe</font></string>
     <string name="editTextPasswordVer"><font size="30">Vérifier le mot de passe</font></string>
     <string name="tv_SignUp">S\'inscrire</string>
+    <string name="please_wait">S\'il vous plaît, attendez..</string>
+
+    //LogIn - auth
     <string name="tv_welcomeback">Bienvenue à nouveau dans \nDeep Flavors!</string>
-    <string name="Language">Choisir la langue ..</string>
-    <string name="languageTypeRo">Roumain</string>
-    <string name="languageTypeEn">Anglais</string>
-    <string name="languageTypeDe">Allemand</string>
-    <string name="languageTypeFr">Français</string>
+
+    //Validation (LogIn and SignUp)
     <string name="empty_errfName">Le nom complet est requis!</string>
     <string name="empty_errEmail">Une adresse email est requise!</string>
     <string name="empty_errPass">Mot de passe requis!</string>
@@ -32,4 +37,151 @@
     <string name="signup_failed">Échec de la création du compte.Réessayer!</string>
     <string name="email_exists">Il y a un utilisateur avec ce courriel!</string>
     <string name="login_success">Connecté avec succès!</string>
+
+    //Translate
+    <string name="Language">Choisir la langue ..</string>
+    <string name="languageTypeRo">Roumain</string>
+    <string name="languageTypeEn">Anglais</string>
+    <string name="languageTypeDe">Allemand</string>
+    <string name="languageTypeFr">Français</string>
+
+    //Home fragment
+    <string name="tv_cookedthis">cuit ça</string>
+    <string name="already_cooking_this">Vous l\'avez déjà dans votre liste de recettes cuisinées!</string>
+
+    //Detail recipe fragment
+    <string name="tv_reviews">Critiques</string>
+    <string name="tv_comm_and_add">Afficher tous les commentaires ou en ajouter un</string>
+    <string name="tv_servings">Portions</string>
+    <string name="tv_prep_time">Formation</string>
+    <string name="tv_cook_time">Cuisine</string>
+    <string name="tv_ingredients">Ingrédients</string>
+    <string name="tv_directions">Instructions</string>
+
+    //Comments activity
+    <string name="tv_comments">Commentaires</string>
+    <string name="add_comments">Ajouter un commentaire..</string>
+    <string name="btn_post_comments">Publier</string>
+    <string name="empty_comment">Vous ne pouvez pas envoyer de commentaire vide!</string>
+    <string name="delete">Voulez-vous supprimer?</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+
+    //Layout Rating Recipe
+    <string name="tv_rating_recipe">Évaluation de la recette</string>
+    <string name="btn_cancel">Annuler</string>
+    <string name="btn_ok">Envoyer</string>
+    <string name="evaluating_recipe">Merci d\'avoir évalué la recette!</string>
+    <string name="update_evaluating_recipe">Vous avez mis à jour l\évaluation de la recette!</string>
+
+    //Add/Update Note Activity
+    <string name="tv_add_note">Propre note</string>
+    <string name="helpText_title">Titre de la recette</string>
+    <string name="helpText_description">Description de la recette</string>
+    <string name="tv_details">Détails sur la préparation</string>
+    <string name="tv_preparation_time">Temps de préparation</string>
+    <string name="tv_cooking_time">Temps de cuisson</string>
+    <string name="helpText_portions">portions</string>
+    <string name="helpText_minute">minute</string>
+    <string name="helpText_ingredients">Ecrire les ingrédients de la recette</string>
+    <string name="helpText_directions">Rédiger les instructions de préparation</string>
+    <string name="update_note">Note mise à jour!</string>
+    <string name="add_note">Note ajoutée</string>
+      //Validation
+            <string name="title_length">Longueur max: 25 caractères!</string>
+            <string name="empty_error">Je ne peux pas être vide!</string>
+            <string name="description_length">Longueur max: 40 caractères!</string>
+            <string name="servings_length">Longueur max: 2 caractères!</string>
+            <string name="prep_cook_length">Longueur max: 3 caractères!</string>
+
+    //Search Fragment
+    <string name="hint_search">Rechercher..</string>
+    <string name="tv_liked_recipes">Recettes les plus appréciées</string>
+    <string name="tv_popular_recipes">Recettes populaires</string>
+    <string name="tv_cooked">Cuite</string>
+    <string name="btn_following">suivante</string>
+    <string name="btn_follow">suivre</string>
+
+    //Save Fragment
+    <string name="tv_cookbook">Mon livre de cuisine</string>
+    <string name="tv_cooked_recipes">Recettes Cuisinées</string>
+    <string name="not_cooked">Pas encore cuit</string>
+    <string name="not_cooked_recipes">Pas encore de recettes cuites</string>
+
+    //Likes Fragment
+    <string name="hint_search_like">Rechercher dans les likes..</string>
+
+    //Profile Fragment
+    <string name="edit_profile">Editer le profil</string>
+    <string name="tv_food_post">Poste de Nourriture</string>
+    <string name="tv_show_all">Afficher tout</string>
+    <string name="tv_favorite_recipes">Recettes préférées</string>
+    <string name="no_post">Pas Encore de Poste</string>
+    <string name="posts">Postes</string>
+    <string name="followers">Suiveuses</string>
+    <string name="followings">Suivis</string>
+    <string name="tv_no_favorite_recipes">Aucune recette préférée pour le moment</string>
+       //Bottom Sheet Options
+    <string name="profile_options">Options</string>
+    <string name="language">Langue</string>
+    <string name="notes">Mes notes de recettes</string>
+    <string name="log_out">Se déconnecter</string>
+
+    //Edit Profile Activity
+    <string name="ch_profile_photo">Changer la Photo de Profil</string>
+    <string name="full_name_update">Nom et Prénom</string>
+    <string name="add_location">Emplacement</string>
+    <string name="uploading_photo">Téléchargement..</string>
+    <string name="failed_uploading_photo">Manqué!</string>
+    <string name="failed_no_image_selected">Aucune image sélectionnée!</string>
+
+            //Validation
+    <string name="full_name_length">Longueur max: 25 caractères!</string>
+    <string name="location_length">Longueur max: 27 caractères!</string>
+
+    //Followers Fragment
+    <string name="hint_search_followers">Rechercher in suiveuses..</string>
+
+    //Followings Fragment
+    <string name="hint_search_followings">Rechercher in suivis..</string>
+
+    //My Food Post Fragment
+    <string name="all_food_post">Mon poste de nourriture</string>
+
+    //Edit Post Detail
+    <string name="edit_post">Modifier les détails de l\'article</string>
+    <string name="delete_post">Supprimer le message</string>
+    <string name="delete_question">Voulez-vous le supprimer?</string>
+    <string name="delete_post_no">Non</string>
+    <string name="delete_post_yes">Oui</string>
+
+    //User Notes Activity
+    <string name="hint_search_notes">Rechercher dans les notes..</string>
+    <string name="delete_note">Note supprimée!</string>
+
+    //Note Detail Activity
+    <string name="tv_note_title">Remarque:</string>
+    <string name="tv_note_desc">Remarque la description:</string>
+
+    //Edit Note Activity
+    <string name="tv_edit_note">Note éditée</string>
+
+    //Post Activity
+    <string name="pd_posting">Affectation..</string>
+    <string name="failed_posting">Manquée!</string>
+    <string name="no_image">Aucune image sélectionnée!</string>
+    <string name="new_post">Nouveau poste</string>
+
+    //Wiew Pager Slides - introduction
+    <string name="slide_headings1">Deep Flavours</string>
+    <string name="slide_headings2">Personnalisez votre plat</string>
+    <string name="slide_headings3">Bonne Cuisine</string>
+    <string name="slide_desc1">L\'ingrédient qui nous unit.</string>
+    <string name="slide_desc2">Personnalisez votre plat en utilisant les ingrédients qui se trouvent dans votre cuisine.</string>
+    <string name="slide_desc3">Un conseil simple: cuisinez toujours avec passion!</string>
+    <string name="skip">Passer</string>
+    <string name="back">Dos</string>
+    <string name="next">Voisin</string>
+    <string name="get_started">Démarrer</string>
+
 </resources>
